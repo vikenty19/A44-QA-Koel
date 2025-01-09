@@ -19,9 +19,11 @@ public class GenerateReport {
         // attach reporter to the engine
         extent.attachReporter(sparkReporter);
         ExtentTest eTest1 = extent.createTest("Test One");
-        eTest1.log(Status.INFO,"Chrome is started");
-        eTest1.log(Status.INFO,"Browser got closed");
+        eTest1.log(Status.INFO,"<h1>Chrome is started</h1>");//HEADER
+        eTest1.log(Status.INFO,"<b>Browser got closed</b>");//bold
         eTest1.log(Status.WARNING,"Waiting is too long");
+        eTest1.log(Status.PASS,"<i>Test One passed</i>");//italic
+        eTest1.log(Status.FAIL,"<u>Test one filed</u.");//1st level <u> -> underlined
         extent.flush();//to generate report!!!
         //To open generated eReport automatically
         Desktop.getDesktop().browse(path.toURI());
