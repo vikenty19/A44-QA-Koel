@@ -18,7 +18,8 @@ public class GenerateReport {
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(path);
         // attach reporter to the engine
         extent.attachReporter(sparkReporter);
-        ExtentTest eTest1 = extent.createTest("Test One");
+        ExtentTest eTest1 = extent.createTest("Test One","This is test description");
+        ExtentTest eTest2 = extent.createTest("Test two","This is test description");
         eTest1.log(Status.INFO,"<h1>Chrome is started</h1>");//HEADER
         eTest1.log(Status.INFO,"<b>Browser got closed</b>");//bold
         eTest1.log(Status.WARNING,"Waiting is too long");
