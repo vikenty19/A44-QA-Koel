@@ -62,7 +62,7 @@ public class ExtentReportWithBase64AndPathWithoutRecordingToFile {
     }
     public static String takeScreenShotAndReturnPath(String fileName) throws IOException {
         File srcScreenShotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        File destinationFile = new File(System.getProperty("usr.dir") + "/ScreenShotsKoel/" + fileName + ".png");
+        File destinationFile = new File(System.getProperty("usr.dir") + "ScreenShotsKoel/" + fileName + ".png");
         FileUtils.copyFile(srcScreenShotFile, destinationFile);
         return destinationFile.getAbsolutePath();
 
