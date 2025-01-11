@@ -95,7 +95,7 @@ public class SongsTests extends BaseTest {
         SongPage songPage = new SongPage(driver);
         // search for song name without author whose name divided by hyphen
         int index = text.indexOf("-");
-        String name = (index != -1)?text.substring(index+2):text;
+        String name = (index != -1)?text.substring(index+2):text;//delete from search almum which separate with hyphen-
         //search only by name
         songPage.searchSongInSearchField(name);
         WebElement song = wait.until(ExpectedConditions

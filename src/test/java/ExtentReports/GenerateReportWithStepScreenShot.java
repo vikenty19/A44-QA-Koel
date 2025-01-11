@@ -17,7 +17,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class GenerateReport {
+public class GenerateReportWithStepScreenShot {
    public static WebDriver driver;
     public static void main(String[] args) throws IOException {
         WebDriverManager.chromedriver().clearDriverCache().setup();
