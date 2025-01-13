@@ -12,7 +12,7 @@ import org.testng.ITestResult;
 public class MyListeners  implements ITestListener {
 // Call method to generate extent report
 
-    ExtentReports report = ExtentReportGenerator.getExtendReport();
+   ExtentReports report = ExtentReportGenerator.getExtendReport();
     ExtentTest eTest;
     @Override
     public void onTestStart(ITestResult result) {
