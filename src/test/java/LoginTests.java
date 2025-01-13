@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.List;
 
@@ -31,21 +32,30 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(loginpage.isSubmitLoginBtnDisplayed());
     }
 
-    @Test
-    public void loginInvalidEmailTest() {
+    @Test(priority = 1)
+    public void loginInvalidEmailTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        loginpage.login("notexists@class.com", myLogin);
+        String invalidEmail = "galy.o"+generateTimeStamp()+"@testpro.io";
+      //  System.out.println(invalidEmail);
+        loginpage.login(invalidEmail, myLogin);
+        Thread.sleep(3000);
         System.out.println("Is Submit button is displayed?  " + loginpage.isSubmitLoginBtnDisplayed());
         Assert.assertTrue(loginpage.isSubmitLoginBtnDisplayed());
         //       Assert.assertFalse(homePage.getAvatar());
     }
 
     @Test(dataProvider = "IncorrectLoginProviders")
-    public void negativeLoginTests(String email, String password) {
+    public void negativeLoginTests(String email, String password) throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        loginpage.login(email, password);
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        HomePage homePage = new HomePage(driver);
+        SoftAssert softAssert = new SoftAssert();
+    loginpage.login(email, password);
+      //  Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
+        Thread.sleep(500);
+        System.out.println(driver.getCurrentUrl());
+        softAssert.assertEquals(driver.getCurrentUrl(), url);
+        softAssert.assertTrue(loginpage.isSubmitLoginBtnDisplayed());
+        softAssert.assertAll();
     }
 
     //        Email("demo@class.com");

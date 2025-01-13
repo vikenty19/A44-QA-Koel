@@ -80,6 +80,7 @@ public class BasePage {
         return newEmail+"@gmail.com";
     }
 
+
     public Integer stringToInt(String song) {
 
         char n0 = song.charAt(0);

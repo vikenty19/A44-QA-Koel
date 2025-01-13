@@ -17,6 +17,7 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.Locale;
 
 public class BaseTest {
@@ -71,6 +72,10 @@ public class BaseTest {
         String newName = faker.book().title();
         return newName;
     }
+    public String generateTimeStamp(){
+        Date date = new Date();
+        return date.toString().replace(":","_").substring(11,19);
+    }
 
 
 
@@ -83,6 +88,7 @@ public class BaseTest {
     public static Object[][] getDataFromDataProviders() {
         return new Object[][]{
                 {"notExisting@email.com", "NotExistingPassword"},
+                {myEmail,myLogin},
                 {"demo@class.com", ""},
                 {"", ""}, {"demo@@class.com", "te$t$tudent"}, {"<include name=test'></include>@class.com", "te$t$tudent"}
         };

@@ -33,14 +33,18 @@ public class ExtentReportWithBase64AndPathWithoutRecordingToFile {
         ExtentTest eTest1 = extent.createTest("Test one");
         eTest1.log(Status.INFO,"Test one is started and navigating to Home Page");
         // taking base64 screenShot directly without recording into the file
+
+
      //   eTest1.addScreenCaptureFromBase64String(takeScreenShot(),"Home Page");
         // Make screenshot and bring the screenshot to the log level
         eTest1.log(Status.INFO, MediaEntityBuilder
-                .createScreenCaptureFromBase64String(takeScreenShot(),"TutorialNinjaHomePage").build());
+                .createScreenCaptureFromBase64String(takeScreenShotBase64(),"TutorialNinjaHomePage").build());
         // Second ScreenShot Using path
         eTest1.log(Status.INFO,"HP name entered into the search field");
         driver.findElement(By.name("search")).sendKeys("HP");
        // eTest1.addScreenCaptureFromPath(takeScreenShotAndReturnPath("HP search"),"Hp product Search");
+
+
         //Make screenshot and bring the screenshot to the log level
         eTest1.log(Status.INFO,MediaEntityBuilder
                 .createScreenCaptureFromPath(takeScreenShotAndReturnPath("HP search"),"HP product search").build());
@@ -55,7 +59,7 @@ public class ExtentReportWithBase64AndPathWithoutRecordingToFile {
         }
 
     }
-    public static String takeScreenShot(){
+    public static String takeScreenShotBase64(){
         String base64ScreenShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
         return base64ScreenShot;
 
