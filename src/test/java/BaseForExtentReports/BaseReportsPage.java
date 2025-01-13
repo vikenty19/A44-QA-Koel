@@ -12,7 +12,7 @@ public class BaseReportsPage {
     public String takeScreenShot(String testName, WebDriver driver) throws IOException {
         File srcScreenShotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         File destinationFile = new File(System
-                .getProperty("usr.dir")+"/src/test/java/KoelScreenShots/"+testName+".png");
+                .getProperty("user.dir")+"/src/test/java/KoelScreenShots/"+testName +".png");
         FileUtils.copyFile(srcScreenShotFile,destinationFile);
         return destinationFile.getAbsolutePath();
 

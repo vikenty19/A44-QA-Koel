@@ -6,9 +6,14 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class MyListeners extends BaseReportsPage implements ITestListener {
 // Call method to generate extent report
@@ -30,17 +35,32 @@ public class MyListeners extends BaseReportsPage implements ITestListener {
         eTest.log(Status.PASS,testName + "passed successfully");
     }
 
-    @SneakyThrows
+
     @Override
     public void onTestFailure(ITestResult result) {
         String testName =  result.getName();
-        eTest.log(Status.FAIL,testName+ "GOT FAILED");
+        eTest.log(Status.FAIL,testName+ "   GOT FAILED");
         //Let's add a ScreenShot
         //Implement driver
-        WebDriver driver = (WebDriver)result.getTestClass().getRealClass()
-                        .getDeclaredField("driver").get(result.getInstance());
+        WebDriver driver = null;
+
+        try {
+
+           driver = (WebDriver)result.getTestClass().getRealClass()
+                         .getField("driver").get(result.getInstance());
+
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
         //Create Class BaseReportPage and method takeScreenShot
-       eTest.addScreenCaptureFromPath(takeScreenShot(testName,driver));
+
+
+        try {
+            eTest.addScreenCaptureFromPath(takeScreenShot(testName,driver),testName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+         eTest.log(Status.INFO,result.getThrowable());
 
     }
 
@@ -54,6 +74,12 @@ public class MyListeners extends BaseReportsPage implements ITestListener {
     @Override
     public void onFinish(ITestContext context) {
         report.flush();//Otherwise nothing works
+        File eRportFile = new File(System.getProperty("user.dir")+"/src/test/java/Koel/eReport.html");
+        try {
+            Desktop.getDesktop().browse(eRportFile.toURI());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
