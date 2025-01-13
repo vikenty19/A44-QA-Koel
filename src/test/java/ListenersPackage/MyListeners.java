@@ -1,5 +1,6 @@
 package ListenersPackage;
 
+import BaseForExtentReports.BaseReportsPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
@@ -9,7 +10,7 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class MyListeners  implements ITestListener {
+public class MyListeners extends BaseReportsPage implements ITestListener {
 // Call method to generate extent report
 
    ExtentReports report = ExtentReportGenerator.getExtendReport();
@@ -38,19 +39,22 @@ public class MyListeners  implements ITestListener {
         //Implement driver
         WebDriver driver = (WebDriver)result.getTestClass().getRealClass()
                         .getDeclaredField("driver").get(result.getInstance());
-       // eTest.addScreenCaptureFromPath(takeScreenShot(testName,driver))
-        //
+        //Create Class BaseReportPage and method takeScreenShot
+       eTest.addScreenCaptureFromPath(takeScreenShot(testName,driver));
+
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
+        String testName =  result.getName();
+        eTest.log(Status.INFO,testName+ "  skipped");
+
     }
 
     @Override
     public void onFinish(ITestContext context) {
+        report.flush();//Otherwise nothing works
     }
 
-    @Override
-    public void onTestFailedWithTimeout(ITestResult result) {
-    }
+
 }
