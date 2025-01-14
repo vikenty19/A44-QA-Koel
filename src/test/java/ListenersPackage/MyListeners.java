@@ -4,6 +4,8 @@ import BaseForExtentReports.BaseReportsPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,7 +34,8 @@ public class MyListeners extends BaseReportsPage implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         String testName =  result.getName();
-        eTest.log(Status.PASS,testName + "passed successfully");
+        eTest.log(Status.PASS,testName + "passed successfully").log(Status.INFO, MarkupHelper
+                .createLabel("<h1> CONGRATS!", ExtentColor.GREEN));
     }
 
 
@@ -61,7 +64,10 @@ public class MyListeners extends BaseReportsPage implements ITestListener {
             throw new RuntimeException(e);
         }
          eTest.log(Status.INFO,result.getThrowable());
-
+        eTest.assignAuthor("Vikenty Plakhov");
+        eTest.assignCategory("Smoke");
+        eTest.assignDevice("Windows 10 Chrome131");
+        eTest.log(Status.FAIL,"<b>Test  failed</b>");
     }
 
     @Override
