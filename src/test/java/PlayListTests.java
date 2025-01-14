@@ -24,7 +24,7 @@ public class PlayListTests extends BaseTest {
         PlayListPage playListPage = new PlayListPage(driver);
 
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("demo@class.com", "te$t$tudent");
+        loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
         playListPage.goToPlayListField();
         playListPage.createNewPlaylist(playlistName);
@@ -45,7 +45,7 @@ public class PlayListTests extends BaseTest {
         String newPlayLIstName = "Mermaid";
         PlayListPage playListPage = new PlayListPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("demo@class.com", "te$t$tudent");
+        loginPage.login(myEmail, myLogin);
 
         playListPage.choosePlayListToDelete();
         playListPage.enterPlaylistName(newPlayLIstName);
@@ -60,7 +60,7 @@ public class PlayListTests extends BaseTest {
         PlayListPage playListPage = new PlayListPage(driver);
         BasePage basePage = new BasePage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("demo@class.com", "te$t$tudent");
+        loginPage.login(myEmail, myLogin);
         playListPage.rightClickToEditPlistName();
         playListPage.enterPlaylistName(newName);
         basePage.isSuccessBannerDisplayed();
@@ -78,7 +78,7 @@ public class PlayListTests extends BaseTest {
         PlayListPage playListPage = new PlayListPage(driver);
         SongPage songPage = new SongPage(driver);
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("demo@class.com", "te$t$tudent");
+        loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
         playListPage.goToPlayListField();
         playListPage.createNewPlaylist(playlistName);

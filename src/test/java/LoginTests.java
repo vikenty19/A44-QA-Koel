@@ -26,7 +26,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginEmptyPasswordTest() {
-       LoginPage loginpage = new LoginPage(driver);
+        LoginPage loginpage = new LoginPage(driver);
         loginpage.login(myEmail, "");
         System.out.println("Is Submit button is displayed?  " + loginpage.isSubmitLoginBtnDisplayed());
         Assert.assertTrue(loginpage.isSubmitLoginBtnDisplayed());
@@ -35,8 +35,8 @@ public class LoginTests extends BaseTest {
     @Test(priority = 1)
     public void loginInvalidEmailTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        String invalidEmail = "galy.o"+generateTimeStamp()+"@testpro.io";
-      //  System.out.println(invalidEmail);
+        String invalidEmail = "galy.o" + generateTimeStamp() + "@testpro.io";
+        //  System.out.println(invalidEmail);
         loginpage.login(invalidEmail, myLogin);
         Thread.sleep(3000);
         System.out.println("Is Submit button is displayed?  " + loginpage.isSubmitLoginBtnDisplayed());
@@ -47,10 +47,9 @@ public class LoginTests extends BaseTest {
     @Test(dataProvider = "IncorrectLoginProviders")
     public void negativeLoginTests(String email, String password) throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+
         SoftAssert softAssert = new SoftAssert();
-    loginpage.login(email, password);
-      //  Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
+        loginpage.login(email, password);
         Thread.sleep(500);
         System.out.println(driver.getCurrentUrl());
         softAssert.assertEquals(driver.getCurrentUrl(), url);
