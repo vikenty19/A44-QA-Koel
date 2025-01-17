@@ -34,6 +34,8 @@ public class DemoGenerateReportWithStepScreenShot {
         // create object extentSparkReporter
         File path = new File(System.getProperty("user.dir") + "/src/test/java/ExtentReports/ReportsFolder/eReport.html");
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(path);
+
+
         // attach reporter to the engine
         extent.attachReporter(sparkReporter);
         ExtentTest eTest1 = extent.createTest("Test One","This is the test description");

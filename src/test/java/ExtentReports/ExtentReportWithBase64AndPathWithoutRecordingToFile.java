@@ -26,6 +26,7 @@ public class ExtentReportWithBase64AndPathWithoutRecordingToFile {
                 + "/src/test/java/ExtentReports/ReportsFolder/eReportTutorialNinja.html");
         ExtentSparkReporter sparkReporter = new ExtentSparkReporter(path);
         extent.attachReporter(sparkReporter);
+        sparkReporter.loadJSONConfig(new File(System.getProperty("user.dir")+"/src/test/resources/Base64ScreenShotTrue.json"));
         WebDriverManager.chromedriver().clearDriverCache().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
