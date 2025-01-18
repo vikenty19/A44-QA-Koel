@@ -8,12 +8,10 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.awt.*;
 import java.io.File;
@@ -34,21 +32,30 @@ public class DemoExtentReportWithEnvironmentDetails {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        ExtentReports eReport = new ExtentReports();
-        File eReportFile = new File(System
-                .getProperty("user.dir") + "/src/test/java/ExtentReports/ReportsFolder/eReportWithSystemData.html");
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter(eReportFile);
-        eReport.attachReporter(sparkReporter);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
-
-
         driver = new ChromeDriver(options);
         driver.get(prop.getProperty("url"));
+
+        ExtentReports eReport = new ExtentReports();
+        File eReportFile = new File(System
+                .getProperty("user.dir") + "/src/test/java/ExtentReports/ReportsFolder/eReportWithSystemData.html");
+        ExtentSparkReporter sparkReporter = new ExtentSparkReporter(eReportFile);
+        sparkReporter.config().setTimeStampFormat("MM-dd-yyyy h:mm:ss a");
+        eReport.attachReporter(sparkReporter);
+
+
         //Set app url in eReport
        eReport.setSystemInfo("Application URL:  ", prop.getProperty("url"));
+        Capabilities cap = ((RemoteWebDriver)driver).getCapabilities();
+        eReport.setSystemInfo("Browser Name:  ",cap.getBrowserName());
+        eReport.setSystemInfo("Browser version:  ", cap.getBrowserVersion());
+        // add info from the System
+        System.getProperties().list(System.out);// All System properties list
+        eReport.setSystemInfo("Operating System:  ",System.getProperty("os.name"));
+        eReport.setSystemInfo("Java version: ",System.getProperty("java.version"));
 
         driver.findElement(By.cssSelector("[type='email']")).sendKeys(prop.getProperty("myEmail"));
         driver.findElement(By.cssSelector("[type='password']")).sendKeys(prop.getProperty("myLogin" ));
@@ -59,7 +66,7 @@ public class DemoExtentReportWithEnvironmentDetails {
             throw new RuntimeException(e);
         }
         driver.findElement(By.xpath("//button[@type='submit']")).click();
-        Thread.sleep(500);
+        Thread.sleep(1000);
         String HomeScreenPath = null;
         try {
           HomeScreenPath = takeScreenShot("HomePageKoel");
@@ -81,16 +88,18 @@ public class DemoExtentReportWithEnvironmentDetails {
 
         ExtentTest eTest2 = eReport.createTest("Test two","<h1>This is KoelHomePage</h1>")
                 .log(Status.INFO, MarkupHelper.createLabel("<h1>KoelHomePage</h1>", ExtentColor.GREEN));//description of th test added
-        eTest2.addScreenCaptureFromPath(HomeScreenPath,"<i><b>HomePageKoel</b></i> ");//Screenshot in ExtentReport
+        eTest2.addScreenCaptureFromPath(ScreenPath,"<b>Login Page</b>");
+        eTest2.addScreenCaptureFromPath(HomeScreenPath,"<b>HomePageKoel</b> ");//Screenshot in ExtentReport
+
         eTest2.log(Status.INFO,"<b>KoelHomePage</b>");
-        eTest2.log(Status.INFO, MarkupHelper.createLabel("<h1>KoelHomePage</h1>", ExtentColor.BLUE));//highlight text
+
         eTest2.log(Status.FAIL,"Test two got failed");
         eTest2.assignAuthor("Vikenty Plakhov");
         eTest2.assignCategory("Sanity");
         eTest2.assignDevice("Windows 10 FireFox");
 
 
-        eTest2.addScreenCaptureFromPath(ScreenPath,"<b>Koel Login Page/b>");
+    ///    eTest2.addScreenCaptureFromPath(ScreenPath,"<b>Koel Login Page/b>");
 
         ExtentTest eTest3= eReport.createTest("Test Three","This is a description of Test Three");
         eTest3.log(Status.INFO,"Test Three is started");
@@ -102,6 +111,7 @@ public class DemoExtentReportWithEnvironmentDetails {
         ExtentTest eTest4 = eReport.createTest("Test Four","This is a description of Test Four");
         eTest4.log(Status.INFO,"Test Four is started");
         eTest4.log(Status.PASS,"Test three got passed");
+        eTest4.log(Status.INFO, MarkupHelper.createLabel("<h1>KoelHomePage</h1>", ExtentColor.BLUE));//highlight text
         eTest4.assignAuthor("VIP");
         eTest4.assignCategory("Regression");
         eTest4.assignDevice("Windows 10 Chrome 131");

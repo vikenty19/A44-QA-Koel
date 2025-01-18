@@ -33,11 +33,15 @@ public class DemoGenerateReportWithStepScreenShot {
         driver = new ChromeDriver();
        driver.manage().window().maximize();
        driver.get(prop.getProperty("url"));
+
+
        //HERE WE ARE TAKING SCREENSHOT ON THE TEST LEVEL
       // Create a method to get KoelScreenShot
       /*File KoelHomeScreenShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         String KoelScreenPath = System.getProperty("user.dir")+"./src/test/java/Koel/KoelHomeScreenShot.png";
         FileUtils.copyFile(KoelHomeScreenShot,new File(KoelScreenPath));*/
+
+
         String KoelScreenPath = takeScreenShot("HomePageKoel");
         ExtentReports extent = new ExtentReports();//extent is an engine
         // create object extentSparkReporter
@@ -83,7 +87,7 @@ public class DemoGenerateReportWithStepScreenShot {
         //another ScreenShot
         driver.findElement(By.cssSelector("[type='email']")).sendKeys("VIPlakh@mail.com");
         String KoelEmailField = takeScreenShot("KoelEmail");
-        eTest2.addScreenCaptureFromPath(KoelEmailField,"<b>Koel Email Enter</b>");
+       eTest2.addScreenCaptureFromPath(KoelEmailField,"<b>Koel Email Enter</b>");
 
         ExtentTest eTest3= extent.createTest("Test Three","This is a description of Test Three");
         eTest3.log(Status.INFO,"Test Three is started");
