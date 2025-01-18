@@ -6,7 +6,6 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class DemoExtentReportWithEnvironmentDetails {
+public class DemoExtentReportWithPropFileAndSystemDetails {
    static WebDriver driver;
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         Properties prop = new Properties();
@@ -49,11 +48,12 @@ public class DemoExtentReportWithEnvironmentDetails {
 
         //Set app url in eReport
        eReport.setSystemInfo("Application URL:  ", prop.getProperty("url"));
+       // Add System and Browser info to the eReport
         Capabilities cap = ((RemoteWebDriver)driver).getCapabilities();
         eReport.setSystemInfo("Browser Name:  ",cap.getBrowserName());
         eReport.setSystemInfo("Browser version:  ", cap.getBrowserVersion());
         // add info from the System
-        System.getProperties().list(System.out);// All System properties list
+       // System.getProperties().list(System.out);// All System properties list
         eReport.setSystemInfo("Operating System:  ",System.getProperty("os.name"));
         eReport.setSystemInfo("Java version: ",System.getProperty("java.version"));
 
@@ -90,16 +90,11 @@ public class DemoExtentReportWithEnvironmentDetails {
                 .log(Status.INFO, MarkupHelper.createLabel("<h1>KoelHomePage</h1>", ExtentColor.GREEN));//description of th test added
         eTest2.addScreenCaptureFromPath(ScreenPath,"<b>Login Page</b>");
         eTest2.addScreenCaptureFromPath(HomeScreenPath,"<b>HomePageKoel</b> ");//Screenshot in ExtentReport
-
         eTest2.log(Status.INFO,"<b>KoelHomePage</b>");
-
         eTest2.log(Status.FAIL,"Test two got failed");
         eTest2.assignAuthor("Vikenty Plakhov");
         eTest2.assignCategory("Sanity");
         eTest2.assignDevice("Windows 10 FireFox");
-
-
-    ///    eTest2.addScreenCaptureFromPath(ScreenPath,"<b>Koel Login Page/b>");
 
         ExtentTest eTest3= eReport.createTest("Test Three","This is a description of Test Three");
         eTest3.log(Status.INFO,"Test Three is started");
