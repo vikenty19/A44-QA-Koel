@@ -1,5 +1,5 @@
-import POM.HomePage;
-import POM.LoginPage;
+import POM.*;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -15,10 +15,9 @@ public class LoginTests extends BaseTest {
     @Test//(groups = {"smoke1"})
     public void loginSucceedTest() {
         LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(myEmail,myLogin);
         HomePage homePage = new HomePage(driver);
-        loginPage.login(myEmail, myLogin);
-
-        // find if avatar exists
+              // find if avatar exists
         Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
         System.out.println("User logged successfully   " + homePage.getAvatar());
     }

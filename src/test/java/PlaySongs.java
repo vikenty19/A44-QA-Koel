@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class PlaySongs extends BaseTest {
 
     @Test
-    public void playSong() {
+    public void playSong() throws InterruptedException {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(myEmail, myLogin);
         SongPage songPage = new SongPage(driver);
@@ -20,6 +20,7 @@ public class PlaySongs extends BaseTest {
         // Play the song
 
         songPage.playSongWithPlayBtn();
+
         basePage.isEqualizerDisplayed();
         basePage.isPauseBtnDisplayed();
     }
