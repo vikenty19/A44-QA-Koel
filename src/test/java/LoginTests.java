@@ -35,7 +35,7 @@ public class LoginTests extends BaseTest {
     public void loginInvalidEmailTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
         String invalidEmail = "galy.o" + generateTimeStamp() + "@testpro.io";
-        //  System.out.println(invalidEmail);
+          System.out.println(invalidEmail);
         loginpage.login(invalidEmail, myLogin);
         Thread.sleep(3000);
         System.out.println("Is Submit button is displayed?  " + loginpage.isSubmitLoginBtnDisplayed());

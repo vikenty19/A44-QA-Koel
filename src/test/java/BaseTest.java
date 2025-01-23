@@ -72,7 +72,7 @@ public class BaseTest {
         String newName = faker.book().title();
         return newName;
     }
-    public String generateTimeStamp(){
+    public final String generateTimeStamp(){
         Date date = new Date();
         return date.toString().replace(":","_").substring(11,19);
     }

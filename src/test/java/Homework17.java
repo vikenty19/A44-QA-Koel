@@ -1,3 +1,4 @@
+import POM.BasePage;
 import POM.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,10 +15,11 @@ public class Homework17 extends BaseTest {
     @Test
     public void addSongToPlaylist() throws InterruptedException {
         String text = "Ketsa - Beautiful";
+
         String playlistName = generateRandomPlaylistName();
         // login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("vicplach123@gmail.com", "MEGAdelta06@");
+        loginPage.login(myEmail, myLogin);
         // search for song
 
         searchForSong(text);
