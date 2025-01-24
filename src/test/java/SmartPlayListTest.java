@@ -8,9 +8,9 @@ import org.testng.annotations.Test;
 public class SmartPlayListTest extends BaseTest {
 
     @Test
-    public void createPlistWithName() throws InterruptedException {
-        String addedSong = "Dark Days";
-        String SmartPlistName = "qQqQQQQQQQQQqq";
+    public void createPlistWithName() {
+        String addedSong = "Episode 2";
+        String SmartPlistName = addedSong;
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -24,9 +24,16 @@ public class SmartPlayListTest extends BaseTest {
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
         Assert.assertTrue(homePage.getAvatar());
         String plName = driver.findElement(By.cssSelector("#playlistWrapper .heading-wrapper h1")).getText();
+        String songTitle =driver.findElement(By
+                .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .title")).getText();
+        System.out.println(songTitle);
+        //Just to check info with differ Plist title
+        String playlist = driver.findElement(By.cssSelector("#playlists ul li:nth-child(3)")).getText();
+        System.out.println(playlist);
         System.out.println(plName);
         System.out.println("After test");
-        //Assert.assertEquals(plName,SmartPlistName);
+        Assert.assertEquals(songTitle,addedSong);
+      //  Assert.assertEquals(plName,SmartPlistName);
 
     }
 }
