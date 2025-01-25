@@ -76,6 +76,7 @@ public class SmartPlayListTest extends BaseTest {
     @Test
     public void plListByArtistNames() throws InterruptedException {
        // String addedSong = generateRandomPlaylistName();
+        String firstLetterOfArtistName = "h";
         String SmartPlistName =generateRandomPlaylistBookName();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
@@ -92,7 +93,7 @@ public class SmartPlayListTest extends BaseTest {
 
         Select select1 = new Select(dropDownOption);
         select1.selectByVisibleText("begins with");
-        driver.findElement(By.name("value[]")).sendKeys("D");
+        driver.findElement(By.name("value[]")).sendKeys(firstLetterOfArtistName);
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
         Assert.assertTrue(homePage.getAvatar());
         // Check List of songs in the playlist
@@ -102,7 +103,8 @@ public class SmartPlayListTest extends BaseTest {
            String name= temp.getText();
             System.out.println(name);
             Character firstLetter = name.charAt(0);
-            Assert.assertEquals(firstLetter.toString(),"D");
+            String a = firstLetter.toString();
+            Assert.assertTrue(a.equalsIgnoreCase(firstLetterOfArtistName));
         }
 
 
