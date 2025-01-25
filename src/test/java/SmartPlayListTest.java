@@ -14,7 +14,7 @@ public class SmartPlayListTest extends BaseTest {
     @Test
     public void createPlistWithName() {
         String addedSong = "Episode 2";
-        String SmartPlistName = addedSong;
+        String SmartPlistName = generateRandomPlaylistName();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -43,7 +43,7 @@ public class SmartPlayListTest extends BaseTest {
     }
     @Test
     public void plListByArtistName() throws InterruptedException {
-        String addedSong = generateRandomPlaylistName();
+
         String SmartPlistName =generateRandomPlaylistBookName();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
@@ -73,10 +73,10 @@ public class SmartPlayListTest extends BaseTest {
         Thread.sleep(5000);
 
     }
-    @Test
+    @Test//Checking first letter of the artists names in the list of songs
     public void plListByArtistNames() throws InterruptedException {
        // String addedSong = generateRandomPlaylistName();
-        String firstLetterOfArtistName = "h";
+        String firstLetterOfArtistName = "a";
         String SmartPlistName =generateRandomPlaylistBookName();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
