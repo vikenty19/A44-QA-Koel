@@ -76,7 +76,7 @@ public class SmartPlayListTest extends BaseTest {
     @Test//Checking first letter of the artists names in the list of songs
     public void plListByArtistNames() throws InterruptedException {
        // String addedSong = generateRandomPlaylistName();
-        String firstLetterOfArtistName = "a";
+        String firstLetterOfArtistName = "z";
         String SmartPlistName =generateRandomPlaylistBookName();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
@@ -99,6 +99,11 @@ public class SmartPlayListTest extends BaseTest {
         // Check List of songs in the playlist
         List<WebElement> artistName = driver.findElements(By
                 .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .artist"));
+        if(artistName.size()==0){
+            String message = driver.findElement(By.cssSelector("#playlistWrapper .screen-placeholder .text")).getText();
+            Assert.assertTrue(message.contains("No songs match the playlist's "));
+            System.out.println("No song like that");
+        }
         for (WebElement temp:artistName){
            String name= temp.getText();
             System.out.println(name);
