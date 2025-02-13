@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,7 +21,8 @@ public class PlayListPage extends BasePage {
     By plusBtn = By.cssSelector(".fa-plus-circle");
     By pListLocator = By.cssSelector(".playlist:nth-child(3)>a");
 
-    By pListNameField = By.cssSelector("input[name='name']");
+    By pListNameField = By.cssSelector("input[name='name']");//li:nth-child(3).playlist.smart
+   // By pListNameField = By.cssSelector("li:nth-child(3).playlist.smart");
     By footerSubmitBtn= By.cssSelector("footer button[type='submit']");
 
     By createPlaylistLocator = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
@@ -66,6 +68,18 @@ public class PlayListPage extends BasePage {
         playlistInputField.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), name);
         WebElement footerSubmit = waitUntilVisible(footerSubmitBtn);
         footerSubmit.sendKeys(Keys.ENTER);
+    }
+    public void typeNewPlistNameInNameField(String name) throws InterruptedException {
+      WebElement  enterNewPlistName = waitUntilClickable(By.cssSelector("li:nth-child(3).playlist.smart"));
+      new Actions(driver).doubleClick().perform();
+      Thread.sleep(3000);
+    /*    WebElement playlistInputField = waitUntilClickable(pListNameField);
+      playlistInputField.click();
+      playlistInputField.clear();
+      playlistInputField.sendKeys(name);
+      enterNewPlistName.sendKeys(Keys.ENTER);*/
+       createNewPlaylist(name);
+       new Actions(driver).sendKeys(Keys.ENTER).perform();
     }
 
     public void plusBtnClick() {

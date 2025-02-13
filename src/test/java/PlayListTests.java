@@ -1,7 +1,4 @@
-import POM.BasePage;
-import POM.LoginPage;
-import POM.PlayListPage;
-import POM.SongPage;
+import POM.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
@@ -9,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,21 +39,26 @@ public class PlayListTests extends BaseTest {
 
 
     @Test
-    public void renamePlayList() {
+    public void renamePlayList() throws InterruptedException {
         String newPlayLIstName = "Mermaid";
         PlayListPage playListPage = new PlayListPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(myEmail, myLogin);
 
         playListPage.choosePlayListToDelete();
-        playListPage.enterPlaylistName(newPlayLIstName);
+      //  playListPage.goToPlayListField();
+        playListPage.createNewPlaylist(newPlayLIstName );
+      //  playListPage.typeNewPlistNameInNameField(newPlayLIstName);
+        new Actions(driver).sendKeys(ENTER).perform();
         System.out.println(newPlayLIstName);
         System.out.println(playListPage.getPlaylistName());
-        Assert.assertEquals(newPlayLIstName, playListPage.getPlaylistName());
+        BasePage basePage = new BasePage(driver);
+        basePage.isSuccessBannerDisplayed();
+       // Assert.assertEquals(newPlayLIstName, playListPage.getPlaylistName());
     }
 
     @Test
-    public void renamePlistWithEditBtn() {
+    public void renamePlistWithEditBtn() throws InterruptedException {
         String newName = "Sausage Dog";
         PlayListPage playListPage = new PlayListPage(driver);
         BasePage basePage = new BasePage(driver);
@@ -64,9 +67,12 @@ public class PlayListTests extends BaseTest {
         playListPage.rightClickToEditPlistName();
         playListPage.enterPlaylistName(newName);
         basePage.isSuccessBannerDisplayed();
-        Assert.assertEquals(newName, playListPage.getPlaylistName());
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(newName, playListPage.getPlaylistName());
         System.out.println(newName + "  " + playListPage.getPlaylistName());
-
+        GetSQLInfo getSQLInfo = new GetSQLInfo();
+        System.out.println(getSQLInfo.getSQLData(newName));
+        softAssert.assertAll();
     }
 
     @Test

@@ -12,6 +12,8 @@ repositories {
 dependencies {
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '5.6.4'
 
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.2.0'
+
 
     testImplementation 'org.testng:testng:7.7.0'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-api', version: '4.16.1'
