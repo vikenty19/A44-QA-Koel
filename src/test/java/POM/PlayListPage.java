@@ -21,6 +21,7 @@ public class PlayListPage extends BasePage {
     By pListLocator = By.cssSelector(".playlist:nth-child(3)>a");
 
     By pListNameField = By.cssSelector("input[name='name']");
+    By footerSubmitBtn= By.cssSelector("footer button[type='submit']");
 
     By createPlaylistLocator = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
 
@@ -63,7 +64,8 @@ public class PlayListPage extends BasePage {
     public void enterPlaylistName(String name) {
         WebElement playlistInputField = waitUntilClickable(pListNameField);
         playlistInputField.sendKeys(Keys.HOME, Keys.chord(Keys.SHIFT, Keys.END), name);
-        playlistInputField.sendKeys(Keys.ENTER);
+        WebElement footerSubmit = waitUntilVisible(footerSubmitBtn);
+        footerSubmit.sendKeys(Keys.ENTER);
     }
 
     public void plusBtnClick() {
