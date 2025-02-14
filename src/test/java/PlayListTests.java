@@ -59,7 +59,7 @@ public class PlayListTests extends BaseTest {
 
     @Test
     public void renamePlistWithEditBtn() throws InterruptedException {
-        String newName = "Sausage Dog";
+        String newName = generateRandomPlaylistName();
         PlayListPage playListPage = new PlayListPage(driver);
         BasePage basePage = new BasePage(driver);
         LoginPage loginPage = new LoginPage(driver);
@@ -71,7 +71,7 @@ public class PlayListTests extends BaseTest {
         softAssert.assertEquals(newName, playListPage.getPlaylistName());
         System.out.println(newName + "  " + playListPage.getPlaylistName());
         GetSQLInfo getSQLInfo = new GetSQLInfo();
-      //  System.out.println(getSQLInfo.getSQLData(newName));
+       softAssert.assertEquals(getSQLInfo.getSQLData(newName),newName);
         softAssert.assertAll();
     }
 

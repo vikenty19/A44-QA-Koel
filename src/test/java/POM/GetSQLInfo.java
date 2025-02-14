@@ -1,12 +1,14 @@
 package POM;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class GetSQLInfo {
 
-    public void getSQLData(String songName) {
+    public String getSQLData(String songName) {
 
 
         String url = "jdbc:mariadb://104.237.13.60:3306/";
@@ -17,7 +19,7 @@ public class GetSQLInfo {
 
         Connection connection = null;
 
-
+          String dbPlistName = "";
         try {
             //connect to Koel DB
             connection = DriverManager.getConnection(dbURL, name, password);
@@ -30,7 +32,10 @@ public class GetSQLInfo {
                         .executeQuery("SELECT p.name, count(p.name) FROM dbkoel.playlists p WHERE p.name = '" + songName + "'");
 
                 while (resultSet.next()) {
-                    System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
+                    // Getting playlist name from DB
+                     dbPlistName = resultSet.getString("p.name");
+
+                 //   System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
                 }
 
             }
@@ -52,5 +57,6 @@ public class GetSQLInfo {
             }
 
         }
+        return dbPlistName;
     }
 }
