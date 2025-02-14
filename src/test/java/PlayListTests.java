@@ -1,7 +1,9 @@
 import POM.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -39,26 +41,36 @@ public class PlayListTests extends BaseTest {
 
 
     @Test
-    public void renamePlayList() throws InterruptedException {
+    public void renamePlayListWithDoubleClick()  {
         String newPlayLIstName = "Mermaid";
         PlayListPage playListPage = new PlayListPage(driver);
         LoginPage loginPage = new LoginPage(driver);
+        BasePage basePage = new BasePage(driver);
         loginPage.login(myEmail, myLogin);
 
         playListPage.choosePlayListToDelete();
-      //  playListPage.goToPlayListField();
         playListPage.createNewPlaylist(newPlayLIstName );
-      //  playListPage.typeNewPlistNameInNameField(newPlayLIstName);
-        new Actions(driver).sendKeys(ENTER).perform();
+
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        WebElement  enterNewPlistName = basePage.waitUntilClickable(By.cssSelector("li:nth-child(3).playlist.smart"));
+        new Actions(driver).doubleClick(enterNewPlistName).perform();
+        //Double click on plList name( first in the list)
+        WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='name']")));
+
+        //clear field plName
+        jse.executeScript("arguments[0].value = '';",field);
+        //Entering new name of the pList
+        jse.executeScript("document.activeElement.innerText = 'Mermayd';");
+        field.sendKeys("Mermaid", ENTER);
+
         System.out.println(newPlayLIstName);
         System.out.println(playListPage.getPlaylistName());
-        BasePage basePage = new BasePage(driver);
         basePage.isSuccessBannerDisplayed();
        // Assert.assertEquals(newPlayLIstName, playListPage.getPlaylistName());
     }
 
     @Test
-    public void renamePlistWithEditBtn() throws InterruptedException {
+    public void renamePlistWithEditBtnAndDataBaseChecking() throws InterruptedException {
         String newName = generateRandomPlaylistName();
         PlayListPage playListPage = new PlayListPage(driver);
         BasePage basePage = new BasePage(driver);
@@ -71,6 +83,7 @@ public class PlayListTests extends BaseTest {
         softAssert.assertEquals(newName, playListPage.getPlaylistName());
         System.out.println(newName + "  " + playListPage.getPlaylistName());
         GetSQLInfo getSQLInfo = new GetSQLInfo();
+        //Assert new name with DB name
        softAssert.assertEquals(getSQLInfo.getSQLData(newName),newName);
         softAssert.assertAll();
     }

@@ -71,15 +71,8 @@ public class PlayListPage extends BasePage {
     }
     public void typeNewPlistNameInNameField(String name) throws InterruptedException {
       WebElement  enterNewPlistName = waitUntilClickable(By.cssSelector("li:nth-child(3).playlist.smart"));
-      new Actions(driver).doubleClick().perform();
-      Thread.sleep(3000);
-    /*    WebElement playlistInputField = waitUntilClickable(pListNameField);
-      playlistInputField.click();
-      playlistInputField.clear();
-      playlistInputField.sendKeys(name);
-      enterNewPlistName.sendKeys(Keys.ENTER);*/
-       createNewPlaylist(name);
-       new Actions(driver).sendKeys(Keys.ENTER).perform();
+      new Actions(driver).doubleClick(enterNewPlistName).perform();
+
     }
 
     public void plusBtnClick() {
