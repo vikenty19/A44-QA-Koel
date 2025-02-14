@@ -71,7 +71,7 @@ public class PlayListTests extends BaseTest {
         softAssert.assertEquals(newName, playListPage.getPlaylistName());
         System.out.println(newName + "  " + playListPage.getPlaylistName());
         GetSQLInfo getSQLInfo = new GetSQLInfo();
-        System.out.println(getSQLInfo.getSQLData(newName));
+      //  System.out.println(getSQLInfo.getSQLData(newName));
         softAssert.assertAll();
     }
 

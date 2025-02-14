@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class GetSQLInfo {
 
-    public String getSQLData(String songName) {
+    public void getSQLData(String songName) {
 
 
         String url = "jdbc:mariadb://104.237.13.60:3306/";
@@ -15,77 +15,37 @@ public class GetSQLInfo {
         String name = "dbuser01";//dbuser01 pa$$01
         String password = "pa$$01";
 
-        Connection connection;
+        Connection connection = null;
 
-        {
-            try {
-                connection = DriverManager.getConnection(dbURL, name, password);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+
+        try {
+            //connect to Koel DB
+            connection = DriverManager.getConnection(dbURL, name, password);
+            //verify the connection and execute SQL statement
+            if (!connection.isClosed()) {
+                System.out.println("we are in!");
+                // Fire SQL Selection statement
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement
+                        .executeQuery("SELECT p.name, count(p.name) FROM dbkoel.playlists p WHERE p.name = '" + songName + "'");
+
+                while (resultSet.next()) {
+                    System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
+                }
+
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             try {
                 if (!connection.isClosed()) {
-                    System.out.println("we are in!");
-                } else {
-                    System.out.println("We are not in");
+                    //close the connection
+                    connection.close();
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            Statement statement;
-
-            {
-                try {
-                    statement = connection.createStatement();
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                e.printStackTrace();
             }
 
-            ResultSet resultSet;
-
-            {
-                try {
-                    resultSet = statement.executeQuery("SELECT p.name, count(p.name) FROM dbkoel.playlists p WHERE p.name = '" + songName + "'");
-
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-
-            //  Map<String, String> songs = new HashMap<>();
-            while (true) {
-                try {
-                    if (!resultSet.next()) break;
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-       /*     try {
-                songs.put(resultSet.getString("p.name"), resultSet.getString("count(p.name)"));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);*/
-            }
-            // System.out.println(resultSet.getString("id")+"--"+resultSet.getString("email")+"----"+ resultSet.getString("password"));
-            try {
-                System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
-                try {
-                    return resultSet.getString("p.name");
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-
-            //   System.out.println("Number of songs in the DB is = " + songs.size());
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-        }
-
     }
-
+}
