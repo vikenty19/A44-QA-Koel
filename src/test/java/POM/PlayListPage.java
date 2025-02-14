@@ -1,9 +1,6 @@
 package POM;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +9,8 @@ import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.openqa.selenium.Keys.ENTER;
 
 public class PlayListPage extends BasePage {
     public PlayListPage(WebDriver givenDriver) {
@@ -35,7 +34,8 @@ public class PlayListPage extends BasePage {
             .cssSelector(".btn-delete-playlist");
 
     By playListsLocator = By.cssSelector(".playlist.playlist>a");
-
+    By pListNamelocator = By.cssSelector("li:nth-child(3).playlist.smart");
+   By nameField  = By.cssSelector("input[name='name']");
     public void choosePlayListToDelete() {
         WebElement pListNameToDelete = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(pListLocator));
@@ -62,6 +62,18 @@ public class PlayListPage extends BasePage {
 
         //.menu> ul > li:nth-of-type(1)
     }
+    public void enterNewNameIntoNameField(String newName) {
+        BasePage basePage = new BasePage(driver);
+        WebElement  enterNewPlistName = basePage.waitUntilClickable(pListNamelocator);
+        new Actions(driver).doubleClick(enterNewPlistName).perform();
+        //Double click on plList name( first in the list)
+        WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(nameField));
+        //clear field plName using jse
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("arguments[0].value = '';",field);
+        //Entering new name of the pList
+        field.sendKeys(newName, ENTER);
+    }
 
     public void enterPlaylistName(String name) {
         WebElement playlistInputField = waitUntilClickable(pListNameField);
@@ -69,11 +81,7 @@ public class PlayListPage extends BasePage {
         WebElement footerSubmit = waitUntilVisible(footerSubmitBtn);
         footerSubmit.sendKeys(Keys.ENTER);
     }
-    public void typeNewPlistNameInNameField(String name) throws InterruptedException {
-      WebElement  enterNewPlistName = waitUntilClickable(By.cssSelector("li:nth-child(3).playlist.smart"));
-      new Actions(driver).doubleClick(enterNewPlistName).perform();
 
-    }
 
     public void plusBtnClick() {
         WebElement plusButton = waitUntilVisible(plusBtn);
