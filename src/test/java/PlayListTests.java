@@ -51,13 +51,14 @@ public class PlayListTests extends BaseTest {
         playListPage.choosePlayListToDelete();
         playListPage.createNewPlaylist(newPlayLIstName );
 
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+
         WebElement  enterNewPlistName = basePage.waitUntilClickable(By.cssSelector("li:nth-child(3).playlist.smart"));
         new Actions(driver).doubleClick(enterNewPlistName).perform();
         //Double click on plList name( first in the list)
         WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='name']")));
 
         //clear field plName using jse
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("arguments[0].value = '';",field);
         //Entering new name of the pList
         field.sendKeys(newPlayLIstName, ENTER);
@@ -65,6 +66,7 @@ public class PlayListTests extends BaseTest {
         System.out.println(newPlayLIstName);
         System.out.println(playListPage.getPlaylistName());
         basePage.isSuccessBannerDisplayed();
+        //DataBase checking pListName
         GetSQLInfo getSQLInfo = new GetSQLInfo();
        Assert.assertEquals(newPlayLIstName,getSQLInfo.getSQLData(newPlayLIstName));
     }
