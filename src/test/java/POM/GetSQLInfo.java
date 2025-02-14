@@ -37,10 +37,15 @@ public class GetSQLInfo {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            //close the connection
             try {
-                if (!connection.isClosed()) {
-                    //close the connection
-                    connection.close();
+                connection.close();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+            try {
+                if (connection.isClosed()) {
+                    System.out.println("connection is closed");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
