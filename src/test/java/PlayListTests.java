@@ -42,7 +42,7 @@ public class PlayListTests extends BaseTest {
 
     @Test
     public void renamePlayListWithDoubleClick()  {
-        String newPlayLIstName = "Mermaid";
+        String newPlayLIstName = generateRandomPlaylistName();
         PlayListPage playListPage = new PlayListPage(driver);
         LoginPage loginPage = new LoginPage(driver);
         BasePage basePage = new BasePage(driver);
@@ -57,16 +57,16 @@ public class PlayListTests extends BaseTest {
         //Double click on plList name( first in the list)
         WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='name']")));
 
-        //clear field plName
+        //clear field plName using jse
         jse.executeScript("arguments[0].value = '';",field);
         //Entering new name of the pList
-        jse.executeScript("document.activeElement.innerText = 'Mermayd';");
-        field.sendKeys("Mermaid", ENTER);
+        field.sendKeys(newPlayLIstName, ENTER);
 
         System.out.println(newPlayLIstName);
         System.out.println(playListPage.getPlaylistName());
         basePage.isSuccessBannerDisplayed();
-       // Assert.assertEquals(newPlayLIstName, playListPage.getPlaylistName());
+        GetSQLInfo getSQLInfo = new GetSQLInfo();
+       Assert.assertEquals(newPlayLIstName,getSQLInfo.getSQLData(newPlayLIstName));
     }
 
     @Test
