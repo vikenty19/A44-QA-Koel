@@ -1,6 +1,4 @@
-import POM.HomePage;
-import POM.LoginPage;
-import POM.PlayListPage;
+import POM.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -13,34 +11,50 @@ import java.util.List;
 public class SmartPlayListTest extends BaseTest {
 
     @Test
-    public void createPlistWithName() {
+    public void createSmartPlistWithName() {
+        BasePage basePage = new BasePage(driver);
         String addedSong = "Episode 2";
-        String SmartPlistName = generateRandomPlaylistName();
+        String SmartPlistName = generateRandomPlaylistName()+basePage.timeStamp();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
-        HomePage homePage = new HomePage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
-        ;////div/p[@class = 'msg']
-        driver.findElement(By.cssSelector("[data-testid =playlist-context-menu-create-smart]")).click();
-        driver.findElement(By.name("name")).sendKeys(SmartPlistName);
-        driver.findElement(By.name("value[]")).sendKeys(addedSong);
-        //  Thread.sleep(5000);
-        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
-        Assert.assertTrue(homePage.getAvatar());
+        SmartPlayListPage smart = new SmartPlayListPage(driver);
+        smart.createSmartPlistWithoutGroup(SmartPlistName,addedSong);
+        basePage.isSuccessBannerDisplayed();
+
         String plName = driver.findElement(By.cssSelector("#playlistWrapper .heading-wrapper h1")).getText();
         String songTitle = driver.findElement(By
                 .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .title")).getText();
-        System.out.println(songTitle);
-        //Just to check info with differ Plist title
-        String playlist = driver.findElement(By.cssSelector("#playlists ul li:nth-child(3)")).getText();
+        System.out.println("Song added in the Playlist --"+songTitle);
 
-        System.out.println(playlist);
-        // System.out.println(plName);
+         System.out.println(" name of created plyList  ---"+plName);
         System.out.println("After test");
         Assert.assertEquals(songTitle, addedSong);
         //  Assert.assertEquals(plName,SmartPlistName);
 
+    }
+    @Test
+    public void createSmartPlistWithNameAndGroup() throws InterruptedException {
+        HomePage homePage = new HomePage(driver);
+        BasePage basePage = new BasePage(driver);
+        String addedSong = "Episode 2";
+        String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
+        LoginPage loginPage = new LoginPage(driver);
+        PlayListPage playListPage = new PlayListPage(driver);
+        loginPage.login(myEmail, myLogin);
+        playListPage.plusBtnClick();
+        driver.findElement(By.cssSelector("[data-testid =playlist-context-menu-create-smart]")).click();
+        driver.findElement(By.name("name")).sendKeys(SmartPlistName);
+        //Add rule
+
+        driver.findElement(By.name("value[]")).sendKeys(addedSong);
+        //add group
+        driver.findElement(By.cssSelector(".btn-add-group")).click();
+        WebElement dropDownField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']"));
+        Select select = new Select(dropDownField);
+        select.selectByVisibleText("Album");;
+        Thread.sleep(3000);
     }
 
     @Test
@@ -77,7 +91,7 @@ public class SmartPlayListTest extends BaseTest {
     }
 
     @Test(dataProvider = "alphabet")//Checking first letter of the artists names in the list of songs
-    public void plListByArtistNames(char letter)  {
+    public void plListByArtistNamesFirstLetterCheck(char letter)  {
 
 
         Character firstLetterOfArtistName = letter;
@@ -118,7 +132,7 @@ public class SmartPlayListTest extends BaseTest {
 
     }
 
-    @DataProvider(name = "alphabet")
+    @DataProvider(name = "plListByArtistNamesFirstLetterCheck")
     public Object[][] returnChar() {
         Object[][] alphabet = new Object[26][1];
         for (int i = 0; i < 26; i++) {

@@ -1,14 +1,10 @@
 package POM;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GetSQLInfo {
 
-    public String getSQLData(String songName) {
+    public String checkSQLPlayListName(String songName) {
 
 
         String url = "jdbc:mariadb://104.237.13.60:3306/";
@@ -25,7 +21,7 @@ public class GetSQLInfo {
             connection = DriverManager.getConnection(dbURL, name, password);
             //verify the connection and execute SQL statement
             if (!connection.isClosed()) {
-                System.out.println("we are in!");
+              //  System.out.println("we are in!");
                 // Fire SQL Selection statement
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement
@@ -35,7 +31,7 @@ public class GetSQLInfo {
                     // Getting playlist name from DB
                      dbPlistName = resultSet.getString("p.name");
 
-                 //   System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
+                   System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
                 }
 
             }
@@ -50,7 +46,7 @@ public class GetSQLInfo {
             }
             try {
                 if (connection.isClosed()) {
-                    System.out.println("connection is closed");
+                 //   System.out.println("connection is closed");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

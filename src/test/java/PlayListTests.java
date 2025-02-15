@@ -1,28 +1,22 @@
 import POM.*;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.openqa.selenium.Keys.ENTER;
+import java.util.Date;
 
 public class PlayListTests extends BaseTest {
 
     @Test
     public void deletePlaylistTest() throws InterruptedException {
-        String playlistName = generateRandomPlaylistBookName();
+        BasePage basePage = new BasePage(driver);
+        String playlistName = generateRandomPlaylistBookName()+basePage.timeStamp();
         System.out.println(playlistName);
         PlayListPage playListPage = new PlayListPage(driver);
-
+        GetSQLInfo getSQLInfo = new GetSQLInfo();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
@@ -31,13 +25,20 @@ public class PlayListTests extends BaseTest {
         //Assertions of playlist name
         playListPage.checkPlayListName(playlistName);
         playListPage.isSuccessBannerDisplayed();
+        //checking created plist name in the DB
+        getSQLInfo.checkSQLPlayListName(playlistName);
         //delete playlist
         playListPage.deleteCreatedPlaylist();
         //Assertions
         Thread.sleep(1000);//left it because of instability
         playListPage.isPlayListDeleted(playlistName);
-
+        //Assert deleting created playlist from DB
+       Assert.assertNull(getSQLInfo.checkSQLPlayListName(playlistName));
     }
+
+
+
+
 
 
     @Test
@@ -55,7 +56,8 @@ public class PlayListTests extends BaseTest {
         basePage.isSuccessBannerDisplayed();
         //DataBase checking pListName
         GetSQLInfo getSQLInfo = new GetSQLInfo();
-       Assert.assertEquals(newPlayLIstName,getSQLInfo.getSQLData(newPlayLIstName));
+        //Assertion
+       Assert.assertEquals(newPlayLIstName,getSQLInfo.checkSQLPlayListName(newPlayLIstName));
     }
 
 
@@ -75,11 +77,11 @@ public class PlayListTests extends BaseTest {
         System.out.println(newName + "  " + playListPage.getPlaylistName());
         GetSQLInfo getSQLInfo = new GetSQLInfo();
         //Assert new name with DB name
-       softAssert.assertEquals(getSQLInfo.getSQLData(newName),newName);
+       softAssert.assertEquals(getSQLInfo.checkSQLPlayListName(newName),newName);
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(enabled = false)
     public void deletePlaylistAddingSongsByDragging() throws InterruptedException {
         //  String playlistName = generateRandomPlaylistBookName();
         String playlistName = "00000001";
@@ -112,6 +114,34 @@ public class PlayListTests extends BaseTest {
         playListPage.isPlayListDeleted(playlistName);
         playListPage.isSuccessBannerDisplayed();
 
+
+    }
+    @Test
+    public void dragSongToPlaylist() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(myEmail,myLogin);
+        SongPage songPage = new SongPage(driver);
+        songPage.goToAllSongsTub();
+
+        WebElement song = loginPage.waitUntilClickable(By
+                .cssSelector(".all-songs .song-item:nth-of-type(1) .title"));
+        String songInAllSong = song.getText();
+        System.out.println("song in all songs  " + songInAllSong);
+        WebElement playlist = loginPage.waitUntilClickable(By
+                .cssSelector("#playlists li:nth-child(3)"));
+        //drag song to created playlist
+
+
+        new Actions(driver)
+                .dragAndDrop(song, playlist)
+                .perform();
+        playlist.click();
+        WebElement addedSong = loginPage.waitUntilVisible(By
+                .cssSelector(".playlist .item-container .items tr.song-item:nth-child(1) .title"));
+        addedSong.click();
+        String songInPlaylist = addedSong.getText();
+        System.out.println("Song In Playlist  " + songInPlaylist);
+        Assert.assertEquals(songInAllSong, songInPlaylist);
 
     }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,7 +147,7 @@ public class PlayListPage extends BasePage {
                 .click(deleteOK)
                 .perform();
     }
-
+@Test
     public void dragSongToPlaylist() {
         LoginPage loginPage = new LoginPage(driver);
         WebElement song = loginPage.waitUntilClickable(By

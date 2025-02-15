@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.Locale;
 
 public class BasePage {
@@ -79,7 +80,13 @@ public class BasePage {
         String newEmail =faker.animal().name();
         return newEmail+"@gmail.com";
     }
+    public String timeStamp() {
 
+        Date date = new Date();
+        String time = date.toString();
+        String time1 = time.replace(":", "_");
+        return time1.substring(11, 19);
+    }
     public Integer stringToInt(String song) {
 
         char n0 = song.charAt(0);
