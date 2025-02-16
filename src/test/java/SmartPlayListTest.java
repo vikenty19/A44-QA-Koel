@@ -52,8 +52,13 @@ public class SmartPlayListTest extends BaseTest {
         //add group
         driver.findElement(By.cssSelector(".btn-add-group")).click();
         WebElement dropDownField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']"));
+        dropDownField.click();
         Select select = new Select(dropDownField);
-        select.selectByVisibleText("Album");;
+        select.selectByVisibleText("Artist");
+        WebElement dropOptionField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']"));
+        dropOptionField.click();
+        Select select1 = new Select(dropOptionField);
+        select1.selectByVisibleText("ends with");
         Thread.sleep(3000);
     }
 
