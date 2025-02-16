@@ -21,33 +21,34 @@ public class SmartPlayListTest extends BaseTest {
     public void createSmartPlistWithName() {
         BasePage basePage = new BasePage(driver);
         String addedSong = "Episode 2";
-        String SmartPlistName = generateRandomPlaylistName()+basePage.timeStamp();
+        String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
         SmartPlayListPage smart = new SmartPlayListPage(driver);
-        smart.createSmartPlistWithoutGroup(SmartPlistName,addedSong);
+        smart.createSmartPlistWithoutGroup(SmartPlistName, addedSong);
         basePage.isSuccessBannerDisplayed();
 
         String plName = driver.findElement(By.cssSelector("#playlistWrapper .heading-wrapper h1")).getText();
         String songTitle = driver.findElement(By
                 .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .title")).getText();
-        System.out.println("Song added in the Playlist --"+songTitle);
+        System.out.println("Song added in the Playlist --" + songTitle);
 
-         System.out.println(" name of created plyList  ---"+plName);
+        System.out.println(" name of created plyList  ---" + plName);
         System.out.println("After test");
         Assert.assertEquals(songTitle, addedSong);
         //  Assert.assertEquals(plName,SmartPlistName);
 
     }
+
     @Test
     public void createSmartPlistWithNameAndGroup() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(driver);
         BasePage basePage = new BasePage(driver);
         String addedSong = "Episode 2";
-        String enteredLetter = "O";
+        String enteredLetter = "o";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
         System.out.println(SmartPlistName);
         LoginPage loginPage = new LoginPage(driver);
@@ -69,51 +70,50 @@ public class SmartPlayListTest extends BaseTest {
         dropOptionField.click();
         Select select1 = new Select(dropOptionField);
         select1.selectByVisibleText("ends with");
-        WebElement dropValueField =  homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) [name='value[]']"));
+        WebElement dropValueField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) [name='value[]']"));
         dropValueField.click();
         dropValueField.sendKeys(enteredLetter);
-      //  Thread.sleep(3000);
+        //  Thread.sleep(3000);
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
         basePage.isSuccessBannerDisplayed();
 
-
-        List<WebElement>smartPlistNames = driver.findElements(By.cssSelector("li.playlist.smart"));
-        for (WebElement temp:smartPlistNames){
-            if(temp.getText().equalsIgnoreCase(SmartPlistName)){
+       //Find all smart plist names
+        List<WebElement> smartPlistNames = driver.findElements(By.cssSelector("li.playlist.smart"));
+        for (WebElement temp : smartPlistNames) {
+            if (temp.getText().equalsIgnoreCase(SmartPlistName)) {
                 System.out.println(temp.getText());
                 Thread.sleep(1000);
                 temp.click();
                 break;
             }
         }
-        Thread.sleep(3000);//tr td.artist -- artists   li.playlist.smart
+        Thread.sleep(3000);
 
         //check the last letter of the artist name
-        List<WebElement>songsInSmartPlist = driver.findElements(By.cssSelector("tr td.artist"));
-        for (WebElement temp :songsInSmartPlist){
-            String lastLetter =temp.getText();
+        List<WebElement> songsInSmartPlist = driver.findElements(By.cssSelector("tr td.artist"));
+        for (WebElement temp : songsInSmartPlist) {
+            String lastLetter = temp.getText();
             System.out.println(lastLetter);
             // Get last char of the artist name
-         if(!lastLetter.isEmpty()){
-         char lastChar = lastLetter.charAt(lastLetter.length()-1);
-             System.out.println(lastChar);
-             String lastLetterString = ""+lastChar;
-             // Assert if result conform to entering last letter of the artist name
-            softAssert.assertTrue(lastLetterString.equalsIgnoreCase(enteredLetter));
+            if (!lastLetter.isEmpty()) {
+                char lastChar = lastLetter.charAt(lastLetter.length() - 1);
+                System.out.println(lastChar);
+                String lastLetterString = "" + lastChar;
+                // Assert if result conform to entering last letter of the artist name
+                softAssert.assertTrue(lastLetterString.equalsIgnoreCase(enteredLetter));
+             //Taking screenShot of the error
+                if (!lastLetterString.equalsIgnoreCase(enteredLetter)) {
+                    File scrShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                    File destinationScrShotFile = new File("./src/test/java/ScreenShots/SmartPlist.png");
+                    try {
+                        FileHandler.copy(scrShot, destinationScrShotFile);
 
-             System.out.println("-------------------");
-             if(!lastLetterString.equalsIgnoreCase(enteredLetter)){
-                 File scrShot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-                 File destinationScrShotFile = new File("./src/test/java/ScreenShots/SmartPlist.png");
-                 try {
-                     FileHandler.copy(scrShot,destinationScrShotFile);
-                     System.out.println("Screen");
-                 } catch (IOException e) {
-                     throw new RuntimeException(e);
-                 }
-             }
-             softAssert.assertAll();
-           }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                softAssert.assertAll();
+            }
 
         }
     }
@@ -152,7 +152,7 @@ public class SmartPlayListTest extends BaseTest {
     }
 
     @Test(dataProvider = "alphabet")//Checking first letter of the artists names in the list of songs
-    public void plListByArtistNamesFirstLetterCheck(char letter)  {
+    public void plListByArtistNamesFirstLetterCheck(char letter) {
 
 
         Character firstLetterOfArtistName = letter;
