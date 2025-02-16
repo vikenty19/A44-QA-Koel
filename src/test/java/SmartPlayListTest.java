@@ -40,6 +40,7 @@ public class SmartPlayListTest extends BaseTest {
         BasePage basePage = new BasePage(driver);
         String addedSong = "Episode 2";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
+        System.out.println(SmartPlistName);
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         loginPage.login(myEmail, myLogin);
@@ -59,7 +60,12 @@ public class SmartPlayListTest extends BaseTest {
         dropOptionField.click();
         Select select1 = new Select(dropOptionField);
         select1.selectByVisibleText("ends with");
+        WebElement dropValueField =  homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) [name='value[]']"));
+        dropValueField.click();
+        dropValueField.sendKeys("O");
         Thread.sleep(3000);
+        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+        basePage.isSuccessBannerDisplayed();
     }
 
     @Test
