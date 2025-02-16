@@ -47,7 +47,7 @@ public class SmartPlayListTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(driver);
         BasePage basePage = new BasePage(driver);
-        String addedSong = "Episode 2";
+        String addedSong = "Reactor";// this artist name ended with "O"
         String enteredLetter = "o";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
         System.out.println(SmartPlistName);
@@ -77,31 +77,30 @@ public class SmartPlayListTest extends BaseTest {
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
         basePage.isSuccessBannerDisplayed();
 
-       //Find all smart plist names
+        //Find all smart plist names
         List<WebElement> smartPlistNames = driver.findElements(By.cssSelector("li.playlist.smart"));
         for (WebElement temp : smartPlistNames) {
             if (temp.getText().equalsIgnoreCase(SmartPlistName)) {
-                System.out.println(temp.getText());
-                Thread.sleep(1000);
+                Thread.sleep(1000);//because of instability
                 temp.click();
                 break;
             }
         }
-        Thread.sleep(3000);
+        Thread.sleep(1000);//because of instability
 
         //check the last letter of the artist name
         List<WebElement> songsInSmartPlist = driver.findElements(By.cssSelector("tr td.artist"));
         for (WebElement temp : songsInSmartPlist) {
             String lastLetter = temp.getText();
-            System.out.println(lastLetter);
+
             // Get last char of the artist name
             if (!lastLetter.isEmpty()) {
                 char lastChar = lastLetter.charAt(lastLetter.length() - 1);
-                System.out.println(lastChar);
+
                 String lastLetterString = "" + lastChar;
                 // Assert if result conform to entering last letter of the artist name
                 softAssert.assertTrue(lastLetterString.equalsIgnoreCase(enteredLetter));
-             //Taking screenShot of the error
+                //Taking screenShot of the error
                 if (!lastLetterString.equalsIgnoreCase(enteredLetter)) {
                     File scrShot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                     File destinationScrShotFile = new File("./src/test/java/ScreenShots/SmartPlist.png");
