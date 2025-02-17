@@ -16,7 +16,7 @@ public class PlayListTests extends BaseTest {
         String playlistName = generateRandomPlaylistBookName()+basePage.timeStamp();
         System.out.println(playlistName);
         PlayListPage playListPage = new PlayListPage(driver);
-        GetSQLInfo getSQLInfo = new GetSQLInfo();
+     //   GetSQLInfo getSQLInfo = new GetSQLInfo();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
@@ -26,14 +26,14 @@ public class PlayListTests extends BaseTest {
         playListPage.checkPlayListName(playlistName);
         playListPage.isSuccessBannerDisplayed();
         //checking created plist name in the DB
-        getSQLInfo.checkSQLPlayListName(playlistName);
+        GetSQLInfo.checkSQLPlayListName(playlistName);
         //delete playlist
         playListPage.deleteCreatedPlaylist();
         //Assertions
         Thread.sleep(1000);//left it because of instability
         playListPage.isPlayListDeleted(playlistName);
         //Assert deleting created playlist from DB
-       Assert.assertNull(getSQLInfo.checkSQLPlayListName(playlistName));
+       Assert.assertNull(GetSQLInfo.checkSQLPlayListName(playlistName));
     }
 
 
