@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 public class SmartPlayListPage extends BasePage{
 
     public SmartPlayListPage(WebDriver givenDriver) {
@@ -25,6 +27,9 @@ public class SmartPlayListPage extends BasePage{
     WebElement titleField;
 
     By dropOptionField = By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']");
+    By optionGroup = By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']");
+    By subMit =By.cssSelector("div.rule-group:nth-child(2) [name='value[]']");
+    By plyListsName = By.cssSelector("li.playlist.smart");
     public void createSmartPlistWithOutGroup(String name, String addedSong){
 
         createSmartPlist.click();
@@ -46,7 +51,7 @@ public class SmartPlayListPage extends BasePage{
     }
     public void selectOptionInGroup(String option){
 
-        WebElement dropOptionField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']"));
+        WebElement dropOptionField = homePage.waitUntilClickable(optionGroup);
         dropOptionField.click();
         Select select1 = new Select(dropOptionField);
         select1.selectByVisibleText(option);
@@ -54,17 +59,28 @@ public class SmartPlayListPage extends BasePage{
     }
 
     public void enterValueToCreateSmartPlist(String text) {
-        driver.findElement(By.name("value[]")).sendKeys(text);
+        songName.sendKeys(text);
     }
 
     public void enterOptionForGroupRule(String text) {
-        WebElement dropValueField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) [name='value[]']"));
+        WebElement dropValueField = homePage.waitUntilClickable(subMit);
         dropValueField.click();
         dropValueField.sendKeys(text);
     }
 
     public void clickSubmitBtn() {
-        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+        submit.click();
+    }
+
+    public void findCreatedPlyList(String name) throws InterruptedException {
+        List<WebElement> smartPlistNames = driver.findElements(plyListsName );
+        for (WebElement temp : smartPlistNames) {
+            if (temp.getText().equalsIgnoreCase(name)) {
+                Thread.sleep(1000);//because of instability
+                temp.click();
+                break;
+            }
+        }
     }
 }
 //div.rule-group:nth-child(2) select[name='model[]']

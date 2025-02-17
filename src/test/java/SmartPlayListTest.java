@@ -44,10 +44,9 @@ public class SmartPlayListTest extends BaseTest {
     @Test
     public void createSmartPlistWithNameAndGroup() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
-        HomePage homePage = new HomePage(driver);
         BasePage basePage = new BasePage(driver);
         SmartPlayListPage smartPlayListPage = new SmartPlayListPage(driver);
-        String addedSong = "Reactor";// this artist name ended with "O"
+        String addedSong = "Riqui-Riqui";// this artist name ended with "O"
         String enteredLetter = "o";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
         System.out.println(SmartPlistName);
@@ -65,15 +64,11 @@ public class SmartPlayListTest extends BaseTest {
         smartPlayListPage.enterOptionForGroupRule(enteredLetter);
         smartPlayListPage.clickSubmitBtn();
         basePage.isSuccessBannerDisplayed();
+        //Check name in the DB
+        GetSQLInfo.checkSQLPlayListName(SmartPlistName);
         //Find all smart plist names
-        List<WebElement> smartPlistNames = driver.findElements(By.cssSelector("li.playlist.smart"));
-        for (WebElement temp : smartPlistNames) {
-            if (temp.getText().equalsIgnoreCase(SmartPlistName)) {
-                Thread.sleep(1000);//because of instability
-                temp.click();
-                break;
-            }
-        }
+        smartPlayListPage.findCreatedPlyList(SmartPlistName);
+
         Thread.sleep(1000);//because of instability
 
         //check the last letter of the artist name

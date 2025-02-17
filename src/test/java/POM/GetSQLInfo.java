@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class GetSQLInfo {
 
-    public String checkSQLPlayListName(String songName) {
+    public static String checkSQLPlayListName(String songName) {
 
 
         String url = "jdbc:mariadb://104.237.13.60:3306/";
@@ -31,7 +31,7 @@ public class GetSQLInfo {
                     // Getting playlist name from DB
                      dbPlistName = resultSet.getString("p.name");
 
-                   System.out.println(resultSet.getString("p.name") + " ------  " + resultSet.getString("count(p.name)"));
+                   System.out.println(resultSet.getString("p.name") + " ------SQL count  " + resultSet.getString("count(p.name)"));
                 }
 
             }
