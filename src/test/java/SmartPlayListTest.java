@@ -1,5 +1,4 @@
 import POM.*;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -27,7 +26,7 @@ public class SmartPlayListTest extends BaseTest {
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
         SmartPlayListPage smart = new SmartPlayListPage(driver);
-        smart.createSmartPlistWithoutGroup(SmartPlistName, addedSong);
+        smart.createSmartPlistWithOutGroup(SmartPlistName, addedSong);
         basePage.isSuccessBannerDisplayed();
 
         String plName = driver.findElement(By.cssSelector("#playlistWrapper .heading-wrapper h1")).getText();
@@ -57,22 +56,15 @@ public class SmartPlayListTest extends BaseTest {
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
         smartPlayListPage.enterSmartPlistName(SmartPlistName);
-
-        //Add rule
-
-        driver.findElement(By.name("value[]")).sendKeys(addedSong);
+        //Add text in the value field
+        smartPlayListPage.enterValueToCreateSmartPlist(addedSong);
         //add group title Artist
          smartPlayListPage.selectGroupTitle("Artist");
          //select option in group
         smartPlayListPage.selectOptionInGroup("ends with");
-       
-        WebElement dropValueField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) [name='value[]']"));
-        dropValueField.click();
-        dropValueField.sendKeys(enteredLetter);
-        //  Thread.sleep(3000);
-        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+        smartPlayListPage.enterOptionForGroupRule(enteredLetter);
+        smartPlayListPage.clickSubmitBtn();
         basePage.isSuccessBannerDisplayed();
-
         //Find all smart plist names
         List<WebElement> smartPlistNames = driver.findElements(By.cssSelector("li.playlist.smart"));
         for (WebElement temp : smartPlistNames) {
@@ -191,7 +183,7 @@ public class SmartPlayListTest extends BaseTest {
 
     }
 
-    @DataProvider(name = "plListByArtistNamesFirstLetterCheck")
+    @DataProvider(name = "alphabet")
     public Object[][] returnChar() {
         Object[][] alphabet = new Object[26][1];
         for (int i = 0; i < 26; i++) {
