@@ -47,6 +47,7 @@ public class SmartPlayListTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(driver);
         BasePage basePage = new BasePage(driver);
+        SmartPlayListPage smartPlayListPage = new SmartPlayListPage(driver);
         String addedSong = "Reactor";// this artist name ended with "O"
         String enteredLetter = "o";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
@@ -55,21 +56,16 @@ public class SmartPlayListTest extends BaseTest {
         PlayListPage playListPage = new PlayListPage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
-        driver.findElement(By.cssSelector("[data-testid =playlist-context-menu-create-smart]")).click();
-        driver.findElement(By.name("name")).sendKeys(SmartPlistName);
+        smartPlayListPage.enterSmartPlistName(SmartPlistName);
+
         //Add rule
 
         driver.findElement(By.name("value[]")).sendKeys(addedSong);
-        //add group
-        driver.findElement(By.cssSelector(".btn-add-group")).click();
-        WebElement dropDownField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']"));
-        dropDownField.click();
-        Select select = new Select(dropDownField);
-        select.selectByVisibleText("Artist");
-        WebElement dropOptionField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']"));
-        dropOptionField.click();
-        Select select1 = new Select(dropOptionField);
-        select1.selectByVisibleText("ends with");
+        //add group title Artist
+         smartPlayListPage.selectGroupTitle("Artist");
+         //select option in group
+        smartPlayListPage.selectOptionInGroup("ends with");
+       
         WebElement dropValueField = homePage.waitUntilClickable(By.cssSelector("div.rule-group:nth-child(2) [name='value[]']"));
         dropValueField.click();
         dropValueField.sendKeys(enteredLetter);
@@ -115,7 +111,10 @@ public class SmartPlayListTest extends BaseTest {
             }
 
         }
+
     }
+
+
 
     @Test
     public void plListByArtistName() throws InterruptedException {
