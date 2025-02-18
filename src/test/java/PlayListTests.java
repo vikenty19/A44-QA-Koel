@@ -55,9 +55,8 @@ public class PlayListTests extends BaseTest {
         System.out.println(playListPage.getPlaylistName());
         basePage.isSuccessBannerDisplayed();
         //DataBase checking pListName
-        GetSQLInfo getSQLInfo = new GetSQLInfo();
         //Assertion
-       Assert.assertEquals(newPlayLIstName,getSQLInfo.checkSQLPlayListName(newPlayLIstName));
+       Assert.assertEquals(newPlayLIstName,GetSQLInfo.checkSQLPlayListName(newPlayLIstName));
     }
 
 
