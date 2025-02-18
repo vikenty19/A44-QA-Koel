@@ -72,16 +72,18 @@ public class SmartPlayListPage extends BasePage{
         submit.click();
     }
 
-    public void findCreatedPlyList(String name) throws InterruptedException {
+    public boolean isSmartPlistCreated(String name) throws InterruptedException {
+        boolean exist = false;
         List<WebElement> smartPlistNames = driver.findElements(plyListsName );
         for (WebElement temp : smartPlistNames) {
             if (temp.getText().equalsIgnoreCase(name)) {
                 Thread.sleep(1000);//because of instability
                 temp.click();
-
+                exist = true;
                 break;
             }
-        }
+
+        }return exist;
     }
 }
 //div.rule-group:nth-child(2) select[name='model[]']

@@ -42,7 +42,7 @@ public class SmartPlayListTest extends BaseTest {
 
     }
     @Test
-    public void cancelCreatingSmartPlist(){
+    public void cancelCreatingSmartPlist() throws InterruptedException {
         BasePage basePage = new BasePage(driver);
         String SmartPlistName = generateRandomPlaylistName()+basePage.timeStamp();
         String addedSong = "Episode 2";;
@@ -56,9 +56,7 @@ public class SmartPlayListTest extends BaseTest {
         smart.songName.sendKeys(addedSong);
         driver.findElement(By.cssSelector(".btn-cancel")).click();
         driver.findElement(By.cssSelector("button.ok")).click();
-        WebElement successLocator = wait
-                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".success")));
-        Assert.assertFalse(successLocator.isDisplayed());
+        Assert.assertFalse(smart.isSmartPlistCreated(SmartPlistName));
     }
 
     @Test
@@ -66,7 +64,7 @@ public class SmartPlayListTest extends BaseTest {
         SoftAssert softAssert = new SoftAssert();
         BasePage basePage = new BasePage(driver);
         SmartPlayListPage smartPlayListPage = new SmartPlayListPage(driver);
-        String addedSong = "Riqui-Riqui";// this artist name ended with "O" "Reactor"
+        String addedSong = "Reactor";// this artist name ended with "O" "Reactor"
         String enteredLetter = "o";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
         System.out.println(SmartPlistName);
@@ -86,8 +84,9 @@ public class SmartPlayListTest extends BaseTest {
         basePage.isSuccessBannerDisplayed();
         //Check name in the DB
         GetSQLInfo.checkSQLPlayListName(SmartPlistName);
-        //Find all smart plist names
-        smartPlayListPage.findCreatedPlyList(SmartPlistName);
+
+        //Check if Playlist is in the list
+       Assert.assertTrue(smartPlayListPage.isSmartPlistCreated(SmartPlistName));
 
         Thread.sleep(1000);//because of instability
 
