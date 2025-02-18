@@ -16,11 +16,11 @@ public class SmartPlayListPage extends BasePage{
     }
       HomePage homePage = new HomePage(driver);
     @FindBy(css ="[data-testid =playlist-context-menu-create-smart]")
-    WebElement createSmartPlist;
+   public WebElement createSmartPlist;
     @FindBy(name = "name")
-    WebElement playListName;
+   public WebElement playListName;
     @FindBy(name = "value[]")
-    WebElement songName;
+    public WebElement songName;
     @FindBy(css = "footer [type = 'submit']")
     WebElement submit;
     @FindBy(css = ".btn-add-group")
@@ -78,6 +78,7 @@ public class SmartPlayListPage extends BasePage{
             if (temp.getText().equalsIgnoreCase(name)) {
                 Thread.sleep(1000);//because of instability
                 temp.click();
+
                 break;
             }
         }

@@ -4,6 +4,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -40,13 +41,32 @@ public class SmartPlayListTest extends BaseTest {
         //  Assert.assertEquals(plName,SmartPlistName);
 
     }
+    @Test
+    public void cancelCreatingSmartPlist(){
+        BasePage basePage = new BasePage(driver);
+        String SmartPlistName = generateRandomPlaylistName()+basePage.timeStamp();
+        String addedSong = "Episode 2";;
+        LoginPage loginPage = new LoginPage(driver);
+        PlayListPage playListPage = new PlayListPage(driver);
+        loginPage.login(myEmail, myLogin);
+        playListPage.plusBtnClick();
+        SmartPlayListPage smart = new SmartPlayListPage(driver);
+        smart.createSmartPlist.click();
+        smart.playListName.sendKeys(SmartPlistName);
+        smart.songName.sendKeys(addedSong);
+        driver.findElement(By.cssSelector(".btn-cancel")).click();
+        driver.findElement(By.cssSelector("button.ok")).click();
+        WebElement successLocator = wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".success")));
+        Assert.assertFalse(successLocator.isDisplayed());
+    }
 
     @Test
     public void createSmartPlistWithNameAndGroup() throws InterruptedException {
         SoftAssert softAssert = new SoftAssert();
         BasePage basePage = new BasePage(driver);
         SmartPlayListPage smartPlayListPage = new SmartPlayListPage(driver);
-        String addedSong = "Riqui-Riqui";// this artist name ended with "O"
+        String addedSong = "Riqui-Riqui";// this artist name ended with "O" "Reactor"
         String enteredLetter = "o";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
         System.out.println(SmartPlistName);
