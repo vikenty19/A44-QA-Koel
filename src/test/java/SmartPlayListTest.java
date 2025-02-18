@@ -54,8 +54,9 @@ public class SmartPlayListTest extends BaseTest {
         smart.createSmartPlist.click();
         smart.playListName.sendKeys(SmartPlistName);
         smart.songName.sendKeys(addedSong);
-        driver.findElement(By.cssSelector(".btn-cancel")).click();
-        driver.findElement(By.cssSelector("button.ok")).click();
+        smart.cancelCreatedPlist.click();
+        smart.cancelConfirm.click();
+        //check Plist has NOT been created
         Assert.assertFalse(smart.isSmartPlistCreated(SmartPlistName));
     }
 

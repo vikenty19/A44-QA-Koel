@@ -25,6 +25,10 @@ public class SmartPlayListPage extends BasePage{
     WebElement submit;
     @FindBy(css = ".btn-add-group")
     WebElement titleField;
+    @FindBy(css = ".btn-cancel")
+   public WebElement cancelCreatedPlist;
+    @FindBy(css = "button.ok")
+            public WebElement cancelConfirm;
 
     By dropOptionField = By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']");
     By optionGroup = By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']");
