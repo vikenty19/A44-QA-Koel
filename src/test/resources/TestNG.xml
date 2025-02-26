@@ -13,7 +13,7 @@
                       <class name="PlaySongs"/>
                       <class name="PlayListTests"/>
                       <class name="SmartPlayListTest"/>
-            <class name="CucumberRunner"/>
+                      <class name="CucumberRunner"/>
 
 
         </classes>
