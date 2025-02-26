@@ -21,9 +21,7 @@ public class MyHooks {
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
         // try to switch language to English in the message
-        options.addArguments("--lang =en-US");
-        options.addArguments("--incognito");
-      options.addArguments("--disable-cache");
+           options.addArguments("--disable-cache");
       options.addArguments("disable-application-cache");
      driver = new ChromeDriver(options);
     }
