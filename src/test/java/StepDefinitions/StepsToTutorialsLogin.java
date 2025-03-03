@@ -8,14 +8,17 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 
 
 public class StepsToTutorialsLogin {
-
+   WebDriverWait wait;
    public static WebDriver driver;
     public static String tutorialURL ="http://tutorialsninja.com/demo/";
     TutHeadersSection tutHeadersSection = new TutHeadersSection();
@@ -31,6 +34,7 @@ public class StepsToTutorialsLogin {
             options.addArguments("--start-maximized");
 
             driver = new ChromeDriver(options);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
             driver.get(tutorialURL);
 
         System.out.println("User open the URL");
@@ -39,11 +43,14 @@ public class StepsToTutorialsLogin {
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
      driver.findElement(tutHeadersSection.accountEnterBtn).click();
-
+     //   WebElement loGin = driver.findElement(By.linkText("Login"));
+      //  loGin.click();
+     driver.findElement(tutHeadersSection.registerBtn).click();
     }
 
     @When("User enters valid email {string}")
     public void userEntersValidEmail(String email) {
+
         System.out.println("User enters  " + email);
     }
 
