@@ -43,8 +43,6 @@ public class StepsToTutorialsLogin {
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
      driver.findElement(tutHeadersSection.accountEnterBtn).click();
-     //   WebElement loGin = driver.findElement(By.linkText("Login"));
-      //  loGin.click();
      driver.findElement(tutHeadersSection.registerBtn).click();
     }
 
