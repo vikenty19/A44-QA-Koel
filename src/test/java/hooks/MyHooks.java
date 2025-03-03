@@ -26,7 +26,7 @@ public class MyHooks {
      driver = new ChromeDriver(options);
     }
 
-    @After
+   @After
     public void tearDown() {
 
         driver.quit();

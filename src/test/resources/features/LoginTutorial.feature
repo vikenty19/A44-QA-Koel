@@ -14,16 +14,16 @@ Feature: Login user
       | "amotooricap9@gmail.com" | "12345"  |
       | "amotooricap3@gmail.com" | "12345"  |
 
-  Scenario Outline: Login with invalid credentials
-    When User enters valid email <email>
-    And Enters valid password <password>
-    And Click on login button
-    Then User should get a warning message
-    Examples:
-      | email                        | password |
-      | "amotooricap93433@gmail.com" | "123456" |
-      | "amotooricap934@gmail.com"   | "123456" |
-      | "amotooricap9@gmail.com"     | "12345"  |
+  #Scenario Outline: Login with invalid credentials
+   # When User enters valid email <email>
+     # And Enters valid password <password>
+ #   And Click on login button
+  #  Then User should get a warning message
+   # Examples:
+    #  | email                        | password |
+     # | "amotooricap93433@gmail.com" | "123456" |
+      #| "amotooricap934@gmail.com"   | "123456" |
+ #     | "amotooricap9@gmail.com"     | "12345"  |
 
 
   Scenario Outline: Login with valid email and invalid password

@@ -24,13 +24,16 @@ public class BaseTest {
     public static String myEmail = "vikenty.plakhov@testpro.io";
     public static WebDriverWait wait = null;
 
+    //Tutorial ninja app
+    public static String tutorialURL ="http://tutorialsninja.com/demo/";
+
     @BeforeSuite
     static void setupDriver() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeMethod
+/*    @BeforeMethod
     public void setUpBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -43,8 +46,8 @@ public class BaseTest {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        openUrl(url);
-    }
+        openUrl(tutorialURL);
+    }*/
 
 
     @AfterMethod(alwaysRun = true)
