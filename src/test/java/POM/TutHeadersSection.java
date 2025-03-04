@@ -27,4 +27,5 @@ public By password = By.id("input-password");
 
 public By submit = By.xpath("//input[@type ='submit']");
 public By confirm = By.cssSelector("#content");
+public By registerBtn = By.linkText("Register");
 }
