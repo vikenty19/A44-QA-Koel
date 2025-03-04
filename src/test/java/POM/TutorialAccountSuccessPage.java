@@ -12,5 +12,6 @@ public class TutorialAccountSuccessPage {
         PageFactory.initElements(driver,this);
     }
  public static By successText = By.cssSelector("#content h1");
+    public static By successCrumble = By.linkText("Success");
 
 }

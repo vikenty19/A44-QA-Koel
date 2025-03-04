@@ -50,5 +50,7 @@ public class StepsTutorialRegister  {
       Assert.assertTrue(wait
               .until(ExpectedConditions.visibilityOfElementLocated(TutorialAccountSuccessPage.successText))
               .isDisplayed());
+      Assert.assertTrue(wait.until(ExpectedConditions
+              .visibilityOfElementLocated(TutorialAccountSuccessPage.successCrumble)).isDisplayed());
     }
 }
