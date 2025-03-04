@@ -8,7 +8,7 @@ Feature: Registration functionality scenarios
 
       |FirstName| Ravi                    |
       |LastName | Kiran                   |
-      |Email    |Ravi.kiran@gmail.com     |
+      |Email    |Vic@gmail.com     |
       |Telephone|9212345678               |
       |Password |rkiran                   |
     And I check-in the Privacy Policy

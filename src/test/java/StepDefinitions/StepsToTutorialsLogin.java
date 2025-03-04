@@ -1,17 +1,15 @@
 package StepDefinitions;
 
-import POM.TutHeadersSection;
+import POM.TutHeadersSectionPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -23,7 +21,7 @@ public class StepsToTutorialsLogin {
    WebDriverWait wait;
    public static WebDriver driver;
     public static String tutorialURL ="http://tutorialsninja.com/demo/";
-    TutHeadersSection tutHeadersSection = new TutHeadersSection();
+    TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
 
@@ -44,33 +42,33 @@ public class StepsToTutorialsLogin {
 
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
-     driver.findElement(tutHeadersSection.accountEnterBtn).click();
-     driver.findElement(tutHeadersSection.loginBtn).click();
+     driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
+     driver.findElement(tutHeadersSectionPage.loginBtn).click();
     }
 
     @When("User enters valid email {string}")
     public void userEntersValidEmail(String email) {
-        driver.findElement(tutHeadersSection.email).sendKeys(email);
+        driver.findElement(tutHeadersSectionPage.email).sendKeys(email);
 
         System.out.println("User enters  " + email);
     }
 
     @And("Enters valid password {string}")
     public void entersValidPassword(String password) {
-        driver.findElement(tutHeadersSection.password).sendKeys(password);
+        driver.findElement(tutHeadersSectionPage.password).sendKeys(password);
 
         System.out.println("User enters   " + password);
     }
 
     @And("Click on login button")
     public void clickOnLoginButton() {
-        driver.findElement(tutHeadersSection.submit).click();
+        driver.findElement(tutHeadersSectionPage.submit).click();
         System.out.println("Click on login button");
     }
 
     @Then("User login successfully")
     public void userLoginSuccessfully() {
-        WebElement confirm = driver.findElement(tutHeadersSection.confirm);
+        WebElement confirm = driver.findElement(tutHeadersSectionPage.confirm);
         Assert.assertTrue(confirm.isDisplayed());
         System.out.println("User is logged in!!");
     }
