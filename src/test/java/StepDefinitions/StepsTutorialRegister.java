@@ -28,21 +28,17 @@ public class StepsTutorialRegister  {
 
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
-      Map<String,String> map =dataTable.asMap(String.class,String.class);
-      Elements.TypeText(RegisterPage.firstName,map.get("FirstName"));
-      Elements.TypeText(RegisterPage.lastName,map.get("LastName"));
-      Elements.TypeText(RegisterPage.emailAddress,map.get("Email"));
-      Elements.TypeText(RegisterPage.phone,map.get("Telephone"));
-      Elements.TypeText(RegisterPage.passwordField,map.get("Password"));
-      Elements.TypeText(RegisterPage.passwordConfirm,map.get("Password"));
+    RegisterPage.enterAllDetails(dataTable);
     }
 
     @And("I check-in the Privacy Policy")
     public void iCheckInThePrivacyPolicy() {
+      RegisterPage.agree.click();
     }
 
     @And("I click on continue button")
     public void iClickOnContinueButton() {
+      RegisterPage.submitBtn.click();
     }
 
     @Then("I should see that the User Account has successfully been created")
