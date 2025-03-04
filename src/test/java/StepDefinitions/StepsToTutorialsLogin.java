@@ -18,7 +18,7 @@ import java.time.Duration;
 
 public class StepsToTutorialsLogin {
 
-   WebDriverWait wait;
+  public static WebDriverWait wait;
    public static WebDriver driver;
     public static String tutorialURL ="http://tutorialsninja.com/demo/";
     TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
