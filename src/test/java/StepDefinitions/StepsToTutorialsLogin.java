@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -43,27 +44,33 @@ public class StepsToTutorialsLogin {
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
      driver.findElement(tutHeadersSection.accountEnterBtn).click();
-     driver.findElement(tutHeadersSection.registerBtn).click();
+     driver.findElement(tutHeadersSection.loginBtn).click();
     }
 
     @When("User enters valid email {string}")
     public void userEntersValidEmail(String email) {
+        driver.findElement(tutHeadersSection.email).sendKeys(email);
 
         System.out.println("User enters  " + email);
     }
 
     @And("Enters valid password {string}")
     public void entersValidPassword(String password) {
+        driver.findElement(tutHeadersSection.password).sendKeys(password);
+
         System.out.println("User enters   " + password);
     }
 
     @And("Click on login button")
     public void clickOnLoginButton() {
+        driver.findElement(tutHeadersSection.submit).click();
         System.out.println("Click on login button");
     }
 
     @Then("User login successfully")
     public void userLoginSuccessfully() {
+        WebElement confirm = driver.findElement(tutHeadersSection.confirm);
+        Assert.assertTrue(confirm.isDisplayed());
         System.out.println("User is logged in!!");
     }
 

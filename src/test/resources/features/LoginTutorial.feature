@@ -11,7 +11,7 @@ Feature: Login user
     Then User login successfully
     Examples:
       | email                    | password |
-      | "amotooricap9@gmail.com" | "12345"  |
+      | "amotooricap7@gmail.com" | "12345"  |
       | "amotooricap3@gmail.com" | "12345"  |
 
   #Scenario Outline: Login with invalid credentials

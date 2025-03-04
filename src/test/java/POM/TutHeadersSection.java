@@ -19,5 +19,12 @@ public class TutHeadersSection {
 
 
 public By accountEnterBtn = By.cssSelector(".fa-user");
-public By registerBtn = By.linkText("Register");
+public By loginBtn = By.linkText("Login");
+
+public By email = By.id("input-email");
+
+public By password = By.id("input-password");
+
+public By submit = By.xpath("//input[@type ='submit']");
+public By confirm = By.cssSelector("#content");
 }
