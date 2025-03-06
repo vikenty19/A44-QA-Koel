@@ -73,9 +73,14 @@ public class StepsTutorialRegister  {
     softAssert.assertEquals(TutorialRegisterPage
             .phoneWarning.getText(),"Telephone must be between 3 and 32 characters!");
   softAssert.assertEquals(TutorialRegisterPage
-            .passwordWarning.getText(),"Password must be between 4 and 20 characters!");
+            .passwordWarning.getText(),"Password must be between 4 and 20 characters!");  softAssert.assertEquals(TutorialRegisterPage
+            .mainWarning.getText(),"Warning: You must agree to the Privacy Policy!");
     softAssert.assertAll();
 
 
+  }
+
+  @And("I check-in the Subscription radio button")
+  public void iCheckInTheSubscriptionRadioButton() {
   }
 }
