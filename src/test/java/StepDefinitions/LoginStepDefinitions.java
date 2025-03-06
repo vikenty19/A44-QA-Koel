@@ -28,10 +28,10 @@ public class LoginStepDefinitions  {
      public  WebDriver driver;
     public static String url ="https://qa.koel.app/";
     public static WebDriverWait wait = null;
- /* @After
+  @After
     public void tearDown() {
         driver.quit();
-    }*/
+    }
    @Given ("I open browser")
     public void setUpDriver(){
 WebDriverManager.chromedriver().clearDriverCache().setup();
