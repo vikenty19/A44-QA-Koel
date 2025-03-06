@@ -9,8 +9,8 @@
                      <class name="CSVDataProviderTest"/>
                        <class name="ProfileTests"/>
                       <class name="SongsTests"/>
-                      <class name="Homework17"/>
-                      <class name="PlaySongs"/>
+
+                        <class name="PlaySongs"/>
                       <class name="PlayListTests"/>
             <class name="CucumberRunner"/>
 
