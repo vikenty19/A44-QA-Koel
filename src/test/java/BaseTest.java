@@ -33,7 +33,7 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
     }
 
-/*    @BeforeMethod
+    @BeforeMethod
     public void setUpBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -46,8 +46,8 @@ public class BaseTest {
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        openUrl(tutorialURL);
-    }*/
+        openUrl(url);
+    }
 
 
     @AfterMethod(alwaysRun = true)
