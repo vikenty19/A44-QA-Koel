@@ -82,5 +82,6 @@ public class StepsTutorialRegister  {
 
   @And("I check-in the Subscription radio button")
   public void iCheckInTheSubscriptionRadioButton() {
+      TutorialRegisterPage.subscriptionBtn.click();
   }
 }

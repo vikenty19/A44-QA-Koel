@@ -46,6 +46,8 @@ public class TutorialRegisterPage {
 
       @FindBy(css = ".alert")
       public static WebElement mainWarning;
+      @FindBy(css = "label:nth-child(1)>[name='newsletter']")
+      public static WebElement subscriptionBtn;
 
       public static   By registerBreadCrumb = By.linkText("Register");
     public static void enterAllDetails(DataTable dataTable){
