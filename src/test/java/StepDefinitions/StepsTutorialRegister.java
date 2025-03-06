@@ -11,6 +11,7 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.time.Duration;
 
@@ -53,4 +54,28 @@ public class StepsTutorialRegister  {
       Assert.assertTrue(wait.until(ExpectedConditions
               .visibilityOfElementLocated(TutorialAccountSuccessPage.successCrumble)).isDisplayed());
     }
+
+  @Then("I should see that the User Account is not created")
+  public void iShouldSeeThatTheUserAccountIsNotCreated() {
+    Assert.assertTrue(wait.until(ExpectedConditions
+            .visibilityOfElementLocated(TutorialRegisterPage.registerBreadCrumb)).isDisplayed());
+  }
+
+  @And("I should see the error messages informing the user to fill the mandatory fields")
+  public void iShouldSeeTheErrorMessagesInformingTheUserToFillTheMandatoryFields() {
+    SoftAssert softAssert=new SoftAssert();
+    softAssert.assertEquals(TutorialRegisterPage
+            .firstNameWarning.getText(),"First Name must be between 1 and 32 characters!");
+    softAssert.assertEquals(TutorialRegisterPage
+            .lastNameWarning.getText(),"Last Name must be between 1 and 32 characters!");
+    softAssert.assertEquals(TutorialRegisterPage
+            .emailWarning.getText(),"E-Mail Address does not appear to be valid!");
+    softAssert.assertEquals(TutorialRegisterPage
+            .phoneWarning.getText(),"Telephone must be between 3 and 32 characters!");
+  softAssert.assertEquals(TutorialRegisterPage
+            .passwordWarning.getText(),"Password must be between 4 and 20 characters!");
+    softAssert.assertAll();
+
+
+  }
 }

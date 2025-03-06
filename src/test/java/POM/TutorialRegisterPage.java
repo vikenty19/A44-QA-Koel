@@ -2,6 +2,7 @@ package POM;
 
 import Base.Elements;
 import io.cucumber.datatable.DataTable;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,6 +33,21 @@ public class TutorialRegisterPage {
     public static WebElement agree;
     @FindBy(css = "input[type ='submit']")
     public static WebElement submitBtn;
+    @FindBy(css = "input[id ='input-firstname']+div")
+    public static WebElement firstNameWarning;
+    @FindBy(css = "input[id ='input-lastname']+div")
+    public static WebElement lastNameWarning;
+    @FindBy(css = "input[id ='input-email']+div")
+    public static WebElement emailWarning;
+    @FindBy(css = "input[id ='input-telephone']+div")
+    public static WebElement phoneWarning;
+      @FindBy(css = "input[id ='input-password']+div")
+    public static WebElement passwordWarning;
+
+      @FindBy(css = ".alert")
+      public static WebElement mainWarning;
+
+      public static   By registerBreadCrumb = By.linkText("Register");
     public static void enterAllDetails(DataTable dataTable){
         Map<String,String> map =dataTable.asMap(String.class,String.class);
         Elements.TypeText(TutorialRegisterPage.firstName,map.get("FirstName"));

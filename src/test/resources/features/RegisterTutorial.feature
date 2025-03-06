@@ -14,3 +14,12 @@ Feature: Registration functionality scenarios
     And I check-in the Privacy Policy
     And  I click on continue button
     Then I should see that the User Account has successfully been created
+
+
+  @Register @Two
+  Scenario: Verify whether the user is not allowed to register on skipping mandatory fields
+    Given User opens application URL
+    And I navigate to Account Registration page
+    When I click on continue button
+    Then I should see that the User Account is not created
+    And I should see the error messages informing the user to fill the mandatory fields
