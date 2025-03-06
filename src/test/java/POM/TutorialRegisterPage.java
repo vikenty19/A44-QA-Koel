@@ -50,17 +50,21 @@ public class TutorialRegisterPage {
       public static WebElement subscriptionBtn;
 
       public static   By registerBreadCrumb = By.linkText("Register");
-    public static void enterAllDetails(DataTable dataTable){
+    public static void enterAllDetails(DataTable dataTable,String credentialsType){
         Map<String,String> map =dataTable.asMap(String.class,String.class);
         Elements.TypeText(TutorialRegisterPage.firstName,map.get("FirstName"));
         Elements.TypeText(TutorialRegisterPage.lastName,map.get("LastName"));
-        Elements.TypeText(TutorialRegisterPage.emailAddress,System.currentTimeMillis()+map.get("Email"));
         Elements.TypeText(TutorialRegisterPage.phone,map.get("Telephone"));
         Elements.TypeText(TutorialRegisterPage.passwordField,map.get("Password"));
         Elements.TypeText(TutorialRegisterPage.passwordConfirm,map.get("Password"));
+        if(credentialsType.equalsIgnoreCase("duplicate")){
+            Elements.TypeText(TutorialRegisterPage.emailAddress,map.get("Email"));
+    }else {
 
+            Elements.TypeText(TutorialRegisterPage.emailAddress,System.currentTimeMillis()+map.get("Email"));
+        }
     }
-    public static void enterDuplicatedDetails(DataTable dataTable){
+  /*  public static void enterDuplicatedDetails(DataTable dataTable){
         Map<String,String> map =dataTable.asMap(String.class,String.class);
         Elements.TypeText(TutorialRegisterPage.firstName,map.get("FirstName"));
         Elements.TypeText(TutorialRegisterPage.lastName,map.get("LastName"));
@@ -69,6 +73,6 @@ public class TutorialRegisterPage {
         Elements.TypeText(TutorialRegisterPage.passwordField,map.get("Password"));
         Elements.TypeText(TutorialRegisterPage.passwordConfirm,map.get("Password"));
 
-    }
+    }*/
 
 }

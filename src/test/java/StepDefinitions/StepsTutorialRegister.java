@@ -33,7 +33,7 @@ public class StepsTutorialRegister  {
 
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
-    TutorialRegisterPage.enterAllDetails(dataTable);
+    TutorialRegisterPage.enterAllDetails(dataTable,"unique");
     }
 
     @And("I check-in the Privacy Policy")
@@ -88,11 +88,12 @@ public class StepsTutorialRegister  {
 
   @When("I provide duplicated details")
   public void iProvideDuplicatedDetails(DataTable dataTable) {
-      TutorialRegisterPage.enterDuplicatedDetails(dataTable);
+      TutorialRegisterPage.enterAllDetails(dataTable,"duplicate");
   }
 
   @Then("I should see that the User Account is restricted from creating duplicate account")
   public void iShouldSeeThatTheUserAccountIsRestrictedFromCreatingDuplicateAccount() {
+
       Assert.assertEquals(TutorialRegisterPage
               .mainWarning.getText(),"Warning: E-Mail Address is already registered!");
   }
