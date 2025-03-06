@@ -24,9 +24,9 @@ public class MyHooks {
            options.addArguments("--disable-cache");
       options.addArguments("disable-application-cache");
      driver = new ChromeDriver(options);
-    }
+    }*/
 
-   @After
+ /*  @After
     public void tearDown() {
 
         driver.quit();
