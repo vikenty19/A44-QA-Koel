@@ -4,10 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 public class LoginTests extends BaseTest {
 
@@ -22,26 +19,27 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
         System.out.println("User logged successfully   " + homePage.getAvatar());
     }
-@Test
-public void getMessage(){
-      driver.manage().deleteAllCookies();
-    LoginPage loginPage = new LoginPage(driver);
-    loginPage.enterEmail("gala.gmail.com");
-    loginPage.clickLoginBtn();
-    WebElement emailInput = loginPage.waitUntilVisible(By.cssSelector("[type='email']"));
-    JavascriptExecutor js = (JavascriptExecutor)driver;
 
-    String message = (String) js.executeScript("return arguments[0].validationMessage",emailInput);
-    String lang = (String) js.executeScript("return navigator.language");
-    System.out.println(message);
-    System.out.println(lang);
-    Assert.assertTrue(message.contains("@"));
+    @Test
+    public void getMessageFromEmailField() {
+        driver.manage().deleteAllCookies();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterEmail("gala.gmail.com");
+        loginPage.clickLoginBtn();
+        WebElement emailInput = loginPage.waitUntilVisible(By.cssSelector("[type='email']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-}
+        String message = (String) js.executeScript("return arguments[0].validationMessage", emailInput);
+        String lang = (String) js.executeScript("return navigator.language");
+        System.out.println(message);
+        System.out.println(lang);
+        Assert.assertTrue(message.contains("@"));
+
+    }
 
     @Test
     public void loginEmptyPasswordTest() {
-       LoginPage loginpage = new LoginPage(driver);
+        LoginPage loginpage = new LoginPage(driver);
         loginpage.login(myEmail, "");
         System.out.println("Is Submit button is displayed?  " + loginpage.isSubmitLoginBtnDisplayed());
         Assert.assertTrue(loginpage.isSubmitLoginBtnDisplayed());
