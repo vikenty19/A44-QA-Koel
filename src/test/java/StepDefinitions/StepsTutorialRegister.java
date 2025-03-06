@@ -73,7 +73,8 @@ public class StepsTutorialRegister  {
     softAssert.assertEquals(TutorialRegisterPage
             .phoneWarning.getText(),"Telephone must be between 3 and 32 characters!");
   softAssert.assertEquals(TutorialRegisterPage
-            .passwordWarning.getText(),"Password must be between 4 and 20 characters!");  softAssert.assertEquals(TutorialRegisterPage
+            .passwordWarning.getText(),"Password must be between 4 and 20 characters!");
+  softAssert.assertEquals(TutorialRegisterPage
             .mainWarning.getText(),"Warning: You must agree to the Privacy Policy!");
     softAssert.assertAll();
 
@@ -83,5 +84,16 @@ public class StepsTutorialRegister  {
   @And("I check-in the Subscription radio button")
   public void iCheckInTheSubscriptionRadioButton() {
       TutorialRegisterPage.subscriptionBtn.click();
+  }
+
+  @When("I provide duplicated details")
+  public void iProvideDuplicatedDetails(DataTable dataTable) {
+      TutorialRegisterPage.enterDuplicatedDetails(dataTable);
+  }
+
+  @Then("I should see that the User Account is restricted from creating duplicate account")
+  public void iShouldSeeThatTheUserAccountIsRestrictedFromCreatingDuplicateAccount() {
+      Assert.assertEquals(TutorialRegisterPage
+              .mainWarning.getText(),"Warning: E-Mail Address is already registered!");
   }
 }

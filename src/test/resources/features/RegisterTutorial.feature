@@ -40,3 +40,17 @@ Feature: Registration functionality scenarios
     And I check-in the Subscription radio button
     And  I click on continue button
     Then I should see that the User Account has successfully been created
+
+    @Register @Four
+    Scenario: User is restricted from creating duplicate account
+      Given User opens application URL
+      And I navigate to Account Registration page
+      When I provide duplicated details
+        |FirstName| Ravi                    |
+        |LastName | Kiran                   |
+        |Email    |Vic1@gmail.com           |
+        |Telephone|9212345678               |
+        |Password |rkiran                   |
+      And I check-in the Privacy Policy
+      And I click on continue button
+      Then I should see that the User Account is restricted from creating duplicate account

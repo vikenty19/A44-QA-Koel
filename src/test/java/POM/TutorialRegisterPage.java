@@ -60,5 +60,15 @@ public class TutorialRegisterPage {
         Elements.TypeText(TutorialRegisterPage.passwordConfirm,map.get("Password"));
 
     }
+    public static void enterDuplicatedDetails(DataTable dataTable){
+        Map<String,String> map =dataTable.asMap(String.class,String.class);
+        Elements.TypeText(TutorialRegisterPage.firstName,map.get("FirstName"));
+        Elements.TypeText(TutorialRegisterPage.lastName,map.get("LastName"));
+        Elements.TypeText(TutorialRegisterPage.emailAddress,map.get("Email"));
+        Elements.TypeText(TutorialRegisterPage.phone,map.get("Telephone"));
+        Elements.TypeText(TutorialRegisterPage.passwordField,map.get("Password"));
+        Elements.TypeText(TutorialRegisterPage.passwordConfirm,map.get("Password"));
+
+    }
 
 }
