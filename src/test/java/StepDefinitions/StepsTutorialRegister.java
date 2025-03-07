@@ -19,7 +19,7 @@ public class StepsTutorialRegister  {
     public void iLaunchTheApp() {
     }*/
   // To initialise pages with @FindBy
-  TutorialRegisterPage tutorialRegisterPage = new TutorialRegisterPage();
+
   TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
     @And("I navigate to Account Registration page")
     public void iNavigateToAccountRegistrationPage() {

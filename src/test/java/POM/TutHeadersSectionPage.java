@@ -14,8 +14,8 @@ public class TutHeadersSectionPage {
     public static   WebElement accountEnterBtn;*/
 
 
-public By accountEnterBtn = By.cssSelector(".fa-user");
-public By loginBtn = By.linkText("Login");
+public static By accountEnterBtn = By.cssSelector(".fa-user");
+public static By loginBtn = By.linkText("Login");
 
 public By email = By.id("input-email");
 
