@@ -18,32 +18,33 @@ import java.time.Duration;
 
 public class TutorialsLoginOnly {
 
-  public static WebDriverWait wait;
-   public static WebDriver driver;
-    public static String tutorialURL ="http://tutorialsninja.com/demo/";
+    public static WebDriverWait wait;
+    public static WebDriver driver;
+    public static String tutorialURL = "http://tutorialsninja.com/demo/";
     TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
+
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
 
 
-           WebDriverManager.chromedriver().clearDriverCache().setup();
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--remote-allow-origins=*");
-            options.addArguments("--disable-notifications");
-            options.addArguments("--start-maximized");
+        WebDriverManager.chromedriver().clearDriverCache().setup();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
 
-            driver = new ChromeDriver(options);
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            driver.get(tutorialURL);
+        driver.get(tutorialURL);
 
         System.out.println("User open the URL");
     }
 
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
-     driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
-     driver.findElement(tutHeadersSectionPage.loginBtn).click();
+        driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
+        driver.findElement(tutHeadersSectionPage.loginBtn).click();
     }
 
     @When("User enters valid email {string}")
@@ -80,7 +81,7 @@ public class TutorialsLoginOnly {
 
     @And("Enters invalid password {string}")
     public void entersInvalidPassword(String invalidPassword) {
-        System.out.println("user entered invalid password"+invalidPassword );
+        System.out.println("user entered invalid password" + invalidPassword);
     }
 
     @When("User enters invalid email {string}")

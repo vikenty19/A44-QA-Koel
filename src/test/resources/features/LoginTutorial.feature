@@ -1,5 +1,5 @@
 Feature: Login scenarios
-  @Login @One
+  @Login @Two
   Scenario Outline: Successfully login the user with valid credentials
     Given User opens application URL
     And User navigate to Account Login page
@@ -9,7 +9,7 @@ Feature: Login scenarios
       |email             | password      |
       | ravi.kiran1@gmail.com    |rkiran         |
 
-  @Login @Tw0
+  @Login @One
   Scenario Outline:User shouldn't login with invalid credentials
     Given User opens application URL
     And User navigate to Account Login page
@@ -17,4 +17,4 @@ Feature: Login scenarios
     Then User shouldn't be able to login successfully and see a warning message
     Examples:
       |email             | password      |
-      | ravi.kiran99@gmail.com    |rkiran99         |
+      | ravi.kiran99@gmail.com    |rkiran99        |

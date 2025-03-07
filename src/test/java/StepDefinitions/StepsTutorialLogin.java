@@ -37,9 +37,9 @@ public class StepsTutorialLogin {
     @Then("User shouldn't be able to login successfully and see a warning message")
     public void userShouldnTBeAbleToLoginSuccessfullyAndSeeAWarningMessage() {
       //  By alert = By.cssSelector(".alert");
-         WebElement warningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert")));
-         Assert.assertEquals(warningMessage.getText(),"Warning: No match for E-Mail Address and/or Password.");
-
+        WebElement warningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert")));
+        Assert.assertEquals(warningMessage.getText(),"Warning: No match for E-Mail Address and/or Password.");
+        System.out.println("URAY!!");
     }
 }
 
