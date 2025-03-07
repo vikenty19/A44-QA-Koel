@@ -8,9 +8,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import static StepDefinitions.TutorialsLoginOnly.driver;
+import static StepDefinitions.TutorialsLoginOnly.wait;
 
 public class StepsTutorialLogin {
     @And("User navigate to Account Login page")
@@ -31,10 +34,12 @@ public class StepsTutorialLogin {
     }
 
 
+    @Then("User shouldn't be able to login successfully and see a warning message")
+    public void userShouldnTBeAbleToLoginSuccessfullyAndSeeAWarningMessage() {
+      //  By alert = By.cssSelector(".alert");
+         WebElement warningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert")));
+         Assert.assertEquals(warningMessage.getText(),);
 
-
-
-
-
+    }
 }
 

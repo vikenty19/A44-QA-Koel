@@ -20,4 +20,6 @@ public class TutorialLoginPage {
     public static By submitLogin = By.cssSelector("input[type ='submit']");
     public static WebElement loginSubmitBtn =wait.until(ExpectedConditions.elementToBeClickable(submitLogin));
 
+
+
 }
