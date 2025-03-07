@@ -6,33 +6,40 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Map;
 
 import static StepDefinitions.TutorialsLoginOnly.driver;
+import static StepDefinitions.TutorialsLoginOnly.wait;
 
 public class TutorialRegisterPage {
     public TutorialRegisterPage() {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(css = "[name =firstname]")
-    public static WebElement firstName;
-    // public By firstName = By.cssSelector("[name =firstname]");
-    @FindBy(id = "input-lastname")
-    public static WebElement lastName;
-    @FindBy(id = "input-email")
-    public static WebElement emailAddress;
-    @FindBy(id = "input-telephone")
-    public static WebElement phone;
-    @FindBy(id = "input-password")
-    public static WebElement passwordField;
-    @FindBy(id = "input-confirm")
-    public static WebElement passwordConfirm;
-    @FindBy(name = "agree")
-    public static WebElement agree;
-    @FindBy(css = "input[type ='submit']")
-    public static WebElement submitBtn;
+//   @FindBy(css = "[name =firstname]")
+//    public static WebElement firstName;
+     public static By firstName = By.cssSelector("[name =firstname]");
+    static WebElement firstNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.firstName));
+   public static By lastName= By.id("input-lastname");
+    public static WebElement lastNameField =wait
+            .until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.lastName));
+  public static By email =By.id ("input-email");
+    public static WebElement emailAddress=wait.
+            until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.email))   ;
+    public static By phoneNumb =By.id("input-telephone");
+    public static WebElement phone = wait
+            .until(ExpectedConditions.visibilityOfElementLocated(phoneNumb));
+    public static By passwordPlace =By.id  ("input-password");
+    public static WebElement passwordField=wait
+            .until(ExpectedConditions.visibilityOfElementLocated(passwordPlace));
+   public static By passConfirm = By.id("input-confirm");
+    public static WebElement passwordConfirm =wait.until(ExpectedConditions.visibilityOfElementLocated(passConfirm));
+    public static By agreement =By.name("agree");
+    public static WebElement agree= wait.until(ExpectedConditions.visibilityOfElementLocated(agreement));
+    public static By subMit = By.cssSelector("input[type ='submit']");
+    public static WebElement submitBtn =wait.until(ExpectedConditions.visibilityOfElementLocated(subMit));
     @FindBy(css = "input[id ='input-firstname']+div")
     public static WebElement firstNameWarning;
     @FindBy(css = "input[id ='input-lastname']+div")
@@ -46,16 +53,17 @@ public class TutorialRegisterPage {
 
       @FindBy(css = ".alert")
       public static WebElement mainWarning;
-      @FindBy(css = "label:nth-child(1)>[name='newsletter']")
-      public static WebElement subscriptionBtn;
+      public static By subscrBtn = By.cssSelector("label:nth-child(1)>[name='newsletter']");
+      public static WebElement subscriptionBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(subscrBtn));
 
       public static   By registerBreadCrumb = By.linkText("Register");
     public static void enterAllDetails(DataTable dataTable,String credentialsType){
         Map<String,String> map =dataTable.asMap(String.class,String.class);
-        Elements.TypeText(TutorialRegisterPage.firstName,map.get("FirstName"));
-        Elements.TypeText(TutorialRegisterPage.lastName,map.get("LastName"));
-        Elements.TypeText(TutorialRegisterPage.phone,map.get("Telephone"));
-        Elements.TypeText(TutorialRegisterPage.passwordField,map.get("Password"));
+
+        Elements.TypeText(firstNameField,map.get("FirstName"));
+        Elements.TypeText(lastNameField,map.get("LastName"));
+        Elements.TypeText(phone,map.get("Telephone"));
+        Elements.TypeText(passwordField,map.get("Password"));
         Elements.TypeText(TutorialRegisterPage.passwordConfirm,map.get("Password"));
         if(credentialsType.equalsIgnoreCase("duplicate")){
             Elements.TypeText(TutorialRegisterPage.emailAddress,map.get("Email"));

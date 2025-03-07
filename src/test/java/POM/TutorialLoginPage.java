@@ -16,4 +16,5 @@ public class TutorialLoginPage {
     public static WebElement passwordField;
     @FindBy(css = "input[type ='submit']")
     public static WebElement loginSubmitBtn;
+
 }
