@@ -1,14 +1,12 @@
 package Base;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Random;
 
-import static StepDefinitions.StepsToTutorialsLogin.driver;
+import static StepDefinitions.TutorialsLoginOnly.driver;
 
 public class Elements {
   //  public Logger log = Logger.getLogger(Elements.class);

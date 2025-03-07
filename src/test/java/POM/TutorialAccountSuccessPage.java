@@ -1,11 +1,9 @@
 package POM;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static StepDefinitions.StepsToTutorialsLogin.driver;
+import static StepDefinitions.TutorialsLoginOnly.driver;
 
 public class TutorialAccountSuccessPage {
     public TutorialAccountSuccessPage(){

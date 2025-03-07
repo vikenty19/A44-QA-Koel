@@ -1,6 +1,6 @@
 package POM;
 
-import StepDefinitions.StepsToTutorialsLogin;
+import StepDefinitions.TutorialsLoginOnly;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
@@ -8,7 +8,7 @@ public class TutHeadersSectionPage {
 
     public TutHeadersSectionPage() {
 
-        PageFactory.initElements(StepsToTutorialsLogin.driver, this);
+        PageFactory.initElements(TutorialsLoginOnly.driver, this);
     }
  /*   @FindBy(css = ".fa-user")
     public static   WebElement accountEnterBtn;*/

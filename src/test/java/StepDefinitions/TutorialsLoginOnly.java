@@ -16,7 +16,7 @@ import org.testng.Assert;
 import java.time.Duration;
 
 
-public class StepsToTutorialsLogin {
+public class TutorialsLoginOnly {
 
   public static WebDriverWait wait;
    public static WebDriver driver;

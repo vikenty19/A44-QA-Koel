@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.Map;
 
-import static StepDefinitions.StepsToTutorialsLogin.driver;
+import static StepDefinitions.TutorialsLoginOnly.driver;
 
 public class TutorialRegisterPage {
     public TutorialRegisterPage() {

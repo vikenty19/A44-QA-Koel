@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import Base.Elements;
 import POM.TutorialAccountSuccessPage;
 import POM.TutorialRegisterPage;
 import POM.TutHeadersSectionPage;
@@ -8,15 +7,12 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
-import java.time.Duration;
-
-import static StepDefinitions.StepsToTutorialsLogin.driver;
-import static StepDefinitions.StepsToTutorialsLogin.wait;
+import static StepDefinitions.TutorialsLoginOnly.driver;
+import static StepDefinitions.TutorialsLoginOnly.wait;
 
 public class StepsTutorialRegister  {
   /*  @Given("I launch the app")
