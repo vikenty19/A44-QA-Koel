@@ -38,7 +38,7 @@ public class StepsTutorialLogin {
     public void userShouldnTBeAbleToLoginSuccessfullyAndSeeAWarningMessage() {
       //  By alert = By.cssSelector(".alert");
          WebElement warningMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".alert")));
-         Assert.assertEquals(warningMessage.getText(),);
+         Assert.assertEquals(warningMessage.getText(),"Warning: No match for E-Mail Address and/or Password.");
 
     }
 }
