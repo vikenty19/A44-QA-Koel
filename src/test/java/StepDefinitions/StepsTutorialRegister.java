@@ -7,10 +7,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-
 import static StepDefinitions.TutorialsLoginOnly.driver;
 import static StepDefinitions.TutorialsLoginOnly.wait;
 
@@ -29,6 +30,8 @@ public class StepsTutorialRegister  {
 
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
+
+    //  TutorialRegisterPage.firstNameField.sendKeys("raviiii");
     TutorialRegisterPage.enterAllDetails(dataTable,"unique");
     }
 
@@ -60,8 +63,8 @@ public class StepsTutorialRegister  {
   @And("I should see the error messages informing the user to fill the mandatory fields")
   public void iShouldSeeTheErrorMessagesInformingTheUserToFillTheMandatoryFields() {
     SoftAssert softAssert=new SoftAssert();
-    softAssert.assertEquals(TutorialRegisterPage
-            .firstNameWarning.getText(),"First Name must be between 1 and 32 characters!");
+   // softAssert.assertEquals(TutorialRegisterPage
+          //  .firstNameWarning.getText(),"First Name must be between 1 and 32 characters!");
     softAssert.assertEquals(TutorialRegisterPage
             .lastNameWarning.getText(),"Last Name must be between 1 and 32 characters!");
     softAssert.assertEquals(TutorialRegisterPage

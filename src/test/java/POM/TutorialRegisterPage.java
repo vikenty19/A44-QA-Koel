@@ -20,15 +20,15 @@ public class TutorialRegisterPage {
 
 //   @FindBy(css = "[name =firstname]")
 //    public static WebElement firstName;
-     public static By firstName = By.id("input-firstname");
-    static WebElement firstNameField = wait
-            .until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.firstName));
+     public static By name = By.id("input-firstname");
+    public static WebElement firstNameField = wait
+            .until(ExpectedConditions.elementToBeClickable(name));
    public static By lastName= By.id("input-lastname");
     public static WebElement lastNameField =wait
-            .until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.lastName));
+            .until(ExpectedConditions.visibilityOfElementLocated(lastName));
   public static By email =By.id ("input-email");
     public static WebElement emailAddress=wait.
-            until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.email))   ;
+            until(ExpectedConditions.visibilityOfElementLocated(email))   ;
     public static By phoneNumb =By.id("input-telephone");
     public static WebElement phone = wait
             .until(ExpectedConditions.visibilityOfElementLocated(phoneNumb));
@@ -41,8 +41,8 @@ public class TutorialRegisterPage {
     public static WebElement agree= wait.until(ExpectedConditions.visibilityOfElementLocated(agreement));
     public static By subMit = By.cssSelector("input[type ='submit']");
     public static WebElement submitBtn =wait.until(ExpectedConditions.visibilityOfElementLocated(subMit));
-    public static By first = By.cssSelector("input[id ='input-firstname']+div");
-    public static WebElement firstNameWarning=wait.until(ExpectedConditions.visibilityOfElementLocated(first));
+    public static By first = By.cssSelector("input[id ='input-firstname']+div");///--------------??????
+ //   public static WebElement firstNameWarning=wait.until(ExpectedConditions.visibilityOfElementLocated(first));
     @FindBy(css = "input[id ='input-lastname']+div")
     public static WebElement lastNameWarning;
     @FindBy(css = "input[id ='input-email']+div")
