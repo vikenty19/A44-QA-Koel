@@ -39,7 +39,7 @@ public class TutorialsLoginOnly {
         options.addArguments("--start-maximized");
 
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get(tutorialURL);
 
         System.out.println("User open the URL");

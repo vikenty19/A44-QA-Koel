@@ -30,8 +30,9 @@ public class StepsTutorialRegister  {
 
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
-
-    //  TutorialRegisterPage.firstNameField.sendKeys("raviiii");
+      WebElement firstNameField = wait
+              .until(ExpectedConditions.elementToBeClickable(By.id("input-firstname")));
+     firstNameField.sendKeys("raviiii");
     TutorialRegisterPage.enterAllDetails(dataTable,"unique");
     }
 

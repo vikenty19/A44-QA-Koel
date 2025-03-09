@@ -39,7 +39,7 @@ public class TutorialRegisterPage {
     public static WebElement passwordConfirm =wait.until(ExpectedConditions.visibilityOfElementLocated(passConfirm));
     public static By agreement =By.name("agree");
     public static WebElement agree= wait.until(ExpectedConditions.visibilityOfElementLocated(agreement));
-    public static By subMit = By.cssSelector("input[type ='submit']");
+    public static By subMit = By.xpath("//input[@type ='submit']");
     public static WebElement submitBtn =wait.until(ExpectedConditions.visibilityOfElementLocated(subMit));
     public static By first = By.cssSelector("input[id ='input-firstname']+div");///--------------??????
  //   public static WebElement firstNameWarning=wait.until(ExpectedConditions.visibilityOfElementLocated(first));
@@ -52,8 +52,8 @@ public class TutorialRegisterPage {
       @FindBy(css = "input[id ='input-password']+div")
     public static WebElement passwordWarning;
 
-      @FindBy(css = ".alert")
-      public static WebElement mainWarning;
+    public static By warn = By.cssSelector(".alert");
+      public static WebElement mainWarning = wait.until(ExpectedConditions.visibilityOfElementLocated(warn));
       public static By subscrBtn = By.cssSelector("label:nth-child(1)>[name='newsletter']");
       public static WebElement subscriptionBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(subscrBtn));
 
