@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import POM.TutHeadersSectionPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -25,9 +27,11 @@ public class TutorialsLoginOnly {
 
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
+      /*  WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+         driver.manage().window().maximize();*/
 
-
-        WebDriverManager.chromedriver().clearDriverCache().setup();
+       WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -91,5 +95,9 @@ public class TutorialsLoginOnly {
 
     @When("User doesn't enter any credentials")
     public void userDoesnTEnterAnyCredentials() {
+    }
+    @After
+    public void tearOff(){
+        driver.quit();
     }
 }
