@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 @CucumberOptions(
         features = {"src/test/resources/features"},
         glue = {"hooks","StepDefinitions"},
-      // tags = "@Login",
+       tags = "@Register",
         publish = true,
         plugin = {"pretty",
                "html:target/CucumberReports/CucumberReport.html" ,
@@ -18,12 +18,12 @@ import org.testng.annotations.DataProvider;
 
 
 public class CucumberRunner extends AbstractTestNGCucumberTests {
-    private TestNGCucumberRunner testNGCucumberRunner;
+    private static TestNGCucumberRunner testNGCucumberRunner;
 
 
    @BeforeClass(alwaysRun = true)
-    public void setUpCucumber() {
-        testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
+    public static void setUpCucumber() {
+        testNGCucumberRunner = new TestNGCucumberRunner(CucumberRunner.class);
     }
 
 

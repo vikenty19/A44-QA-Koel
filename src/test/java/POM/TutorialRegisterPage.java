@@ -20,8 +20,9 @@ public class TutorialRegisterPage {
 
 //   @FindBy(css = "[name =firstname]")
 //    public static WebElement firstName;
-     public static By firstName = By.cssSelector("[name =firstname]");
-    static WebElement firstNameField = wait.until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.firstName));
+     public static By firstName = By.id("input-firstname");
+    static WebElement firstNameField = wait
+            .until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.firstName));
    public static By lastName= By.id("input-lastname");
     public static WebElement lastNameField =wait
             .until(ExpectedConditions.visibilityOfElementLocated(TutorialRegisterPage.lastName));
@@ -40,8 +41,8 @@ public class TutorialRegisterPage {
     public static WebElement agree= wait.until(ExpectedConditions.visibilityOfElementLocated(agreement));
     public static By subMit = By.cssSelector("input[type ='submit']");
     public static WebElement submitBtn =wait.until(ExpectedConditions.visibilityOfElementLocated(subMit));
-    @FindBy(css = "input[id ='input-firstname']+div")
-    public static WebElement firstNameWarning;
+    public static By first = By.cssSelector("input[id ='input-firstname']+div");
+    public static WebElement firstNameWarning=wait.until(ExpectedConditions.visibilityOfElementLocated(first));
     @FindBy(css = "input[id ='input-lastname']+div")
     public static WebElement lastNameWarning;
     @FindBy(css = "input[id ='input-email']+div")

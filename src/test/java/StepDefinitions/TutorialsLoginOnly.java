@@ -47,8 +47,8 @@ public class TutorialsLoginOnly {
 
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
-        driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
-        driver.findElement(tutHeadersSectionPage.loginBtn).click();
+        driver.findElement(TutHeadersSectionPage.accountEnterBtn).click();
+        driver.findElement(TutHeadersSectionPage.loginBtn).click();
     }
 
     @When("User enters valid email {string}")
@@ -96,8 +96,5 @@ public class TutorialsLoginOnly {
     @When("User doesn't enter any credentials")
     public void userDoesnTEnterAnyCredentials() {
     }
-    @After
-    public void tearOff(){
-        driver.quit();
-    }
+
 }

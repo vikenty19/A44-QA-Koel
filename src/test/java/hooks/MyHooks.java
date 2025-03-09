@@ -8,11 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import static StepDefinitions.TutorialsLoginOnly.driver;
+
 public class MyHooks {
-   public  WebDriver driver;
+ //  public  WebDriver driver;
   //  public static String url = "https://qa.koel.app/";
 
- /* @Before
+  @Before
     public void setUpDriver() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
@@ -24,7 +26,7 @@ public class MyHooks {
            options.addArguments("--disable-cache");
       options.addArguments("disable-application-cache");
      driver = new ChromeDriver(options);
-    }*/
+    }
 
    @After
     public void tearDown() {
