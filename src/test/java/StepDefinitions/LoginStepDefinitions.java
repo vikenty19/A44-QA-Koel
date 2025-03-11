@@ -29,6 +29,7 @@ public class LoginStepDefinitions  {
      public static WebDriver driver;
 
     public static String url ="https://qa.koel.app/";
+    public static String registerUrl ="https://qa.koel.app/registration";
     public static WebDriverWait wait = null;
   @After
     public void tearDown() {
