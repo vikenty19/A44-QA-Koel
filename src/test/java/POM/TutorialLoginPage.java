@@ -19,7 +19,9 @@ public class TutorialLoginPage {
     public static WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(inputPassword));
     public static By submitLogin = By.cssSelector("input[type ='submit']");
     public static WebElement loginSubmitBtn =wait.until(ExpectedConditions.elementToBeClickable(submitLogin));
-
-
+@FindBy(css = ".form-group>a")
+   public static WebElement forgotPassword;
+    public static By info = By.cssSelector(".alert");
+    public static WebElement infoMessage = wait.until(ExpectedConditions.visibilityOfElementLocated(info));
 
 }

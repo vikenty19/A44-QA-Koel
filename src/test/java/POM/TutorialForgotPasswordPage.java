@@ -6,13 +6,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.awt.event.WindowFocusListener;
+
 import static StepDefinitions.TutorialsLoginOnly.driver;
 import static StepDefinitions.TutorialsLoginOnly.wait;
 
-public class MyAccountPage {
-    public MyAccountPage(){
+public class TutorialForgotPasswordPage {
+    public TutorialForgotPasswordPage(){
         PageFactory.initElements(driver,this);
     }
-    public static By account = By.cssSelector(".breadcrumb>li:nth-child(2)>a");
-    public static WebElement accountBreadCrumb = wait.until(ExpectedConditions.visibilityOfElementLocated(account));
+    @FindBy(id = "input-email")
+    public static WebElement emailField;
+    @FindBy(css = "input.btn")
+    public static WebElement continueBtn;
+
 }

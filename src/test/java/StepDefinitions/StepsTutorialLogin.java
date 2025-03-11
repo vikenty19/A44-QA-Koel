@@ -1,9 +1,9 @@
 package StepDefinitions;
 
-import POM.MyAccountPage;
+import POM.TutorialForgotPasswordPage;
+import POM.TuturialMyAccountPage;
 import POM.TutHeadersSectionPage;
 import POM.TutorialLoginPage;
-import POM.TutorialRegisterPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -30,7 +30,7 @@ public class StepsTutorialLogin {
 
     @Then("User should be able to login successfully")
     public void userShouldBeAbleToLoginSuccessfully() {
-        Assert.assertTrue(MyAccountPage.accountBreadCrumb.isDisplayed());
+        Assert.assertTrue(TuturialMyAccountPage.accountBreadCrumb.isDisplayed());
     }
 
 
@@ -41,5 +41,21 @@ public class StepsTutorialLogin {
         Assert.assertEquals(warningMessage.getText(),"Warning: No match for E-Mail Address and/or Password.");
         System.out.println("URAY!!");
     }
+    @When("User reset forgotten password for email {string}")
+    public void userResetForgottenPasswordForEmail(String email) {
+        TutorialLoginPage.forgotPassword.click();
+        TutorialForgotPasswordPage.emailField.sendKeys(email);
+        TutorialForgotPasswordPage.continueBtn.click();
+    }
+
+
+    @Then("Use see a message that resetting info was sending to his email")
+    public void useSeeAMessageThatResettingInfoWasSendingToHisEmail() {
+        String message = TutorialLoginPage.infoMessage.getText();
+        Assert.assertEquals(message,"An email with a confirmation link has been sent your email address.");
+
+    }
+
+
 }
 

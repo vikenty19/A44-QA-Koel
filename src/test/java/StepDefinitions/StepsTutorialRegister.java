@@ -26,12 +26,15 @@ public class StepsTutorialRegister  {
     public void iNavigateToAccountRegistrationPage() {
         driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
         driver.findElement(tutHeadersSectionPage.registerBtn).click();
+
     }
 
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
+      System.out.println("Driver  "+ driver);
+      System.out.println("Locator "+ TutorialRegisterPage.name);
       WebElement firstNameField = wait
-              .until(ExpectedConditions.elementToBeClickable(By.id("input-firstname")));
+              .until(ExpectedConditions.elementToBeClickable(TutorialRegisterPage.name));
      firstNameField.sendKeys("raviiii");
     TutorialRegisterPage.enterAllDetails(dataTable,"unique");
     }

@@ -21,7 +21,7 @@ public class TutorialRegisterPage {
 //   @FindBy(css = "[name =firstname]")
 //    public static WebElement firstName;
      public static By name = By.id("input-firstname");
-    public static WebElement firstNameField = wait
+    public static final WebElement firstNameField = wait
             .until(ExpectedConditions.elementToBeClickable(name));
    public static By lastName= By.id("input-lastname");
     public static WebElement lastNameField =wait
