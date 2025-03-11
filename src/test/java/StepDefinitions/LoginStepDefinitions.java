@@ -21,6 +21,8 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.Map;
 
+import static CucumberPOM.ForgotPassword_RegisterPage.InfoMessage;
+import static CucumberPOM.ForgotPassword_RegisterPage.emailToForgottenPass;
 import static CucumberPOM.LoginPageCucumber.*;
 
 public class LoginStepDefinitions  {
@@ -121,4 +123,21 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
     }
 
 
+    @When("I click the  forgot password link")
+    public void iClickTheForgotPasswordLink() {
+        WebElement forgotPassLink = LoginStepDefinitions.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(link));
+      forgotPassLink.click();
+
+    }
+
+    @And("I enter my registered email {string}")
+    public void iEnterMyRegisteredEmail(String email) {
+        emailToForgottenPass.sendKeys(email);
+    }
+
+    @Then("I should see a message that new password was sent to my email")
+    public void iShouldSeeAMessageThatNewPasswordWasSentToMyEmail() {
+       Assert.assertEquals(InfoMessage.getText(),"You will receive an email with your new credentials");
+    }
 }
