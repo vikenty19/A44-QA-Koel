@@ -103,9 +103,10 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
     }
 
 
-    @And("I enter details below into fields")
+    @And("I enter details below into fields:")
     public void iEnterDetailsBelowIntoFields(DataTable dataTable) {
        Map<String,String> map  =  dataTable.asMap(String.class,String.class);
+        System.out.println("Table data");
     //email
         WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
         emailInput.click();

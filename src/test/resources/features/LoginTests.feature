@@ -10,7 +10,7 @@ Feature: login tests
     Then I am logged in
    Examples:
     |email                  |   password|
-    |"vicplach123@gmail.com"|"MEGAdelta123@"|
+    |"vikenty.plakhov@testpro.io"|"MEGAdelta06"|
 
 
   Scenario Outline:LoginWrongEmail
@@ -23,14 +23,11 @@ Feature: login tests
       |   password|
       |"MEGAdelta123@"|
 
- ## Scenario  : login1 success
-#    And  I enter details below into fields
- #     |email                        |password|
-   #   | vicplach123@gmail.com    |  MEGAdelta123@   |
-#    And  i enter valid email <email>
- #   And I enter valid password <password>
- #   And  I click Submit
-  #  Then I am logged in
-  #  Examples:
-   #   |email                  |   password|
-    #  |"vicplach123@gmail.com"|"MEGAdelta123@"|
+  Scenario: login1 success
+   And I enter details below into fields:
+     |    email                      | vikenty.plakhov@testpro.io      |
+     |  password                        |  MEGAdelta06  |
+
+    And I click Submit
+   Then I am logged in
+
