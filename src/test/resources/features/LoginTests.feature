@@ -39,9 +39,11 @@ Feature: login tests
    And   I enter my registered email "v@gmail.com"
    Then  I should see a message that new password was sent to my email
    @Login
-   Scenario: Login without any credentials
+   Scenario: Login with empty credentials
      And I enter details below into fields:
-       | email    | ""|
-       | password | ""|
+       | email    |""   |
+       | password |  "" |
      And I click Submit
      Then I am not logged in
+     @Login
+     Scenario: Invalid credentials using DataProvider
