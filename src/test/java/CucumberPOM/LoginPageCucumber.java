@@ -13,5 +13,5 @@ public class LoginPageCucumber {
    public static By email = By.cssSelector("[type='email']");
     public static WebElement emailInput =LoginStepDefinitions.driver.findElement(email);
     public static By pass = By.cssSelector("[type='password']");
-    public static WebElement passwordInput=LoginStepDefinitions.driver.findElement(pass);
+    //public static WebElement passwordInput=LoginStepDefinitions.driver.findElement(pass);
 }

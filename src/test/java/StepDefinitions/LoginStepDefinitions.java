@@ -13,16 +13,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.Map;
 
-import static CucumberPOM.LoginPageCucumber.emailInput;
-import static CucumberPOM.LoginPageCucumber.passwordInput;
+import static CucumberPOM.LoginPageCucumber.*;
 
 public class LoginStepDefinitions  {
      public static WebDriver driver;
+
     public static String url ="https://qa.koel.app/";
     public static WebDriverWait wait = null;
  /* @After
@@ -39,7 +41,7 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
         options.addArguments("--start-maximized");
 
           driver = new ChromeDriver(options);
-
+          wait= new WebDriverWait(driver, Duration.ofSeconds(5));
     }
     @When("I open login page")
     public void iOpenLoginPage(){
@@ -55,6 +57,9 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
     }
     @And("I enter valid password {string}")
     public void iEnterPassword(String password) {
+       // Other declaration in cucumberPOM brings "stale element exception"
+        WebElement passwordInput=LoginStepDefinitions
+                .wait.until(ExpectedConditions.visibilityOfElementLocated(pass));
         passwordInput.click();
         passwordInput.clear();
         passwordInput.sendKeys(password);
@@ -79,12 +84,12 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
 
 
 
-    @And("I enter wrong email")
-    public void iEnterWrongEmail() {
+    @And("I enter wrong email {string}")
+    public void iEnterWrongEmail(String email) {
         WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
         emailInput.click();
         emailInput.clear();
-        emailInput.sendKeys("vicplach13@gmail.com");
+        emailInput.sendKeys(email);
     }
 
 
@@ -113,4 +118,6 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
         passwordInput.clear();
         passwordInput.sendKeys(map.get("password"));
     }
+
+
 }
