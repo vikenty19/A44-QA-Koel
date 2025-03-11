@@ -38,4 +38,10 @@ Feature: login tests
    When  I click the  forgot password link
    And   I enter my registered email "v@gmail.com"
    Then  I should see a message that new password was sent to my email
-
+   @Login
+   Scenario: Login without any credentials
+     And I enter details below into fields:
+       | email    | ""|
+       | password | ""|
+     And I click Submit
+     Then I am not logged in

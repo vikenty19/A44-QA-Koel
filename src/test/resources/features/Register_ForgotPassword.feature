@@ -1,5 +1,5 @@
 Feature: Register a new user or restore forgotten password
-
+@Register
   Scenario Outline: User is able to register in app using allowed email
     Given I open browser
     And I open registration page
