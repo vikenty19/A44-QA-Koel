@@ -3,6 +3,7 @@ package StepDefinitions;
 import POM.HomePage;
 import POM.LoginPage;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -27,10 +28,10 @@ public class LoginStepDefinitions  {
 
     public static String url ="https://qa.koel.app/";
     public static WebDriverWait wait = null;
- /* @After
+  @After
     public void tearDown() {
         driver.quit();
-    }*/
+    }
    @Given ("I open browser")
     public void setUpDriver(){
 WebDriverManager.chromedriver().clearDriverCache().setup();
