@@ -2,9 +2,7 @@ package StepDefinitions;
 
 import POM.HomePage;
 import POM.LoginPage;
-import hooks.MyHooks;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,17 +13,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 
-import java.time.Duration;
-import java.util.HashMap;
 import java.util.Map;
 
+import static CucumberPOM.LoginPageCucumber.emailInput;
+import static CucumberPOM.LoginPageCucumber.passwordInput;
+
 public class LoginStepDefinitions  {
-     public  WebDriver driver;
+     public static WebDriver driver;
     public static String url ="https://qa.koel.app/";
     public static WebDriverWait wait = null;
  /* @After
@@ -50,16 +47,14 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
     }
     @And("i enter valid email {string}")
     public void iEnterEmail(String email){
-        WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
-                emailInput.click();
+
+       emailInput.click();
         emailInput.clear();
         emailInput.sendKeys(email);
 
     }
     @And("I enter valid password {string}")
     public void iEnterPassword(String password) {
-        LoginPage loginPage = new LoginPage(driver);
-        WebElement passwordInput = driver.findElement(By.cssSelector("[type='password']"));
         passwordInput.click();
         passwordInput.clear();
         passwordInput.sendKeys(password);
