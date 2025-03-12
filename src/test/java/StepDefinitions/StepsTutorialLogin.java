@@ -12,20 +12,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import static POM.TutHeadersSectionPage.accountEnterBtn;
+import static POM.TutHeadersSectionPage.loginBtn;
 import static StepDefinitions.TutorialsLoginOnly.driver;
 import static StepDefinitions.TutorialsLoginOnly.wait;
 
 public class StepsTutorialLogin {
+
     @And("User navigate to Account Login page")
     public void userNavigateToAccountLoginPage() {
-        driver.findElement(TutHeadersSectionPage.accountEnterBtn).click();
-        driver.findElement(TutHeadersSectionPage.loginBtn).click();
+        driver.findElement(By.cssSelector(".fa-user")).click();
+        driver.findElement( By.linkText("Login")).click();
     }
     @When("User login to the app using email {string} and password {string}")
     public void userLoginToTheAppUsingEmailAndPassword(String email, String password) {
-        TutorialLoginPage.emailField.sendKeys(email);
-        TutorialLoginPage.passwordField.sendKeys(password);
-        TutorialLoginPage.loginSubmitBtn.click();
+        WebElement emailField = wait.until(ExpectedConditions.elementToBeClickable(By.id("input-email")));
+        emailField.sendKeys(email);
+        WebElement passwordField = wait.until(ExpectedConditions.elementToBeClickable(By.id("input-password")));
+        passwordField.sendKeys(password);
+        WebElement loginSubmitBtn =wait
+                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[type ='submit']")));
+        loginSubmitBtn.click();
     }
 
     @Then("User should be able to login successfully")
