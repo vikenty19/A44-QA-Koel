@@ -1,6 +1,7 @@
 import POM.HomePage;
 import POM.LoginPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -47,7 +48,20 @@ public class LoginTests extends BaseTest {
         loginpage.login(email, password);
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
+    @Test
+    public void getMessageFromEmailField() {
+        driver.manage().deleteAllCookies();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterEmail("gala.gmail.com");
+        loginPage.clickLoginBtn();
+        WebElement emailInput = loginPage.waitUntilVisible(By.cssSelector("[type='email']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 
-    //        Email("demo@class.com");
-//        Password("te$t$tudent");
+        String message = (String) js.executeScript("return arguments[0].validationMessage", emailInput);
+        String lang = (String) js.executeScript("return navigator.language");
+        System.out.println(message);
+        System.out.println(lang);
+        Assert.assertTrue(message.contains("@"));
+
+    }
 }
