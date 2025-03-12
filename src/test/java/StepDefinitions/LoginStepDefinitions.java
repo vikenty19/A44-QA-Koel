@@ -3,6 +3,7 @@ package StepDefinitions;
 import CucumberPOM.TestData;
 import POM.HomePage;
 import POM.LoginPage;
+import hooks.MyHooks;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
@@ -26,28 +27,36 @@ import java.util.Map;
 import static CucumberPOM.ForgotPassword_RegisterPage.InfoMessage;
 import static CucumberPOM.ForgotPassword_RegisterPage.emailToForgottenPass;
 import static CucumberPOM.LoginPageCucumber.*;
+import static hooks.Base.driver;
 
 public class LoginStepDefinitions  {
-     public static WebDriver driver;
-
+   //  public static WebDriver driver;
+  // public static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     public static String url ="https://qa.koel.app/";
+<<<<<<< Updated upstream
     public static String registerUrl ="https://qa.koel.app/registration";
     public static WebDriverWait wait = null;
   @After
+=======
+  //  public static WebDriverWait wait = null;
+ /* @After
+>>>>>>> Stashed changes
     public void tearDown() {
         driver.quit();
     }
    @Given ("I open browser")
     public void setUpDriver(){
-WebDriverManager.chromedriver().clearDriverCache().setup();
+       MyHooks.setUpDriver();
+ /*       WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
 
-          driver = new ChromeDriver(options);
-          wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+          driver = new ChromeDriver(options);*/
+
+       System.out.println("SetUpDriver");
     }
     @When("I open login page")
     public void iOpenLoginPage(){
