@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import CucumberPOM.TestData;
 import POM.HomePage;
 import POM.LoginPage;
 import io.cucumber.datatable.DataTable;
@@ -17,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.Map;
@@ -141,4 +143,33 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
     public void iShouldSeeAMessageThatNewPasswordWasSentToMyEmail() {
        Assert.assertEquals(InfoMessage.getText(),"You will receive an email with your new credentials");
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @And("I logs in with email {string} and password {string}")
+    @Test(dataProvider = "LoginData",dataProviderClass = TestData.class)
+    public void iLogsInWithEmailAndPassword(String emailF, String passwordF) {
+        System.out.println(emailF+ "   "+passwordF);
+        WebElement passwordInput=LoginStepDefinitions
+                .wait.until(ExpectedConditions.visibilityOfElementLocated(pass));
+        passwordInput.click();
+        passwordInput.clear();
+        passwordInput.sendKeys(passwordF);
+        WebElement emailField= LoginStepDefinitions.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(email));
+
+        emailField.sendKeys(emailF);
+    }
 }
+

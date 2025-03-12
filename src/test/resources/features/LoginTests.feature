@@ -33,17 +33,23 @@ Feature: login tests
 
     And I click Submit
     Then I am logged in
- @Login
+
+  @Login
   Scenario: I can restore the password via "forgot password" link to registered email
-   When  I click the  forgot password link
-   And   I enter my registered email "v@gmail.com"
-   Then  I should see a message that new password was sent to my email
-   @Login
-   Scenario: Login with empty credentials
-     And I enter details below into fields:
-       | email    |""   |
-       | password |  "" |
-     And I click Submit
-     Then I am not logged in
-     @Login
-     Scenario: Invalid credentials using DataProvider
+    When  I click the  forgot password link
+    And   I enter my registered email "v@gmail.com"
+    Then  I should see a message that new password was sent to my email
+
+  @Login
+  Scenario: Login with empty credentials
+    And I enter details below into fields:
+      | email    | "" |
+      | password | "" |
+    And I click Submit
+    Then I am not logged in
+
+  @Login @five
+  Scenario: Invalid credentials using DataProvider
+    And I logs in with email "<email>" and password "<password>"
+    And I click Submit
+    Then I am not logged in
