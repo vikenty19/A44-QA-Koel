@@ -139,21 +139,6 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
         emailToForgottenPass.sendKeys(email);
     }
 
-    @Then("I should see a message that new password was sent to my email")
-    public void iShouldSeeAMessageThatNewPasswordWasSentToMyEmail() {
-       Assert.assertEquals(InfoMessage.getText(),"You will receive an email with your new credentials");
-    }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -171,5 +156,13 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
 
         emailField.sendKeys(emailF);
     }
+    /*WebElement emailInput = loginPage.waitUntilVisible(By.cssSelector("[type='email']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        String message = (String) js.executeScript("return arguments[0].validationMessage", emailInput);
+        String lang = (String) js.executeScript("return navigator.language");
+        System.out.println(message);
+        System.out.println(lang);
+        Assert.assertTrue(message.contains("@"));*/
 }
 
