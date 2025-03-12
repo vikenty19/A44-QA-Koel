@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import CucumberPOM.ForgotPassword_RegisterPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
@@ -14,6 +15,10 @@ import static StepDefinitions.LoginStepDefinitions.driver;
 import static StepDefinitions.LoginStepDefinitions.registerUrl;
 
 public class RegisterStepDefinitions {
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
 
     @And("I open registration page")
     public void iOpenRegistrationPage() {
@@ -60,11 +65,13 @@ public class RegisterStepDefinitions {
 
     @Then("I should see a message that email must contain special symbols")
     public void iShouldSeeAMessageThatEmailMustContainSpecialSymbols() {
+
         JavascriptExecutor js = (JavascriptExecutor)driver;
         WebElement warningMessage=LoginStepDefinitions.wait
-                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.errors")));
-        String message = (String)js.executeScript("return.arguments[0].validationMessage",warningMessage);
+                .until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("input[name='email']")));
+        String message = (String)js.executeScript("return arguments[0].validationMessage",warningMessage);
         System.out.println(message);
+        Assert.assertTrue(message.contains("@"));
     }
 
 
