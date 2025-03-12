@@ -28,6 +28,8 @@ public class RegisterStepDefinitions {
 
     @Then("I should see a message that new password was sent to my email")
     public void iShouldSeeAMessageThatNewPasswordWasSentToMyEmail() {
+        WebElement InfoMessage =LoginStepDefinitions.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p .small")));
         Assert.assertEquals(InfoMessage.getText(),"You will receive an email with your new credentials");
     }
     @And("I enter my valid email {string} and submit it:")

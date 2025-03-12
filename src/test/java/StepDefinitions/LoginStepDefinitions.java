@@ -136,6 +136,8 @@ WebDriverManager.chromedriver().clearDriverCache().setup();
 
     @And("I enter my registered email {string}")
     public void iEnterMyRegisteredEmail(String email) {
+        WebElement emailToForgottenPass = LoginStepDefinitions.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));
         emailToForgottenPass.sendKeys(email);
     }
 
