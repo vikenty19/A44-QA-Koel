@@ -7,14 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import static POM.SearchResultsPage.searchBtn;
+import static POM.SearchResultsPage.searchField;
 import static StepDefinitions.TutorialsLoginOnly.wait;
 
 public class StepsSearch {
     @When("User search for a product {string}")
     public void userSearchForAProduct(String arg0) {
-        WebElement searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search [name='search']")));
+       // WebElement searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#search [name='search']")));
         searchField.sendKeys("Samsung SyncMaster 941BW");
-        WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".fa-search")));
+       // WebElement searchBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".fa-search")));
         searchBtn.click();
     }
 
