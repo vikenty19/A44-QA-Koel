@@ -4,6 +4,7 @@ import CucumberPOM.ForgotPassword_RegisterPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -47,5 +48,31 @@ public class RegisterStepDefinitions {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.errors")));
         Assert.assertEquals(warningMessage.getText(),"The given data was invalid.");
 
+
     }
+
+    @And("I enter email without special symbols {string}")
+    public void iEnterEmailWithoutSpecialSymbols(String email) {
+        WebElement emailToForgottenPass = LoginStepDefinitions.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));
+        emailToForgottenPass.sendKeys(email);
+    }
+
+    @Then("I should see a message that email must contain special symbols")
+    public void iShouldSeeAMessageThatEmailMustContainSpecialSymbols() {
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        WebElement warningMessage=LoginStepDefinitions.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.errors")));
+        String message = (String)js.executeScript("return.arguments[0].validationMessage",warningMessage);
+        System.out.println(message);
+    }
+
+
+
+
+
+
+    /*     JavascriptExecutor js = (JavascriptExecutor)driver;
+        String message = (String)js.executeScript("return.arguments[0].validationMessage",warningMessage);
+        System.out.println(message);*/
 }
