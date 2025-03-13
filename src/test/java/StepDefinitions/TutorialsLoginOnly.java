@@ -24,7 +24,10 @@ public class TutorialsLoginOnly {
     public static WebDriver driver;
     public static String tutorialURL = "http://tutorialsninja.com/demo/";
     TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
-
+@After
+public void tearDown(){
+    driver.quit();
+}
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
       /*  WebDriverManager.edgedriver().setup();
