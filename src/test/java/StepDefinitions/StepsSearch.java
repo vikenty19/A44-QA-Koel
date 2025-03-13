@@ -14,7 +14,7 @@ import static StepDefinitions.TutorialsLoginOnly.wait;
 
 public class StepsSearch {
     @When("User search for a product {string}")
-    public void userSearchForAProduct(String arg0) throws InterruptedException {
+    public void userSearchForAProduct(String arg0)  {
 
         WebElement searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(search));
         Elements.TypeText(searchField,arg0);

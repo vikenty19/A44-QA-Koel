@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Config.ConfigurationReader;
 import POM.TutHeadersSectionPage;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
@@ -22,6 +23,7 @@ public class TutorialsLoginOnly {
 
     public static WebDriverWait wait;
     public static WebDriver driver;
+    public static ConfigurationReader reader;
     public static String tutorialURL = "http://tutorialsninja.com/demo/";
     TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
 @After

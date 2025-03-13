@@ -17,11 +17,11 @@ public class TutHeadersSectionPage {
 public static By accountEnterBtn = By.cssSelector(".fa-user");
 public static By loginBtn = By.linkText("Login");
 
-public By email = By.id("input-email");
+public static By email = By.id("input-email");
 
-public By password = By.id("input-password");
+public static By password = By.id("input-password");
 
-public By submit = By.xpath("//input[@type ='submit']");
-public By confirm = By.cssSelector("#content");
-public By registerBtn = By.linkText("Register");
+public static By submit = By.xpath("//input[@type ='submit']");
+public static By confirm = By.cssSelector("#content");
+public static By registerBtn = By.linkText("Register");
 }
