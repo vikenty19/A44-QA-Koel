@@ -15,25 +15,25 @@ import static StepDefinitions.TutorialsLoginOnly.wait;
 public class StepsSearch {
     @When("User search for a product {string}")
     public void userSearchForAProduct(String arg0) throws InterruptedException {
-        Thread.sleep(1000);
 
-        driver.navigate().refresh();
         WebElement searchField = wait.until(ExpectedConditions.visibilityOfElementLocated(search));
         Elements.TypeText(searchField,arg0);
-      //  searchField.sendKeys(arg0);
         WebElement searchBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(name));
         searchBtn.click();
     }
 
-    @Then("User should see this product in the search results")
-    public void userShouldSeeThisProductInTheSearchResults() {
+    @Then("User should see this product {string} in the search results")
+    public void userShouldSeeThisProductInTheSearchResults(String message) {
         WebElement result = wait.until(ExpectedConditions.presenceOfElementLocated(SearchResultsPage.resultSearch));
         String SearchResult = result.getText();
-        Assert.assertEquals(SearchResult, "Samsung SyncMaster 941BW");
+        Assert.assertEquals(SearchResult, message);
     }
 
     @Then("User should see a message {string}")
     public void userShouldSeeAMessage(String arg0) {
         System.out.println(arg0);
     }
+
+
+
 }
