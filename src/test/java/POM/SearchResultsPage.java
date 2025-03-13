@@ -12,6 +12,6 @@ public class SearchResultsPage {
   public static By name = By.cssSelector(".fa-search");
  public static WebElement searchBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(name));
  public static By resultSearch = By.cssSelector("h4>a");
- public static WebElement result = wait.until(ExpectedConditions.visibilityOfElementLocated(resultSearch));
+
 
 }

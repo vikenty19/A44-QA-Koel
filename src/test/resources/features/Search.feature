@@ -1,4 +1,5 @@
 Feature: search functionality scenario
+  @Search
   Scenario: Verify user is able to search the product
     Given User opens application URL
     When User search for a product "Samsung SyncMaster 941BW"
