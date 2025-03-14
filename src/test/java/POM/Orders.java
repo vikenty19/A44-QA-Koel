@@ -1,5 +1,6 @@
 package POM;
 
+import Base.BasePage;
 import Base.Elements;
 import Config.PropertyFileReader;
 import StepDefinitions.TutorialsLoginOnly;
@@ -21,28 +22,14 @@ import static StepDefinitions.TutorialsLoginOnly.tutorialURL;
 
 public class Orders {
     public WebDriverWait wait;
+
     @Given("I login to the app")
     public void iLoginToTheApp() throws InterruptedException {
         PropertyFileReader pfr = new PropertyFileReader();
-        WebDriverManager.chromedriver().clearDriverCache().setup();
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-notifications");
-        options.addArguments("--start-maximized");
-
-        driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get(pfr.getUrl());
-        driver.manage().window().maximize();
-
-        WebElement account = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(TutHeadersSectionPage.accountEnterBtn));
-        Elements.clickOnlyIfElementPresent(account);
-        WebElement logIn = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(TutHeadersSectionPage.loginBtn));
-        Elements.clickOnlyIfElementPresent(logIn);
-     //   TutHeadersSectionPage.navigateToLoginPage();
+        BasePage.setUpDriver();
+        BasePage.driver.get(pfr.getUrl());
+        BasePage.driver.manage().window().maximize();
+        TutHeadersSectionPage.navigateToLoginPage();
         Thread.sleep(5000);
     }
 
