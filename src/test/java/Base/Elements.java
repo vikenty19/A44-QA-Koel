@@ -87,7 +87,7 @@ public class Elements {
         return false;
     }
 
-    public boolean isDisplayed(WebElement element){
+    public static boolean isDisplayed(WebElement element){
         if(element.isDisplayed())
             return true;
         return false;
@@ -143,7 +143,7 @@ public class Elements {
         element.click();
     }*/
 
-    public void clickOnlyIfElementPresent(WebElement element){
+    public static void clickOnlyIfElementPresent(WebElement element){
         if(isDisplayed(element))
             element.click();
     }
