@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Base.BasePage;
 import Config.ConfigurationReader;
 import POM.TutHeadersSectionPage;
 import io.cucumber.java.After;
@@ -21,7 +22,7 @@ import java.time.Duration;
 
 public class TutorialsLoginOnly {
 
-    public static WebDriverWait wait;
+  //  public static WebDriverWait wait;
     public static WebDriver driver;
     public static ConfigurationReader reader;
     public static String tutorialURL = "http://tutorialsninja.com/demo/";
@@ -32,11 +33,12 @@ public void tearDown(){
 }
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
+        BasePage.setUpDriver();
       /*  WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
          driver.manage().window().maximize();*/
 
-       WebDriverManager.chromedriver().clearDriverCache().setup();
+    /*   WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -44,8 +46,9 @@ public void tearDown(){
         options.addArguments("--start-maximized");
 
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get(tutorialURL);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));*/
+
+        BasePage.driver.get(tutorialURL);
 
         System.out.println("User open the URL");
     }

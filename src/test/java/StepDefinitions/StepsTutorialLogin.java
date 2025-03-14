@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Base.BasePage;
 import POM.TutorialForgotPasswordPage;
 import POM.TuturialMyAccountPage;
 import POM.TutHeadersSectionPage;
@@ -8,16 +9,23 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import static POM.TutHeadersSectionPage.accountEnterBtn;
-import static POM.TutHeadersSectionPage.loginBtn;
-import static StepDefinitions.TutorialsLoginOnly.driver;
-import static StepDefinitions.TutorialsLoginOnly.wait;
+import static POM.TutorialLoginPage.forgot;
+
 
 public class StepsTutorialLogin {
+    public static WebDriver driver;
+    public static WebDriverWait wait;
+    public StepsTutorialLogin(){
+        this.driver = BasePage.driver;
+        this.wait =BasePage.wait;
+
+    }
 
     @And("User navigate to Account Login page")
     public void userNavigateToAccountLoginPage() {
@@ -50,7 +58,8 @@ public class StepsTutorialLogin {
     }
     @When("User reset forgotten password for email {string}")
     public void userResetForgottenPasswordForEmail(String email) {
-        TutorialLoginPage.forgotPassword.click();
+        WebElement forgotPassword =BasePage.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".form-group>a")));
+        forgotPassword.click();
         TutorialForgotPasswordPage.emailField.sendKeys(email);
         TutorialForgotPasswordPage.continueBtn.click();
     }

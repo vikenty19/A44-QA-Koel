@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import Base.BasePage;
 import POM.TutorialAccountSuccessPage;
 import POM.TutorialRegisterPage;
 import POM.TutHeadersSectionPage;
@@ -13,7 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 import static StepDefinitions.TutorialsLoginOnly.driver;
-import static StepDefinitions.TutorialsLoginOnly.wait;
+
 
 public class StepsTutorialRegister  {
   /*  @Given("I launch the app")
@@ -33,7 +34,7 @@ public class StepsTutorialRegister  {
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
       System.out.println("Driver  "+ driver);
       System.out.println("Locator "+ TutorialRegisterPage.name);
-      WebElement firstNameField = wait
+      WebElement firstNameField = BasePage.wait
               .until(ExpectedConditions.elementToBeClickable(TutorialRegisterPage.name));
      firstNameField.sendKeys("raviiii");
     TutorialRegisterPage.enterAllDetails(dataTable,"unique");
@@ -51,16 +52,16 @@ public class StepsTutorialRegister  {
 
     @Then("I should see that the User Account has successfully been created")
     public void iShouldSeeThatTheUserAccountHasSuccessfullyBeenCreated() {
-      Assert.assertTrue(wait
+      Assert.assertTrue(BasePage.wait
               .until(ExpectedConditions.visibilityOfElementLocated(TutorialAccountSuccessPage.successText))
               .isDisplayed());
-      Assert.assertTrue(wait.until(ExpectedConditions
+      Assert.assertTrue(BasePage.wait.until(ExpectedConditions
               .visibilityOfElementLocated(TutorialAccountSuccessPage.successCrumble)).isDisplayed());
     }
 
   @Then("I should see that the User Account is not created")
   public void iShouldSeeThatTheUserAccountIsNotCreated() {
-    Assert.assertTrue(wait.until(ExpectedConditions
+    Assert.assertTrue(BasePage.wait.until(ExpectedConditions
             .visibilityOfElementLocated(TutorialRegisterPage.registerBreadCrumb)).isDisplayed());
   }
 
