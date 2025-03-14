@@ -1,5 +1,6 @@
 package POM;
 
+import Base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,8 +17,11 @@ public class TutorialForgotPasswordPage {
         PageFactory.initElements(driver,this);
     }
     @FindBy(id = "input-email")
-    public static WebElement emailField;
-    @FindBy(css = "input.btn")
+    public static WebElement emailField = BasePage.wait.until
+            (ExpectedConditions.visibilityOfElementLocated(By.id("input-email")));
+
+
+    public static By continued = By.cssSelector("input.btn");
     public static WebElement continueBtn;
 
 }

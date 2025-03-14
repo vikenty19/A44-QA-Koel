@@ -15,7 +15,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import static POM.TutorialForgotPasswordPage.continued;
 import static POM.TutorialLoginPage.forgot;
+import static POM.TutorialLoginPage.info;
 
 
 public class StepsTutorialLogin {
@@ -61,13 +63,16 @@ public class StepsTutorialLogin {
         WebElement forgotPassword =BasePage.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".form-group>a")));
         forgotPassword.click();
         TutorialForgotPasswordPage.emailField.sendKeys(email);
-        TutorialForgotPasswordPage.continueBtn.click();
+        WebElement continueBtn = BasePage.wait
+                        .until(ExpectedConditions.elementToBeClickable(continued));
+        continueBtn.click();
     }
 
 
     @Then("Use see a message that resetting info was sending to his email")
     public void useSeeAMessageThatResettingInfoWasSendingToHisEmail() {
-        String message = TutorialLoginPage.infoMessage.getText();
+        WebElement infoMessage = BasePage.wait.until(ExpectedConditions.visibilityOfElementLocated(info));
+        String message = infoMessage.getText();
         Assert.assertEquals(message,"An email with a confirmation link has been sent your email address.");
 
     }
