@@ -3,6 +3,7 @@ package POM;
 import Base.BasePage;
 import Base.Elements;
 import Config.PropertyFileReader;
+import StepDefinitions.StepsSearch;
 import StepDefinitions.TutorialsLoginOnly;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -21,34 +22,47 @@ import java.time.Duration;
 
 import static Base.BasePage.driver;
 
+import static POM.SearchResultsPage.*;
 import static POM.TutHeadersSectionPage.*;
 import static POM.TutorialLoginPage.*;
 import static StepDefinitions.TutorialsLoginOnly.tutorialURL;
 
 public class Orders {
+    static PropertyFileReader pfr = new PropertyFileReader();
 
     @Given("I login to the app")
     public void iLoginToTheApp() throws InterruptedException {
-        PropertyFileReader pfr = new PropertyFileReader();
+
         BasePage.setUpDriver();
         driver.get(pfr.getUrl());
         TutHeadersSectionPage.navigateToLoginPage();
-          loginToTheApp();
-
-        Thread.sleep(5000);
+        loginToTheApp();
 
     }
-    public static void loginToTheApp(){
-        PropertyFileReader pfr = new PropertyFileReader();
-        WebElement emailField =  driver.findElement(email);
-       Elements.TypeText(emailField,pfr.getEmail());
-       WebElement passwordField = driver.findElement(password);
-       Elements.TypeText(passwordField,pfr.getPassword());
-        WebElement loginSubmitBtn =BasePage.wait.until(ExpectedConditions.elementToBeClickable(submit));
-       Elements.clickOnlyIfElementPresent(loginSubmitBtn);
+
+    public static void loginToTheApp() {
+        //       PropertyFileReader pfr = new PropertyFileReader();
+        WebElement emailField = driver.findElement(email);
+        Elements.TypeText(emailField, pfr.getEmail());
+        WebElement passwordField = driver.findElement(password);
+        Elements.TypeText(passwordField, pfr.getPassword());
+        WebElement loginSubmitBtn = BasePage.wait.until(ExpectedConditions.elementToBeClickable(submit));
+        Elements.clickOnlyIfElementPresent(loginSubmitBtn);
+
     }
+
     @When("I add a product to a cart and check-out")
-    public void iAddAProductToACartAndCheckOut() {
+    public void iAddAProductToACartAndCheckOut() throws InterruptedException {
+
+        System.out.println(pfr.getProduct());
+        WebElement searchField = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(searchType));
+        Elements.TypeText(searchField, pfr.getProduct());
+        WebElement searchBtn = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(searchClick));
+        Elements.clickOnlyIfElementPresent(searchBtn);
+        Thread.sleep(4000);
+
     }
 
     @And("I place the order")

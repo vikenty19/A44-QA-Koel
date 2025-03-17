@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static Base.BasePage.driver;
+import static Base.BasePage.wait;
+import static POM.SearchResultsPage.search;
 
 public class TutHeadersSectionPage {
 
@@ -27,7 +29,11 @@ public static By email = By.id("input-email");
 public static By password = By.id("input-password");
 
 public static By submit = By.xpath("//input[@type ='submit']");
+public static By searchType = By.cssSelector("input[name ='search']");
+    public static By searchClick = By.cssSelector(".fa-search");
 public static By confirm = By.cssSelector("#content");
+public static WebElement searchField = wait.until(ExpectedConditions
+        .elementToBeClickable(searchType));
 public static By registerBtn = By.linkText("Register");
 
 public static void navigateToLoginPage(){

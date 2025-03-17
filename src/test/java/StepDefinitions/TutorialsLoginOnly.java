@@ -28,7 +28,7 @@ public class TutorialsLoginOnly {
   //  public static WebDriver driver;
     public static ConfigurationReader reader;
     public static String tutorialURL = "http://tutorialsninja.com/demo/";
-    TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
+
 @After
 public void tearDown(){
     driver.quit();
@@ -70,20 +70,20 @@ public void tearDown(){
 
     @And("Enters valid password {string}")
     public void entersValidPassword(String password) {
-        driver.findElement(tutHeadersSectionPage.password).sendKeys(password);
+        driver.findElement(TutHeadersSectionPage.password).sendKeys(password);
 
         System.out.println("User enters   " + password);
     }
 
     @And("Click on login button")
     public void clickOnLoginButton() {
-        driver.findElement(tutHeadersSectionPage.submit).click();
+        driver.findElement(TutHeadersSectionPage.submit).click();
         System.out.println("Click on login button");
     }
 
     @Then("User login successfully")
     public void userLoginSuccessfully() {
-        WebElement confirm = driver.findElement(tutHeadersSectionPage.confirm);
+        WebElement confirm = driver.findElement(TutHeadersSectionPage.confirm);
         Assert.assertTrue(confirm.isDisplayed());
         System.out.println("User is logged in!!");
     }
