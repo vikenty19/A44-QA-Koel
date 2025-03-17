@@ -6,7 +6,8 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 import java.util.Random;
 
-import static StepDefinitions.TutorialsLoginOnly.driver;
+import static Base.BasePage.driver;
+
 
 public class Elements {
   //  public Logger log = Logger.getLogger(Elements.class);

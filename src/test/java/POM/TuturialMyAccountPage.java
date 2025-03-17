@@ -6,7 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static StepDefinitions.TutorialsLoginOnly.driver;
+import static Base.BasePage.driver;
+
 
 public class TuturialMyAccountPage {
     public TuturialMyAccountPage(){

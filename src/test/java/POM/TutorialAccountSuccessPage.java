@@ -3,7 +3,8 @@ package POM;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
-import static StepDefinitions.TutorialsLoginOnly.driver;
+import static Base.BasePage.driver;
+
 
 public class TutorialAccountSuccessPage {
     public TutorialAccountSuccessPage(){

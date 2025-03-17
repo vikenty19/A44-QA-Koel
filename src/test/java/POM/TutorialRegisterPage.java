@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Map;
 
-import static StepDefinitions.TutorialsLoginOnly.driver;
+import static Base.BasePage.driver;
 
 
 public class TutorialRegisterPage {

@@ -9,11 +9,13 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static Base.BasePage.driver;
+
 public class TutHeadersSectionPage {
 
     public TutHeadersSectionPage() {
 
-        PageFactory.initElements(TutorialsLoginOnly.driver, this);
+        PageFactory.initElements(driver, this);
 
     }
 
@@ -31,7 +33,7 @@ public static By registerBtn = By.linkText("Register");
 public static void navigateToLoginPage(){
 
     WebElement account = BasePage.wait.until(ExpectedConditions
-            .visibilityOfElementLocated(TutHeadersSectionPage.accountEnterBtn));
+            .visibilityOfElementLocated(accountEnterBtn));
     Elements.clickOnlyIfElementPresent(account);
     WebElement logIn = BasePage.wait.until(ExpectedConditions
             .visibilityOfElementLocated(TutHeadersSectionPage.loginBtn));

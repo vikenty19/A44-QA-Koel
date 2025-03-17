@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.awt.event.WindowFocusListener;
 
-import static StepDefinitions.TutorialsLoginOnly.driver;
+import static Base.BasePage.driver;
 
 
 public class TutorialForgotPasswordPage {

@@ -19,32 +19,34 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-import static POM.TutHeadersSectionPage.email;
-import static POM.TutorialLoginPage.emailField;
-import static POM.TutorialLoginPage.inputEmail;
-import static StepDefinitions.TutorialsLoginOnly.driver;
+import static Base.BasePage.driver;
+
+import static POM.TutHeadersSectionPage.*;
+import static POM.TutorialLoginPage.*;
 import static StepDefinitions.TutorialsLoginOnly.tutorialURL;
 
 public class Orders {
-    public WebDriverWait wait;
-    public static WebDriver driver = BasePage.setUpDriver();
+
     @Given("I login to the app")
     public void iLoginToTheApp() throws InterruptedException {
         PropertyFileReader pfr = new PropertyFileReader();
-
+        BasePage.setUpDriver();
         driver.get(pfr.getUrl());
-        driver.manage().window().maximize();
         TutHeadersSectionPage.navigateToLoginPage();
-        System.out.println(emailField);
-       //  WebElement emailField = BasePage.wait.until(ExpectedConditions.elementToBeClickable(By.id("input-email")));
+          loginToTheApp();
 
-        Elements.TypeText(emailField,pfr.getEmail());
-       // emailField.sendKeys(pfr.getEmail());
-        TutorialLoginPage.passwordField.sendKeys(pfr.getPassword());
-        TutorialLoginPage.loginSubmitBtn.click();
         Thread.sleep(5000);
-    }
 
+    }
+    public static void loginToTheApp(){
+        PropertyFileReader pfr = new PropertyFileReader();
+        WebElement emailField =  driver.findElement(email);
+       Elements.TypeText(emailField,pfr.getEmail());
+       WebElement passwordField = driver.findElement(password);
+       Elements.TypeText(passwordField,pfr.getPassword());
+        WebElement loginSubmitBtn =BasePage.wait.until(ExpectedConditions.elementToBeClickable(submit));
+       Elements.clickOnlyIfElementPresent(loginSubmitBtn);
+    }
     @When("I add a product to a cart and check-out")
     public void iAddAProductToACartAndCheckOut() {
     }

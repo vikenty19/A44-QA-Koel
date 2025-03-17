@@ -19,11 +19,13 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
+import static Base.BasePage.driver;
+
 
 public class TutorialsLoginOnly {
 
   //  public static WebDriverWait wait;
-    public static WebDriver driver;
+  //  public static WebDriver driver;
     public static ConfigurationReader reader;
     public static String tutorialURL = "http://tutorialsninja.com/demo/";
     TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
@@ -48,7 +50,7 @@ public void tearDown(){
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));*/
 
-        BasePage.driver.get(tutorialURL);
+        driver.get(tutorialURL);
 
         System.out.println("User open the URL");
     }
@@ -61,7 +63,7 @@ public void tearDown(){
 
     @When("User enters valid email {string}")
     public void userEntersValidEmail(String email) {
-        driver.findElement(tutHeadersSectionPage.email).sendKeys(email);
+        driver.findElement(TutHeadersSectionPage.email).sendKeys(email);
 
         System.out.println("User enters  " + email);
     }

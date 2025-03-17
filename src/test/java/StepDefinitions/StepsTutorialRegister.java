@@ -13,7 +13,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-import static StepDefinitions.TutorialsLoginOnly.driver;
+
+import static Base.BasePage.driver;
 
 
 public class StepsTutorialRegister  {
