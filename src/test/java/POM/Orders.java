@@ -5,6 +5,7 @@ import Base.Elements;
 import Config.PropertyFileReader;
 import StepDefinitions.StepsSearch;
 import StepDefinitions.TutorialsLoginOnly;
+import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -41,7 +42,7 @@ public class Orders {
     }
 
     public static void loginToTheApp() {
-        //       PropertyFileReader pfr = new PropertyFileReader();
+
         WebElement emailField = driver.findElement(email);
         Elements.TypeText(emailField, pfr.getEmail());
         WebElement passwordField = driver.findElement(password);
@@ -55,13 +56,12 @@ public class Orders {
     public void iAddAProductToACartAndCheckOut() throws InterruptedException {
 
         System.out.println(pfr.getProduct());
-        WebElement searchField = BasePage.wait.until(ExpectedConditions
-                .visibilityOfElementLocated(searchType));
-        Elements.TypeText(searchField, pfr.getProduct());
-        WebElement searchBtn = BasePage.wait.until(ExpectedConditions
-                .visibilityOfElementLocated(searchClick));
-        Elements.clickOnlyIfElementPresent(searchBtn);
-        Thread.sleep(4000);
+        TutHeadersSectionPage.searchProduct();
+        SearchResultsPage.addFirstProduct();
+       /* WebElement addToCart = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(addPurchase));
+        Elements.clickOnlyIfElementPresent(addToCart);*/
+        Thread.sleep(4000);//.button-group .fa-shopping-cart
 
     }
 

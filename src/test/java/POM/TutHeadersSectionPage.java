@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static Base.BasePage.driver;
 import static Base.BasePage.wait;
+import static POM.Orders.pfr;
 import static POM.SearchResultsPage.search;
 
 public class TutHeadersSectionPage {
@@ -44,5 +45,15 @@ public static void navigateToLoginPage(){
     WebElement logIn = BasePage.wait.until(ExpectedConditions
             .visibilityOfElementLocated(TutHeadersSectionPage.loginBtn));
     Elements.clickOnlyIfElementPresent(logIn);
+}
+public static void searchProduct(){
+     WebElement searchField = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(searchType));
+        Elements.TypeText(searchField, pfr.getProduct());
+        WebElement searchBtn = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(searchClick));
+        Elements.clickOnlyIfElementPresent(searchBtn);
+
+
 }
 }
