@@ -24,6 +24,12 @@ public class PropertyFileReader implements ConfigurationReader{
     public String getUrl() {
         return prop.getProperty("url");
     }
+    public String getEmail(){
+        return prop.getProperty("email");
+    }
+    public String getPassword(){
+        return prop.getProperty("password");
+    }
 
     public String getBrowser() {
         return prop.getProperty("browser");

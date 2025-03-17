@@ -15,9 +15,11 @@ public class TutorialLoginPage {
         PageFactory.initElements(driver,this);
     }
     public static By inputEmail = By.id("input-email");
-    public static WebElement emailField = BasePage.wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
+   // public static WebElement emailField = BasePage.wait.until(ExpectedConditions.elementToBeClickable(inputEmail));
+    public static WebElement emailField = BasePage.driver.findElement(By.id("input-email"));
     public static By inputPassword = By.id("input-password");
-    public static WebElement passwordField = BasePage.wait.until(ExpectedConditions.elementToBeClickable(inputPassword));
+    public static WebElement passwordField = BasePage.wait
+            .until(ExpectedConditions.elementToBeClickable(inputPassword));
     public static By submitLogin = By.cssSelector("input[type ='submit']");
     public static WebElement loginSubmitBtn =BasePage.wait.until(ExpectedConditions.elementToBeClickable(submitLogin));
 public static By forgot = By.cssSelector(".form-group>a");
