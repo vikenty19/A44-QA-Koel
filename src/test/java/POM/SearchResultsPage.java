@@ -22,4 +22,5 @@ public static void addFirstProduct(){
         Elements.clickOnlyIfElementPresent(addToCart);
 
 }
+
 }

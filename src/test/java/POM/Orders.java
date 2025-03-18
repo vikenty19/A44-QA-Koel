@@ -41,16 +41,7 @@ public class Orders {
 
     }
 
-    public static void loginToTheApp() {
 
-        WebElement emailField = driver.findElement(email);
-        Elements.TypeText(emailField, pfr.getEmail());
-        WebElement passwordField = driver.findElement(password);
-        Elements.TypeText(passwordField, pfr.getPassword());
-        WebElement loginSubmitBtn = BasePage.wait.until(ExpectedConditions.elementToBeClickable(submit));
-        Elements.clickOnlyIfElementPresent(loginSubmitBtn);
-
-    }
 
     @When("I add a product to a cart and check-out")
     public void iAddAProductToACartAndCheckOut() throws InterruptedException {
@@ -58,10 +49,9 @@ public class Orders {
         System.out.println(pfr.getProduct());
         TutHeadersSectionPage.searchProduct();
         SearchResultsPage.addFirstProduct();
-       /* WebElement addToCart = BasePage.wait.until(ExpectedConditions
-                .visibilityOfElementLocated(addPurchase));
-        Elements.clickOnlyIfElementPresent(addToCart);*/
-        Thread.sleep(4000);//.button-group .fa-shopping-cart
+        TutHeadersSectionPage.navigateToThShoppingCartPage();
+        ShoppingCartPage.navigateToCheckOutPage();
+         Thread.sleep(4000);
 
     }
 
@@ -71,5 +61,15 @@ public class Orders {
 
     @Then("I should see that the order is placed successfully")
     public void iShouldSeeThatTheOrderIsPlacedSuccessfully() {
+    }
+    public static void loginToTheApp() {
+
+        WebElement emailField = driver.findElement(email);
+        Elements.TypeText(emailField, pfr.getEmail());
+        WebElement passwordField = driver.findElement(password);
+        Elements.TypeText(passwordField, pfr.getPassword());
+        WebElement loginSubmitBtn = BasePage.wait.until(ExpectedConditions.elementToBeClickable(submit));
+        Elements.clickOnlyIfElementPresent(loginSubmitBtn);
+
     }
 }

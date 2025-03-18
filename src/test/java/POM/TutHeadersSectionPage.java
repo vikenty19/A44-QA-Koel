@@ -36,6 +36,7 @@ public static By confirm = By.cssSelector("#content");
 public static WebElement searchField = wait.until(ExpectedConditions
         .elementToBeClickable(searchType));
 public static By registerBtn = By.linkText("Register");
+public static By shopCart = By.cssSelector("[title ='Shopping Cart']");
 
 public static void navigateToLoginPage(){
 
@@ -53,7 +54,11 @@ public static void searchProduct(){
         WebElement searchBtn = BasePage.wait.until(ExpectedConditions
                 .visibilityOfElementLocated(searchClick));
         Elements.clickOnlyIfElementPresent(searchBtn);
-
-
 }
+
+    public static void navigateToThShoppingCartPage(){
+        WebElement shoppingCart = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(shopCart));
+        Elements.clickOnlyIfElementPresent(shoppingCart);
+    }
 }
