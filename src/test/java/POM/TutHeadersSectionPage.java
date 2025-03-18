@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static Base.BasePage.driver;
 import static Base.BasePage.wait;
-import static POM.Orders.pfr;
+import static StepDefinitions.Orders.pfr;
 
 public class TutHeadersSectionPage {
 

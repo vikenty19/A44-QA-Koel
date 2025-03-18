@@ -1,6 +1,5 @@
 package hooks;
 
-import static StepDefinitions.TutorialsLoginOnly.driver;
 
 public class MyHooks {
  //  public  WebDriver driver;

@@ -1,8 +1,11 @@
-package POM;
+package StepDefinitions;
 
 import Base.BasePage;
 import Base.Elements;
 import Config.PropertyFileReader;
+import POM.SearchResultsPage;
+import POM.ShoppingCartPage;
+import POM.TutHeadersSectionPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -15,7 +18,7 @@ import static Base.BasePage.driver;
 import static POM.TutHeadersSectionPage.*;
 
 public class Orders {
-    static PropertyFileReader pfr = new PropertyFileReader();
+    public static PropertyFileReader pfr = new PropertyFileReader();
 
     @Given("I login to the app")
     public void iLoginToTheApp()  {
