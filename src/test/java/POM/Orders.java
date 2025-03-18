@@ -3,36 +3,22 @@ package POM;
 import Base.BasePage;
 import Base.Elements;
 import Config.PropertyFileReader;
-import StepDefinitions.StepsSearch;
-import StepDefinitions.TutorialsLoginOnly;
-import io.cucumber.java.an.E;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 import static Base.BasePage.driver;
 
-import static POM.SearchResultsPage.*;
 import static POM.TutHeadersSectionPage.*;
-import static POM.TutorialLoginPage.*;
-import static StepDefinitions.TutorialsLoginOnly.tutorialURL;
 
 public class Orders {
     static PropertyFileReader pfr = new PropertyFileReader();
 
     @Given("I login to the app")
-    public void iLoginToTheApp() throws InterruptedException {
+    public void iLoginToTheApp()  {
 
         BasePage.setUpDriver();
         driver.get(pfr.getUrl());

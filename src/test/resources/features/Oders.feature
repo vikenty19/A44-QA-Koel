@@ -1,4 +1,5 @@
 Feature: Placing orders E-2-E scenarios
+  @Orders
   Scenario: Verify whether the user can place the order
     Given I login to the app
     When I add a product to a cart and check-out

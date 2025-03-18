@@ -2,17 +2,14 @@ package POM;
 
 import Base.BasePage;
 import Base.Elements;
-import StepDefinitions.TutorialsLoginOnly;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static Base.BasePage.driver;
 import static Base.BasePage.wait;
 import static POM.Orders.pfr;
-import static POM.SearchResultsPage.search;
 
 public class TutHeadersSectionPage {
 

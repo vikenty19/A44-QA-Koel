@@ -24,15 +24,11 @@ import static Base.BasePage.driver;
 
 public class TutorialsLoginOnly {
 
-  //  public static WebDriverWait wait;
-  //  public static WebDriver driver;
+
     public static ConfigurationReader reader;
     public static String tutorialURL = "http://tutorialsninja.com/demo/";
 
-@After
-public void tearDown(){
-    driver.quit();
-}
+
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
         BasePage.setUpDriver();
