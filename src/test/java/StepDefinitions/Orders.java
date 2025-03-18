@@ -3,8 +3,9 @@ package StepDefinitions;
 import Base.BasePage;
 import Base.Elements;
 import Config.PropertyFileReader;
+import POM.OrdersSuccessPage;
 import POM.SearchResultsPage;
-import POM.ShoppingCartPage;
+import POM.CheckOutPage;
 import POM.TutHeadersSectionPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -39,17 +40,19 @@ public class Orders {
         TutHeadersSectionPage.searchProduct();
         SearchResultsPage.addFirstProduct();
         TutHeadersSectionPage.navigateToThShoppingCartPage();
-        ShoppingCartPage.navigateToCheckOutPage();
-         Thread.sleep(4000);
+        CheckOutPage.navigateToCheckOutPage();
+
 
     }
 
     @And("I place the order")
     public void iPlaceTheOrder() {
+        CheckOutPage.placeTheOrder();
     }
 
     @Then("I should see that the order is placed successfully")
     public void iShouldSeeThatTheOrderIsPlacedSuccessfully() {
+        OrdersSuccessPage.orderSuccessConfirmation();
     }
     public static void loginToTheApp() {
 

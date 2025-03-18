@@ -15,11 +15,14 @@ public class SearchResultsPage {
  public static WebElement searchBtn = BasePage.wait.until(ExpectedConditions.visibilityOfElementLocated(name));
  public static By resultSearch = By.cssSelector("h4>a");
  public static By addPurchase = By.cssSelector(".button-group .fa-shopping-cart");
-
+public static  By addToTheCart = By.id("button-cart");
 public static void addFirstProduct(){
      WebElement addToCart = BasePage.wait.until(ExpectedConditions
                 .visibilityOfElementLocated(addPurchase));
         Elements.clickOnlyIfElementPresent(addToCart);
+        WebElement addItemToTheCart = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(addToTheCart));
+        Elements.clickOnlyIfElementPresent(addItemToTheCart);
 
 }
 
