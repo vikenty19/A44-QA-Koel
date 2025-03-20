@@ -14,6 +14,8 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.awt.*;
+
 import static Base.BasePage.driver;
 
 import static POM.TutHeadersSectionPage.*;
@@ -66,7 +68,7 @@ public class Orders {
     }
 
     @When("I add an out-of-stock product to a cart and check-out")
-    public void iAddAnOutOfStockProductToACartAndCheckOut() throws InterruptedException {
+    public void iAddAnOutOfStockProductToACartAndCheckOut() throws InterruptedException, AWTException {
         System.out.println(pfr.getProduct("outOfStockProduct"));
         TutHeadersSectionPage.searchProduct(pfr.getProduct("outOfStockProduct"));
         SearchResultsPage.addFirstProduct();

@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
 
 public class SearchResultsPage {
 
@@ -34,7 +38,7 @@ public static void addFirstProduct(){
       addItemToTheCart.click();
 
 }
-public static void addOptionsOfOutOfStockProduct() throws InterruptedException {
+public static void addOptionsOfOutOfStockProduct() throws InterruptedException, AWTException {
     WebElement radioBtn = BasePage.wait.until(ExpectedConditions
             .elementToBeClickable(radio));
     Elements.clickOnlyIfElementPresent(radioBtn);
@@ -51,11 +55,29 @@ public static void addOptionsOfOutOfStockProduct() throws InterruptedException {
     WebElement enterTextField = BasePage.wait.until(ExpectedConditions
             .elementToBeClickable(field));
     Elements.TypeText(enterTextField,"I eager to have this comp!");
+    //Uploading file from the computer using Robot class
+
     WebElement fileLoadBtn = BasePage.wait.until(ExpectedConditions
             .elementToBeClickable(load));
     fileLoadBtn.click();
- /*   String path ="C:/Users/Acer/Desktop/attachment (7).png";
-    fileLoadBtn.sendKeys(path)*/;
+//=== create path to the file on the computer
+    String path = "attachment.png";
+    //=== create object of Stringselection path to the loading file
+    StringSelection stringSelection = new StringSelection(path);
+    //=== emulate Cntrl+C keys command
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection,null);
+    //=== Robot class to emulate Cntrl+V command on the computer to paste this path to open file
+    Robot robot = new Robot();
+    robot.delay(2000);
+    robot.keyPress(KeyEvent.VK_CONTROL);
+    robot.keyPress(KeyEvent.VK_V);
+    robot.keyRelease(KeyEvent.VK_CONTROL);
+    robot.keyRelease(KeyEvent.VK_V);
+    robot.delay(2000);//adding stability
+    //===Robot emulate ENTER key
+    robot.keyPress(KeyEvent.VK_ENTER);
+    robot.keyRelease(KeyEvent.VK_ENTER);
+    Thread.sleep(3000);
     WebElement addToCart = BasePage.wait.until(ExpectedConditions
             .elementToBeClickable(add));
     Elements.clickOnlyIfElementPresent(addToCart);
