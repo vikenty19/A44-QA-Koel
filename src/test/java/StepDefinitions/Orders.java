@@ -13,6 +13,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.awt.*;
 
@@ -78,5 +79,8 @@ public class Orders {
 
     @Then("I should see the message that this product is out-of-stock")
     public void iShouldSeeTheMessageThatThisProductIsOutOfStock() {
+        String outOfStock = CheckOutPage.outOfStockWarningMessage();
+        Assert.assertTrue(outOfStock.contains(
+                "Products marked with *** are not available in the desired quantity or not in stock!"));
     }
 }
