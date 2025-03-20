@@ -2,6 +2,7 @@ package POM;
 
 import Base.BasePage;
 import Base.Elements;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -77,11 +78,17 @@ public static void addOptionsOfOutOfStockProduct() throws InterruptedException, 
     //===Robot emulate ENTER key
     robot.keyPress(KeyEvent.VK_ENTER);
     robot.keyRelease(KeyEvent.VK_ENTER);
-    Thread.sleep(3000);
+
+    //alert accept
+    //wait until alert is present
+   BasePage.wait.until(ExpectedConditions.alertIsPresent());
+    Alert alert = BasePage.driver.switchTo().alert();
+    alert.accept();
+
     WebElement addToCart = BasePage.wait.until(ExpectedConditions
             .elementToBeClickable(add));
     Elements.clickOnlyIfElementPresent(addToCart);
-    Thread.sleep(9000);
+
 
 }
 }
