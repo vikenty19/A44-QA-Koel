@@ -92,9 +92,7 @@ public static void addOptionsOfOutOfStockProduct() throws InterruptedException, 
             .elementToBeClickable(add));
     Elements.clickOnlyIfElementPresent(addToCart);
     TutHeadersSectionPage.navigateToThShoppingCartPage();
- /*   String outOfStock = CheckOutPage.outOfStockWarningMessage();
-    Assert.assertTrue(outOfStock.contains(
-                    "Products marked with *** are not available in the desired quantity or not in stock!"));*/
+
 
 
 
