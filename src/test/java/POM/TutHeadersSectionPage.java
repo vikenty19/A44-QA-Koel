@@ -52,6 +52,14 @@ public static void searchProduct(){
                 .visibilityOfElementLocated(searchClick));
         Elements.clickOnlyIfElementPresent(searchBtn);
 }
+    public static void searchProduct(String product){
+        WebElement searchField = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(searchType));
+        Elements.TypeText(searchField, product);
+        WebElement searchBtn = BasePage.wait.until(ExpectedConditions
+                .visibilityOfElementLocated(searchClick));
+        Elements.clickOnlyIfElementPresent(searchBtn);
+    }
 
     public static void navigateToThShoppingCartPage(){
         WebElement shoppingCart = BasePage.wait.until(ExpectedConditions

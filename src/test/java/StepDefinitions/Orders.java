@@ -64,4 +64,17 @@ public class Orders {
         Elements.clickOnlyIfElementPresent(loginSubmitBtn);
 
     }
+
+    @When("I add an out-of-stock product to a cart and check-out")
+    public void iAddAnOutOfStockProductToACartAndCheckOut() throws InterruptedException {
+        System.out.println(pfr.getProduct("outOfStockProduct"));
+        TutHeadersSectionPage.searchProduct(pfr.getProduct("outOfStockProduct"));
+        SearchResultsPage.addFirstProduct();
+        SearchResultsPage.addOptionsOfOutOfStockProduct();
+
+    }
+
+    @Then("I should see the message that this product is out-of-stock")
+    public void iShouldSeeTheMessageThatThisProductIsOutOfStock() {
+    }
 }

@@ -41,6 +41,9 @@ public class PropertyFileReader implements ConfigurationReader{
     public String getProduct(){
         return prop.getProperty("product");
     }
+    public String getProduct(String product){
+        return prop.getProperty(product);
+    }
 
 
 }

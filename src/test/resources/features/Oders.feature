@@ -9,4 +9,5 @@ Feature: Placing orders E-2-E scenarios
 Scenario: User is not able to order yhe product which is out of stock
   Given I login to the app
   When  I add an out-of-stock product to a cart and check-out
+  Then I should see the message that this product is out-of-stock
 
