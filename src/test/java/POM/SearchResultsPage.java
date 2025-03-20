@@ -7,10 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+
+import static POM.CheckOutPage.negativeAlert;
 
 
 public class SearchResultsPage {
@@ -88,6 +91,12 @@ public static void addOptionsOfOutOfStockProduct() throws InterruptedException, 
     WebElement addToCart = BasePage.wait.until(ExpectedConditions
             .elementToBeClickable(add));
     Elements.clickOnlyIfElementPresent(addToCart);
+    TutHeadersSectionPage.navigateToThShoppingCartPage();
+    String outOfStock = CheckOutPage.outOfStockWarningMessage();
+    Assert.assertTrue(outOfStock.contains(
+                    "Products marked with *** are not available in the desired quantity or not in stock!"));
+
+
 
 
 }

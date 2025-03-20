@@ -5,6 +5,7 @@ import Base.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class CheckOutPage {
 
@@ -16,6 +17,7 @@ public class CheckOutPage {
 public static  By completeOrder = By.id("button-confirm");
 
     public static By policyConfirm = By.name("agree");
+    public static By negativeAlert = By.cssSelector(".alert.alert-danger");
 
     public static void navigateToCheckOutPage(){
         WebElement shopCart = BasePage.wait.until(
@@ -42,5 +44,10 @@ public static  By completeOrder = By.id("button-confirm");
         WebElement orderCompleteBtn= BasePage.wait
                 .until(ExpectedConditions.visibilityOfElementLocated(completeOrder));
         Elements.clickOnlyIfElementPresent(orderCompleteBtn);
+    }
+    public static String outOfStockWarningMessage(){
+        WebElement outOfStockMessage = BasePage.wait
+                .until(ExpectedConditions.visibilityOfElementLocated(negativeAlert));
+        return outOfStockMessage.getText();
     }
 }
