@@ -8,7 +8,7 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
-        glue = {"hooks","StepDefinitions"},
+        glue = {"StepDefinitions"},
        tags = "@Orders",
         publish = true,
         plugin = {"pretty",
