@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
+import org.testng.Assert.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -15,10 +15,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import static org.testng.AssertJUnit.assertFalse;
+
 public class SmartPlayListTest extends BaseTest {
 
     @Test
-    public void createSmartPlistWithName() {
+    public void createSmartPlistWithNameOfTheSong() {
         BasePage basePage = new BasePage(driver);
         String addedSong = "Episode 2";
         String SmartPlistName = generateRandomPlaylistName() + basePage.timeStamp();
@@ -30,14 +34,11 @@ public class SmartPlayListTest extends BaseTest {
         smart.createSmartPlistWithOutGroup(SmartPlistName, addedSong);
         basePage.isSuccessBannerDisplayed();
 
-        String plName = driver.findElement(By.cssSelector("#playlistWrapper .heading-wrapper h1")).getText();
-        String songTitle = driver.findElement(By
-                .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .title")).getText();
+        String plName = smart.getSmartPlistName();
+        String songTitle = smart.getAddedSongName();
         System.out.println("Song added in the Playlist --" + songTitle);
-
         System.out.println(" name of created plyList  ---" + plName);
-        System.out.println("After test");
-        Assert.assertEquals(songTitle, addedSong);
+        assertEquals(songTitle, addedSong);
         //  Assert.assertEquals(plName,SmartPlistName);
 
     }
@@ -57,7 +58,7 @@ public class SmartPlayListTest extends BaseTest {
         smart.cancelCreatedPlist.click();
         smart.cancelConfirm.click();
         //check Plist has NOT been created
-        Assert.assertFalse(smart.isSmartPlistCreated(SmartPlistName));
+        assertFalse(smart.isSmartPlistCreated(SmartPlistName));
     }
 
     @Test
@@ -87,7 +88,7 @@ public class SmartPlayListTest extends BaseTest {
         GetSQLInfo.checkSQLPlayListName(SmartPlistName);
 
         //Check if Playlist is in the list
-       Assert.assertTrue(smartPlayListPage.isSmartPlistCreated(SmartPlistName));
+        assertTrue(smartPlayListPage.isSmartPlistCreated(SmartPlistName));
 
         Thread.sleep(1000);//because of instability
 
@@ -130,10 +131,12 @@ public class SmartPlayListTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         HomePage homePage = new HomePage(driver);
+        SmartPlayListPage smart = new SmartPlayListPage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
-        driver.findElement(By.cssSelector("[data-testid =playlist-context-menu-create-smart]")).click();
-        driver.findElement(By.name("name")).sendKeys(SmartPlistName);
+        //Create smartPlist
+        smart.enterSmartPlistName(SmartPlistName);
+
         WebElement dropDownField = homePage.waitUntilClickable(By.name("model[]"));
         WebElement dropDownOption = homePage.waitUntilClickable(By.name("operator[]"));
 
@@ -144,14 +147,14 @@ public class SmartPlayListTest extends BaseTest {
         select1.selectByVisibleText("begins with");
         driver.findElement(By.name("value[]")).sendKeys("U");
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
-        Assert.assertTrue(homePage.getAvatar());
+        assertTrue(homePage.getAvatar());
         // Check songs in the playlist
         String artistName = driver.findElement(By
                 .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .artist")).getText();
         System.out.println(artistName);
         Character firstLetter = artistName.charAt(0);
         System.out.println(firstLetter);
-        Assert.assertEquals(firstLetter.toString(), "U");
+        assertEquals(firstLetter.toString(), "U");
         Thread.sleep(5000);
 
     }
@@ -165,10 +168,11 @@ public class SmartPlayListTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         HomePage homePage = new HomePage(driver);
+        SmartPlayListPage smart = new SmartPlayListPage(driver);
         loginPage.login(myEmail, myLogin);
         playListPage.plusBtnClick();
-        driver.findElement(By.cssSelector("[data-testid =playlist-context-menu-create-smart]")).click();
-        driver.findElement(By.name("name")).sendKeys(SmartPlistName);
+    //    driver.findElement(By.cssSelector("[data-testid =playlist-context-menu-create-smart]")).click();
+     //   driver.findElement(By.name("name")).sendKeys(SmartPlistName);
         WebElement dropDownField = homePage.waitUntilClickable(By.name("model[]"));
         WebElement dropDownOption = homePage.waitUntilClickable(By.name("operator[]"));
 
@@ -179,13 +183,13 @@ public class SmartPlayListTest extends BaseTest {
         select1.selectByVisibleText("begins with");
         driver.findElement(By.name("value[]")).sendKeys(firstLetterOfArtistName.toString());
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
-        Assert.assertTrue(homePage.getAvatar());
+        assertTrue(homePage.getAvatar());
         // Check List of songs in the playlist
         List<WebElement> artistName = driver.findElements(By
                 .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .artist"));
         if (artistName.size() == 0) {
             String message = driver.findElement(By.cssSelector("#playlistWrapper .screen-placeholder .text")).getText();
-            Assert.assertTrue(message.contains("No songs match the playlist's "));
+            assertTrue(message.contains("No songs match the playlist's "));
             System.out.println("No song like that");
         }
         for (WebElement temp : artistName) {
@@ -193,7 +197,7 @@ public class SmartPlayListTest extends BaseTest {
             System.out.println(name);
             Character firstLetter = name.charAt(0);
             String a = firstLetter.toString();
-            Assert.assertTrue(a.equalsIgnoreCase(firstLetterOfArtistName.toString()));
+            assertTrue(a.equalsIgnoreCase(firstLetterOfArtistName.toString()));
         }
 
     }

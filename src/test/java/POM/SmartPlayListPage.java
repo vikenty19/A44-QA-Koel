@@ -29,7 +29,10 @@ public class SmartPlayListPage extends BasePage{
    public WebElement cancelCreatedPlist;
     @FindBy(css = "button.ok")
             public WebElement cancelConfirm;
-
+    @FindBy(css = "#playlistWrapper .heading-wrapper h1")
+     public  WebElement pListLocator;
+    @FindBy(css = ".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .title")
+            WebElement addedSong;
     By dropOptionField = By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']");
     By optionGroup = By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']");
     By subMit =By.cssSelector("div.rule-group:nth-child(2) [name='value[]']");
@@ -44,6 +47,12 @@ public class SmartPlayListPage extends BasePage{
     public void enterSmartPlistName(String plName){
         createSmartPlist.click();
         playListName.sendKeys(plName);
+    }
+    public String getSmartPlistName(){
+        return pListLocator.getText();
+    }
+    public String getAddedSongName(){
+        return addedSong.getText();
     }
     public void selectGroupTitle(String artist) {
 
