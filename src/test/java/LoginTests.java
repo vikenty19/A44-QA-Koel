@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static POM.LoginPage.emailWithoutAt;
+
 public class LoginTests extends BaseTest {
 
 
@@ -16,6 +18,7 @@ public class LoginTests extends BaseTest {
         loginPage.login(myEmail, myLogin);
 
         // find if avatar exists
+
         Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
         System.out.println("User logged successfully   " + homePage.getAvatar());
     }
@@ -24,12 +27,12 @@ public class LoginTests extends BaseTest {
     public void getMessageFromEmailField() {
         driver.manage().deleteAllCookies();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterEmail("gala.gmail.com");
+        loginPage.enterEmail(emailWithoutAt);
         loginPage.clickLoginBtn();
-        WebElement emailInput = loginPage.waitUntilVisible(By.cssSelector("[type='email']"));
+       // WebElement emailInput = loginPage.waitUntilVisible(By.cssSelector("[type='email']"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        String message = (String) js.executeScript("return arguments[0].validationMessage", emailInput);
+        String message = (String) js.executeScript("return arguments[0].validationMessage",loginPage.emailInput);
         String lang = (String) js.executeScript("return navigator.language");
         System.out.println(message);
         System.out.println(lang);

@@ -13,14 +13,16 @@ public class LoginPage extends BasePage {
         super(givenDriver);
     }
 
+    public static String emailWithoutAt = "gala.gmail.com";
 
     @FindBy(css = "[type='email']")
-    WebElement emailInput;
+    public WebElement emailInput;
     @FindBy(css = "[type='password']")
     WebElement passwordInput;
     //  By passwordField = By.cssSelector("[type='password']");
     @FindBy(xpath = "//button[@type='submit']")
     WebElement submitLogin;
+
 
     public By loginBtn = By.cssSelector("button[type='submit']");
 
@@ -40,7 +42,7 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage enterEmail(String email) {
-          emailInput.click();
+        emailInput.click();
         emailInput.clear();
         emailInput.sendKeys(email);
         return this;

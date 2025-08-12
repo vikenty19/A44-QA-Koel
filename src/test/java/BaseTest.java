@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class BaseTest {
-    public static WebDriver driver = null;
+    public  WebDriver driver = null;
     public static String url = "https://qa.koel.app/";
     public static String myLogin = "MEGAdelta06";
     public static String myEmail = "vikenty.plakhov@testpro.io";
