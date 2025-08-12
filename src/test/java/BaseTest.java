@@ -27,7 +27,7 @@ public class BaseTest {
     //Tutorial ninja app
     public static String tutorialURL ="http://tutorialsninja.com/demo/";
 
-    @BeforeSuite
+    @BeforeMethod
     static void setupDriver() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
