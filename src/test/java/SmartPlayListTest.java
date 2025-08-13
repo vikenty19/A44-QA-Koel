@@ -4,9 +4,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.FileHandler;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -125,7 +123,7 @@ public class SmartPlayListTest extends BaseTest {
 
 
     @Test
-    public void plListByArtistName() throws InterruptedException {
+    public void createPListByArtistName() throws InterruptedException {
 
         String SmartPlistName = generateRandomPlaylistBookName();
         LoginPage loginPage = new LoginPage(driver);
