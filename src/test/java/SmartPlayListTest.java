@@ -136,52 +136,56 @@ public class SmartPlayListTest extends BaseTest {
 
     @Test
     public void createPListByArtistName() throws InterruptedException, SQLException {
-
-        String SmartPlistName = generateRandomPlaylistBookName();
-        // pick the name of artist
-        int num = GetSQLInfo.listOfArtists().size();
-        String Artist = GetSQLInfo.listOfArtists().get(3);
-        //pick the  first song of the chosen artist
-        String songArtist =GetSQLInfo.listOfSongsBelongsToEachAuthor().get(Artist).get(0);
-        System.out.println(Artist+"________----"+songArtist);
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         HomePage homePage = new HomePage(driver);
         SmartPlayListPage smart = new SmartPlayListPage(driver);
         loginPage.login(myEmail, myLogin);
-        playListPage.plusBtnClick();
-        //Create smartPlist
-        smart.enterSmartPlistName(SmartPlistName);
+        String SmartPlistName = generateRandomPlaylistBookName();
+        // pick the name of artist
+        List<String>artists = GetSQLInfo.listOfArtists();
+        Iterator<String> name = artists.iterator();
+        // iterate through Artist names
+        while (name.hasNext()) {
+            String Artist = name.next();
+            //pick the  first song of the chosen artist
+            String songArtist = GetSQLInfo.listOfSongsBelongsToEachAuthor().get(Artist).get(0);
+            System.out.println(Artist + "  and    Song name ----->   " + songArtist);
 
-        WebElement dropDownField = homePage.waitUntilClickable(By.name("model[]"));
-        WebElement dropDownOption = homePage.waitUntilClickable(By.name("operator[]"));
+            playListPage.plusBtnClick();
+            //Create smartPlist
+            smart.enterSmartPlistName(SmartPlistName);
 
-        Select select = new Select(dropDownField);
-        select.selectByVisibleText("Artist");
+            WebElement dropDownField = homePage.waitUntilClickable(By.name("model[]"));
+            WebElement dropDownOption = homePage.waitUntilClickable(By.name("operator[]"));
 
-        Select select1 = new Select(dropDownOption);
-        select1.selectByVisibleText("is");
-        driver.findElement(By.name("value[]")).sendKeys(Artist);
-        Thread.sleep(5000);
-        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+            Select select = new Select(dropDownField);
+            select.selectByVisibleText("Artist");
 
-        assertTrue(homePage.getAvatar());
-        WebElement text = homePage.waitUntilVisible(By
-                .cssSelector("div.song-list-wrap.main-scroll-wrap.playlist td:nth-child(2)"));
-        String textOnScreen = text.getText();
-        System.out.println(textOnScreen);
-        if(!textOnScreen.equalsIgnoreCase(songArtist)){
-         File srcFile =( (TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileHandler.copy(srcFile,new File("./ScreenShots/smartPlist.png"));
-            } catch (IOException e) {
-                System.out.println("Song name in Playlist doesn't match DataBase name ");
+            Select select1 = new Select(dropDownOption);
+            select1.selectByVisibleText("is");
+            driver.findElement(By.name("value[]")).sendKeys(Artist);
+            Thread.sleep(5000);
+            driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+
+            assertTrue(homePage.getAvatar());
+            WebElement text = homePage.waitUntilVisible(By
+                    .cssSelector("div.song-list-wrap.main-scroll-wrap.playlist td:nth-child(2)"));
+            String textOnScreen = text.getText();
+            System.out.println(textOnScreen);
+            if (!textOnScreen.equalsIgnoreCase(songArtist)) {
+                File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+                try {
+                    FileHandler.copy(srcFile, new File("./ScreenShots/smartPlist"+Artist+".png"));
+                    System.out.println("Song name in Playlist doesn't match DataBase name ");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
 
+
         }
-
-
-
 
     }
     @Test(dataProvider = "SmartPlistDataProvider")
