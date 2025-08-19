@@ -18,7 +18,8 @@ public class PlayListPage extends BasePage {
         super(givenDriver);
     }
 
-    By plusBtn = By.cssSelector(".fa-plus-circle");
+  //  By plusBtn = By.cssSelector(".fa-plus-circle");
+    By plusBtn= By.xpath("//i[@title='Create a new playlist']");
     By pListLocator = By.cssSelector(".playlist:nth-child(3)>a");
 
     By pListNameField = By.cssSelector("input[name='name']");//li:nth-child(3).playlist.smart
@@ -85,7 +86,7 @@ public class PlayListPage extends BasePage {
 
 
     public void plusBtnClick() {
-        WebElement plusButton = waitUntilVisible(plusBtn);
+        WebElement plusButton = wait.until(ExpectedConditions.elementToBeClickable(plusBtn));
         plusButton.click();
     }
 

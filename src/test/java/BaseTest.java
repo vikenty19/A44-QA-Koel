@@ -27,7 +27,7 @@ public class BaseTest {
     //Tutorial ninja app
     public static String tutorialURL ="http://tutorialsninja.com/demo/";
 
-    @BeforeMethod
+   @BeforeMethod
     static void setupDriver() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
@@ -52,7 +52,7 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
-        driver.quit();
+       driver.quit();
     }
 
     public String generateRandomName() {

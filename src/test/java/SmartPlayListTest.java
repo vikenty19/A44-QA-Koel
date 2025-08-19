@@ -1,16 +1,29 @@
 import POM.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.testng.Assert.assertEquals;
@@ -51,6 +64,7 @@ public class SmartPlayListTest extends BaseTest {
         playListPage.plusBtnClick();
         SmartPlayListPage smart = new SmartPlayListPage(driver);
         smart.createSmartPlist.click();
+        smart.clickPlusToCreatePlist();
         smart.playListName.sendKeys(SmartPlistName);
         smart.songName.sendKeys(addedSong);
         smart.cancelCreatedPlist.click();
@@ -122,6 +136,7 @@ public class SmartPlayListTest extends BaseTest {
 
 
 
+
     @Test
     public void createPListByArtistName() throws InterruptedException {
 
@@ -142,8 +157,53 @@ public class SmartPlayListTest extends BaseTest {
         select.selectByVisibleText("Artist");
 
         Select select1 = new Select(dropDownOption);
-        select1.selectByVisibleText("begins with");
-        driver.findElement(By.name("value[]")).sendKeys("U");
+        select1.selectByVisibleText("is");
+        driver.findElement(By.name("value[]")).sendKeys("Till Paradiso");
+        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+        Thread.sleep(5000);
+        assertTrue(homePage.getAvatar());
+
+        // Check songs in the playlist
+       // String artistName = driver.findElement(By
+             //   .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .artist")).getText();
+        List<String>artistSongs = new ArrayList<>();
+        System.out.println(driver.getCurrentUrl());
+      /*  driver.findElement(By.xpath("//table[@class='items']//td[text()= 'BornKing']"));
+        Assert.assertTrue(driver.findElement(By.xpath("//table[@class='items']//td[text()= 'BornKing']")).isDisplayed());*/
+     //   List<WebElement> songName = driver.findElements(By.cssSelector("div.item-container>.item-container .title"));
+       //  String songName =  driver.findElement(By.cssSelector("div.item-container>.item-container td.title")).getText();
+      //  System.out.println(songName);
+     /*   for (WebElement item:songName
+             ) {artistSongs.add(item.getText());
+
+        }
+
+        System.out.println(artistSongs);*/
+
+
+
+    }
+    @Test(dataProvider = "SmartPlistDataProvider")
+    public void createSmartPListWithExelSheetData(String title,String Rule,String letter) throws InterruptedException, IOException {
+
+        String SmartPlistName = generateRandomPlaylistBookName();
+        LoginPage loginPage = new LoginPage(driver);
+        PlayListPage playListPage = new PlayListPage(driver);
+        HomePage homePage = new HomePage(driver);
+        SmartPlayListPage smart = new SmartPlayListPage(driver);
+        loginPage.login(myEmail, myLogin);
+        playListPage.plusBtnClick();
+        //Create smartPlist
+        smart.enterSmartPlistName(SmartPlistName);
+
+        WebElement dropDownField = homePage.waitUntilClickable(By.name("model[]"));
+        WebElement dropDownOption = homePage.waitUntilClickable(By.name("operator[]"));
+
+        Select select = new Select(dropDownField);
+           select.selectByVisibleText(title);
+        Select select1 = new Select(dropDownOption);
+        select1.selectByVisibleText(Rule);
+        driver.findElement(By.name("value[]")).sendKeys(letter);
         driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
         assertTrue(homePage.getAvatar());
         // Check songs in the playlist
@@ -152,10 +212,57 @@ public class SmartPlayListTest extends BaseTest {
         System.out.println(artistName);
         Character firstLetter = artistName.charAt(0);
         System.out.println(firstLetter);
-        assertEquals(firstLetter.toString(), "U");
-        Thread.sleep(5000);
+        assertTrue(firstLetter.toString().equalsIgnoreCase(letter));
+        Thread.sleep(2000);
 
     }
+
+
+
+@DataProvider(name = "SmartPlistDataProvider")
+        public Object[][] exelSheetData () throws IOException {
+            String exelProperty = System.getProperty("user.dir") + "/src/test/resources/pairwise.xlsx";
+            File exelFile = new File(exelProperty);
+            FileInputStream fis = new FileInputStream(exelFile);
+            XSSFWorkbook workbook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workbook.getSheet("pairwise");
+            //find number of rows in the sheet table
+            int rowsCount = (sheet.getPhysicalNumberOfRows());
+
+            //find number of columns
+            int colCount = sheet.getRow(0).getLastCellNum();
+            //create Object Array to pass the data
+            //  Iterator<Row> rows= sheet.iterator();
+            Object[][] data = new Object[rowsCount-1][colCount];//rowCount-1 because first row is names of columns
+            for (int i = 0; i < rowsCount-1; i++) {
+                XSSFRow row = sheet.getRow(i+1);// i +1 because first row is names of columns
+                for (int j = 0; j < colCount; j++) {
+                    XSSFCell cell = row.getCell(j);
+                    CellType cellType = cell.getCellType();
+                    switch (cellType) {
+                        case STRING:
+                            data[i][j] = cell.getStringCellValue();
+                            break;
+                        case NUMERIC:
+                            data[i][j] = cell.getNumericCellValue();
+                            break;
+
+                        case BOOLEAN:
+                            data[i][j] = cell.getBooleanCellValue();
+                            break;
+                    }
+
+
+                }
+            }
+            for (Object[] row : data) {
+                for (Object cell : row) {
+                    System.out.print(cell + " ");
+                }
+                System.out.println();
+            }
+            return data;
+        }
 
     @Test(dataProvider = "alphabet")//Checking first letter of the artists names in the list of songs
     public void plListByArtistNamesFirstLetterCheck(char letter) {
@@ -208,5 +315,10 @@ public class SmartPlayListTest extends BaseTest {
         }
         return alphabet;
     }
+@Test
+    public  void findAllArtists() throws SQLException {
+
+        DataBaseQuery.listOfArtists();
+}
 
 }

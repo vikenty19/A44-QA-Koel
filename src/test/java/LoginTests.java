@@ -52,7 +52,7 @@ public class LoginTests extends BaseTest {
     public void loginInvalidEmailTest() {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
-        loginpage.login("notexists@class.com", myLogin);
+        loginpage.login("notexists@class.com ", myLogin);
         System.out.println("Is Submit button is displayed?  " + loginpage.isSubmitLoginBtnDisplayed());
         Assert.assertTrue(loginpage.isSubmitLoginBtnDisplayed());
         //       Assert.assertFalse(homePage.getAvatar());

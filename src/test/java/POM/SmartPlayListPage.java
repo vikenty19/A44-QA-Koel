@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -33,10 +34,15 @@ public class SmartPlayListPage extends BasePage{
      public  WebElement pListLocator;
     @FindBy(css = ".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .title")
             WebElement addedSong;
+    By plusLocator = By.cssSelector("[data-testid =playlist-context-menu-create-smart]");
     By dropOptionField = By.cssSelector("div.rule-group:nth-child(2) select[name='model[]']");
     By optionGroup = By.cssSelector("div.rule-group:nth-child(2) select[name='operator[]']");
     By subMit =By.cssSelector("div.rule-group:nth-child(2) [name='value[]']");
     By plyListsName = By.cssSelector("li.playlist.smart");
+    public void  clickPlusToCreatePlist(){
+        WebElement plus = wait.until(ExpectedConditions.elementToBeClickable(plusLocator));
+        plus.click();
+    }
     public void createSmartPlistWithOutGroup(String name, String addedSong){
 
         createSmartPlist.click();
