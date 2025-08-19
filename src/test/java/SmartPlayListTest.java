@@ -141,12 +141,13 @@ public class SmartPlayListTest extends BaseTest {
         HomePage homePage = new HomePage(driver);
         SmartPlayListPage smart = new SmartPlayListPage(driver);
         loginPage.login(myEmail, myLogin);
-        String SmartPlistName = generateRandomPlaylistBookName();
+
         // pick the name of artist
         List<String>artists = GetSQLInfo.listOfArtists();
         Iterator<String> name = artists.iterator();
         // iterate through Artist names
         while (name.hasNext()) {
+            String SmartPlistName = generateRandomPlaylistBookName();
             String Artist = name.next();
             //pick the  first song of the chosen artist
             String songArtist = GetSQLInfo.listOfSongsBelongsToEachAuthor().get(Artist).get(0);
@@ -165,7 +166,7 @@ public class SmartPlayListTest extends BaseTest {
             Select select1 = new Select(dropDownOption);
             select1.selectByVisibleText("is");
             driver.findElement(By.name("value[]")).sendKeys(Artist);
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
 
             assertTrue(homePage.getAvatar());
@@ -174,6 +175,7 @@ public class SmartPlayListTest extends BaseTest {
             String textOnScreen = text.getText();
             System.out.println(textOnScreen);
             if (!textOnScreen.equalsIgnoreCase(songArtist)) {
+                Thread.sleep(300);
                 File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
                 try {
                     FileHandler.copy(srcFile, new File("./ScreenShots/smartPlist"+Artist+".png"));
