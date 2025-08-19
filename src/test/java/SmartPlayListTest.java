@@ -6,10 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.io.FileHandler;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -138,9 +135,15 @@ public class SmartPlayListTest extends BaseTest {
 
 
     @Test
-    public void createPListByArtistName() throws InterruptedException {
+    public void createPListByArtistName() throws InterruptedException, SQLException {
 
         String SmartPlistName = generateRandomPlaylistBookName();
+        // pick the name of artist
+        int num = GetSQLInfo.listOfArtists().size();
+        String Artist = GetSQLInfo.listOfArtists().get(3);
+        //pick the  first song of the chosen artist
+        String songArtist =GetSQLInfo.listOfSongsBelongsToEachAuthor().get(Artist).get(0);
+        System.out.println(Artist+"________----"+songArtist);
         LoginPage loginPage = new LoginPage(driver);
         PlayListPage playListPage = new PlayListPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -158,27 +161,25 @@ public class SmartPlayListTest extends BaseTest {
 
         Select select1 = new Select(dropDownOption);
         select1.selectByVisibleText("is");
-        driver.findElement(By.name("value[]")).sendKeys("Till Paradiso");
-        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
+        driver.findElement(By.name("value[]")).sendKeys(Artist);
         Thread.sleep(5000);
-        assertTrue(homePage.getAvatar());
+        driver.findElement(By.cssSelector("footer [type = 'submit']")).click();
 
-        // Check songs in the playlist
-       // String artistName = driver.findElement(By
-             //   .cssSelector(".song-list-wrap.main-scroll-wrap.playlist .virtual-scroller .artist")).getText();
-        List<String>artistSongs = new ArrayList<>();
-        System.out.println(driver.getCurrentUrl());
-      /*  driver.findElement(By.xpath("//table[@class='items']//td[text()= 'BornKing']"));
-        Assert.assertTrue(driver.findElement(By.xpath("//table[@class='items']//td[text()= 'BornKing']")).isDisplayed());*/
-     //   List<WebElement> songName = driver.findElements(By.cssSelector("div.item-container>.item-container .title"));
-       //  String songName =  driver.findElement(By.cssSelector("div.item-container>.item-container td.title")).getText();
-      //  System.out.println(songName);
-     /*   for (WebElement item:songName
-             ) {artistSongs.add(item.getText());
+        assertTrue(homePage.getAvatar());
+        WebElement text = homePage.waitUntilVisible(By
+                .cssSelector("div.song-list-wrap.main-scroll-wrap.playlist td:nth-child(2)"));
+        String textOnScreen = text.getText();
+        System.out.println(textOnScreen);
+        if(!textOnScreen.equalsIgnoreCase(songArtist)){
+         File srcFile =( (TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileHandler.copy(srcFile,new File("./ScreenShots/smartPlist.png"));
+            } catch (IOException e) {
+                System.out.println("Song name in Playlist doesn't match DataBase name ");
+            }
 
         }
 
-        System.out.println(artistSongs);*/
 
 
 
@@ -315,10 +316,6 @@ public class SmartPlayListTest extends BaseTest {
         }
         return alphabet;
     }
-@Test
-    public  void findAllArtists() throws SQLException {
 
-        DataBaseQuery.listOfArtists();
-}
 
 }
