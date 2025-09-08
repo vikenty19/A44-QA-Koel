@@ -18,7 +18,7 @@ Feature: login tests
   @Login @Two
   Scenario Outline:LoginWrongEmail
     And I enter valid password <password>
-    And I enter wrong email <email>
+    And I enter invalid email <email>
     And I click Submit
     Then I am not logged in
     Examples:

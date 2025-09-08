@@ -30,31 +30,30 @@ import static CucumberPOM.LoginPageCucumber.*;
 import static hooks.Base.driver;
 
 public class LoginStepDefinitions  {
-   //  public static WebDriver driver;
+     public static WebDriver driver;
   // public static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     public static String url ="https://qa.koel.app/";
-<<<<<<< Updated upstream
+
     public static String registerUrl ="https://qa.koel.app/registration";
     public static WebDriverWait wait = null;
-  @After
-=======
+
   //  public static WebDriverWait wait = null;
- /* @After
->>>>>>> Stashed changes
+ // @After
+
     public void tearDown() {
         driver.quit();
     }
    @Given ("I open browser")
     public void setUpDriver(){
-       MyHooks.setUpDriver();
- /*       WebDriverManager.chromedriver().clearDriverCache().setup();
+   //    MyHooks.setUpDriver();
+       WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
 
-          driver = new ChromeDriver(options);*/
+          driver = new ChromeDriver(options);
 
        System.out.println("SetUpDriver");
     }
@@ -64,6 +63,8 @@ public class LoginStepDefinitions  {
     }
     @And("i enter valid email {string}")
     public void iEnterEmail(String email){
+        WebElement emailInput=LoginStepDefinitions
+                .wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[type='email']")));
 
        emailInput.click();
         emailInput.clear();
@@ -99,7 +100,7 @@ public class LoginStepDefinitions  {
 
 
 
-    @And("I enter wrong email {string}")
+    @And("I enter invalid email {string}")
     public void iEnterWrongEmail(String email) {
         WebElement emailInput = driver.findElement(By.cssSelector("[type='email']"));
         emailInput.click();

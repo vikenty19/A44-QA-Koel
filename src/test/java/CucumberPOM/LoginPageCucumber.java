@@ -13,7 +13,9 @@ import static hooks.MyHooks.driver;
 public class LoginPageCucumber {
 
    public static By email = By.cssSelector("[type='email']");
-    public static WebElement emailInput = MyHooks.driver.findElement(email);
+  //  public static WebElement emailInput = MyHooks.driver.findElement(email);
+ //public static WebElement emailInput = MyHooks.driver.findElement(email);
+  public static WebElement emailInput = driver.findElement(email);
     public static By pass = By.cssSelector("[type='password']");
     //public static WebElement passwordInput=LoginStepDefinitions.driver.findElement(pass);
     public static By link = By.cssSelector("div>a");
