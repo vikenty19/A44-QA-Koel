@@ -1,3 +1,4 @@
+import POM.BasePage;
 import POM.LoginPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -10,6 +11,19 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class Homework17 extends BaseTest {
+    @Test
+    public void playSongFromPlistUsingRightClick(){
+        BasePage basePage = new BasePage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(myEmail,myLogin);
+        WebElement pLIstName = basePage.waitUntilVisible(By.xpath("//a[text()='Turkmenistan14_50_14']"));
+        pLIstName.click();
+        WebElement songToPlay = basePage.waitUntilClickable(By.xpath("(//td[text()='Episode 2'])[3]"));
+        actions.contextClick(songToPlay).perform();
+        driver.findElement(By.cssSelector(".playback")).click();
+         basePage.isEqualizerDisplayed();
+    }
+
 
     @Test
     public void addSongToPlaylist() throws InterruptedException {
@@ -17,7 +31,7 @@ public class Homework17 extends BaseTest {
         String playlistName = generateRandomPlaylistName();
         // login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.login("vicplach123@gmail.com", "MEGAdelta06@");
+        loginPage.login(myEmail,myLogin);
         // search for song
 
         searchForSong(text);

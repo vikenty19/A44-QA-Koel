@@ -29,6 +29,9 @@ public class BasePage {
     }
 
     By successLocator = By.cssSelector(".success");
+    By pauseLocator =By.cssSelector("span[role='button'] > .fa.fa-pause");
+    By equalizerLocator = By.cssSelector(".bars");
+    By profileNameLocator =By.cssSelector("span .name");
 
     public void refreshDriver() {
         driver.navigate().refresh();
@@ -55,13 +58,13 @@ public class BasePage {
 
     public void isEqualizerDisplayed() {
         WebElement equalizer = wait.until(ExpectedConditions
-                .visibilityOfElementLocated(By.cssSelector(".bars")));
+                .visibilityOfElementLocated(equalizerLocator));
         Assert.assertTrue(equalizer.isDisplayed());
         System.out.println("Is equalizer displayed  " + equalizer.isDisplayed());
     }
 
     public void isPauseBtnDisplayed() {
-        WebElement pauseBtn = driver.findElement(By.cssSelector("span[role='button'] > .fa.fa-pause"));
+        WebElement pauseBtn = driver.findElement(pauseLocator);
         new Actions(driver).moveToElement(pauseBtn)
                 .perform();
         pauseBtn.click();
@@ -70,7 +73,7 @@ public class BasePage {
     }
 
     public String getNewProfileName() {
-        WebElement profile = waitUntilVisible(By.cssSelector("span .name"));//.view-profile>span
+        WebElement profile = waitUntilVisible(profileNameLocator);//.view-profile>span
         String newName = profile.getText();
         return newName;
 

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,9 +21,10 @@ import java.util.Locale;
 public class BaseTest {
     public  WebDriver driver = null;
     public static String url = "https://qa.koel.app/";
-    public static String myLogin = "MEGAdelta06";
+    public static String myLogin = "MEGAdelta06@";
     public static String myEmail = "vikenty.plakhov@testpro.io";
     public static WebDriverWait wait = null;
+    public static Actions actions = null;
 
     //Tutorial ninja app
     public static String tutorialURL ="http://tutorialsninja.com/demo/";
@@ -43,7 +45,7 @@ public class BaseTest {
 
         driver = new ChromeDriver(options);
 
-
+        actions = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         openUrl(url);
