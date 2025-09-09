@@ -27,8 +27,5 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         return driver;
     }
-    @After
-    public void tearDown(){
-        driver.quit();
-    }
+
 }

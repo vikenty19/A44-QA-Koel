@@ -5,6 +5,7 @@ import POM.TutorialForgotPasswordPage;
 import POM.TuturialMyAccountPage;
 import POM.TutHeadersSectionPage;
 import POM.TutorialLoginPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -27,6 +28,10 @@ public class StepsTutorialLogin {
         this.driver = BasePage.driver;
         this.wait =BasePage.wait;
 
+    }
+    @After
+    public void tearDown(){
+        driver.quit();
     }
 
     @And("User navigate to Account Login page")
