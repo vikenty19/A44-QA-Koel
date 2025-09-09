@@ -28,6 +28,15 @@ Feature: Login scenarios
       | email                      | password   |
       | "" | "" |
   @Login
+  Scenario Outline: User is not able to login without providing valid email and invalid password
+    Given User opens application URL
+    And User navigate to Account Login page
+    When User login to the app using email <email> and password <password>
+    Then User shouldn't be able to login successfully and see a warning message
+    Examples:
+      | email                      | password       |
+      |  "ravi.kiran99@gmail.com  "| "222222222222" |
+  @Login
   Scenario: User is able to reset forgotten password
     Given User opens application URL
     And User navigate to Account Login page

@@ -11,7 +11,6 @@ import java.time.Duration;
 
 public class BasePage {
    public static WebDriver driver;
- //  public static WebDriverWait wait = new WebDriverWait(BasePage.setUpDriver(), Duration.ofSeconds(10));;
   public static WebDriverWait wait;
     public static WebDriver setUpDriver() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
