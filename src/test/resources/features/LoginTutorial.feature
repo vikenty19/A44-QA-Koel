@@ -3,7 +3,7 @@ Feature: Login user
   Background:
     Given User opens application URL
     And navigates om Login page
-
+  @Login @One @Smoke @Regression
   Scenario Outline: Login with valid credentials
     When User enters valid email <email>
     And Enters valid password <password>
@@ -13,7 +13,7 @@ Feature: Login user
       | email                    | password |
       | "amotooricap9@gmail.com" | "12345"  |
       | "amotooricap3@gmail.com" | "12345"  |
-
+  @Login @Two @Regression
   Scenario Outline: Login with invalid credentials
     When User enters valid email <email>
     And Enters valid password <password>
@@ -25,7 +25,7 @@ Feature: Login user
       | "amotooricap934@gmail.com"   | "123456" |
       | "amotooricap9@gmail.com"     | "12345"  |
 
-
+  @Login  @Regression
   Scenario Outline: Login with valid email and invalid password
 
     When User enters valid email <email>
@@ -35,7 +35,7 @@ Feature: Login user
     Examples:
       | email                    | password |
       | "amotooricap9@gmail.com" | "123456" |
-
+  @Login  @Regression
   Scenario Outline: Login with invalid email and valid password
 
     When User enters invalid email <email>

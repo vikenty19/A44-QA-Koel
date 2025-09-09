@@ -14,11 +14,11 @@ import java.time.Duration;
 
 public class MyHooks {
    public static WebDriver driver = Base.driver;
-  public static WebDriverWait wait;
+  public static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
   //  public static String url = "https://qa.koel.app/";
 
-  @Before
-    public static void setUpDriver() {
+//  @Before
+    public static WebDriver setUpDriver() {
         WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
@@ -26,10 +26,10 @@ public class MyHooks {
         options.addArguments("--disable-notifications");
         options.addArguments("--start-maximized");
         driver = new ChromeDriver(options);
-        wait= new WebDriverWait(driver, Duration.ofSeconds(5));
+      return driver;
     }
 
-    @After
+   // @After
     public void tearDown() {
 
         driver.quit();

@@ -1,20 +1,40 @@
 package StepDefinitions;
 
+import hooks.MyHooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class StepsToLogin {
+
     @Given("User opens application URL")
-    public void userOpensApplicationURL() {
-        //  WebDriverManager.chromedriver().setup();
+    public void setUpDriver(){
+      //     MyHooks.setUpDriver();
+      /*  WebDriverManager.chromedriver().clearDriverCache().setup();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--start-maximized");
+
+        driver = new ChromeDriver(options);
+        wait=new WebDriverWait(driver, Duration.ofSeconds(10));*/
+        System.out.println("SetUpDriver");
+
         System.out.println("User open the URL");
     }
 
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
+        System.out.println("User navigated on login page");
     }
 
     @When("User enters valid email {string}")

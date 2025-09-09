@@ -1,27 +1,29 @@
 package StepDefinitions;
 
 import CucumberPOM.ForgotPassword_RegisterPage;
+import hooks.MyHooks;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import static CucumberPOM.ForgotPassword_RegisterPage.*;
-import static StepDefinitions.LoginStepDefinitions.driver;
+
 import static StepDefinitions.LoginStepDefinitions.registerUrl;
+import static hooks.MyHooks.driver;
+import static hooks.MyHooks.setUpDriver;
 
 public class RegisterStepDefinitions {
-    @After
-    public void tearDown() {
-        driver.quit();
-    }
+
 
     @And("I open registration page")
     public void iOpenRegistrationPage() {
+
         driver.get(registerUrl);
     }
 

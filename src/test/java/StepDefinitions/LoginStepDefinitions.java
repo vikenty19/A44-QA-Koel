@@ -3,7 +3,6 @@ package StepDefinitions;
 import CucumberPOM.TestData;
 import POM.HomePage;
 import POM.LoginPage;
-import hooks.MyHooks;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
 import io.cucumber.java.en.And;
@@ -24,13 +23,11 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 import java.util.Map;
 
-import static CucumberPOM.ForgotPassword_RegisterPage.InfoMessage;
-import static CucumberPOM.ForgotPassword_RegisterPage.emailToForgottenPass;
 import static CucumberPOM.LoginPageCucumber.*;
-import static hooks.Base.driver;
+import static hooks.MyHooks.driver;
 
 public class LoginStepDefinitions  {
-     public static WebDriver driver;
+
   // public static WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     public static String url ="https://qa.koel.app/";
 
@@ -38,15 +35,11 @@ public class LoginStepDefinitions  {
     public static WebDriverWait wait = null;
 
   //  public static WebDriverWait wait = null;
- // @After
 
-    public void tearDown() {
-        driver.quit();
-    }
    @Given ("I open browser")
     public void setUpDriver(){
    //    MyHooks.setUpDriver();
-       WebDriverManager.chromedriver().clearDriverCache().setup();
+ /*      WebDriverManager.chromedriver().clearDriverCache().setup();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
@@ -54,8 +47,9 @@ public class LoginStepDefinitions  {
         options.addArguments("--start-maximized");
 
           driver = new ChromeDriver(options);
-
+          wait=new WebDriverWait(driver,Duration.ofSeconds(10));*/
        System.out.println("SetUpDriver");
+
     }
     @When("I open login page")
     public void iOpenLoginPage(){
