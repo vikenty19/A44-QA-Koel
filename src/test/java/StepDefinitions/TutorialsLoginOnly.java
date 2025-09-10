@@ -31,7 +31,7 @@ public class TutorialsLoginOnly {
 
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
-        BasePage.setUpDriver();
+       BasePage.setUpDriver();
       /*  WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
          driver.manage().window().maximize();*/

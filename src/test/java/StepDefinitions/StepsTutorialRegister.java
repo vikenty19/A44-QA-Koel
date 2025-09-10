@@ -6,6 +6,7 @@ import POM.TutorialRegisterPage;
 import POM.TutHeadersSectionPage;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
@@ -18,26 +19,28 @@ import static Base.BasePage.driver;
 
 
 public class StepsTutorialRegister  {
-  /*  @Given("I launch the app")
+  /* @Given("I launch the app")
     public void iLaunchTheApp() {
     }*/
   // To initialise pages with @FindBy
 
-  TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
+
+
     @And("I navigate to Account Registration page")
     public void iNavigateToAccountRegistrationPage() {
-        driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
-        driver.findElement(tutHeadersSectionPage.registerBtn).click();
+        BasePage.driver.findElement( By.cssSelector(".fa-user")).click();
+        BasePage.driver.findElement(By.linkText("Register")).click();
 
     }
 
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
       System.out.println("Driver  "+ driver);
-      System.out.println("Locator "+ TutorialRegisterPage.name);
-      WebElement firstNameField = BasePage.wait
-              .until(ExpectedConditions.elementToBeClickable(TutorialRegisterPage.name));
-     firstNameField.sendKeys("raviiii");
+     System.out.println("Locator "+ TutorialRegisterPage.firstNameField);
+        TutorialRegisterPage.firstNameField.click();
+     /*WebElement firstNameField = BasePage.wait
+              .until(ExpectedConditions.elementToBeClickable(By.id("input-firstname")));*/
+     TutorialRegisterPage.firstNameField.sendKeys("raviiii");
     TutorialRegisterPage.enterAllDetails(dataTable,"unique");
     }
 
