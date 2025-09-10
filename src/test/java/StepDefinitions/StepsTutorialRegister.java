@@ -23,7 +23,8 @@ public class StepsTutorialRegister  {
     }*/
   // To initialise pages with @FindBy
 
-  TutHeadersSectionPage tutHeadersSectionPage = new TutHeadersSectionPage();
+  TutHeadersSectionPage tutHeadersSectionPage ;
+  TutorialRegisterPage tutorialRegisterPage;
     @And("I navigate to Account Registration page")
     public void iNavigateToAccountRegistrationPage() {
         driver.findElement(tutHeadersSectionPage.accountEnterBtn).click();
@@ -34,9 +35,9 @@ public class StepsTutorialRegister  {
     @When("I provide all the below valid details :")
     public void iProvideAllTheBelowValidDetails(DataTable dataTable) {
       System.out.println("Driver  "+ driver);
-      System.out.println("Locator "+ TutorialRegisterPage.name);
+  //    System.out.println("Locator "+ tutorialRegisterPage.name);
       WebElement firstNameField = BasePage.wait
-              .until(ExpectedConditions.elementToBeClickable(TutorialRegisterPage.name));
+              .until(ExpectedConditions.elementToBeClickable(By.id("input-firstname")));
      firstNameField.sendKeys("raviiii");
     TutorialRegisterPage.enterAllDetails(dataTable,"unique");
     }
