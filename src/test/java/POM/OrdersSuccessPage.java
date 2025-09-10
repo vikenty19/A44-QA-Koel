@@ -1,6 +1,5 @@
 package POM;
 
-import Base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +10,7 @@ public class OrdersSuccessPage {
 
     public static void orderSuccessConfirmation(){
 
-        WebElement successOrder = BasePage.wait.until(
+        WebElement successOrder = hooks.MyHooks.wait.until(
                 ExpectedConditions.visibilityOfElementLocated(success));
         Assert.assertTrue(successOrder.isDisplayed());
 

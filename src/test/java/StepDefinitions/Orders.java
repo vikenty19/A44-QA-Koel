@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import Base.BasePage;
 import Base.Elements;
 import Config.PropertyFileReader;
 import POM.OrdersSuccessPage;
@@ -17,18 +16,18 @@ import org.testng.Assert;
 
 import java.awt.*;
 
-import static Base.BasePage.driver;
+;
 
 import static POM.TutHeadersSectionPage.*;
 
 public class Orders {
     public static PropertyFileReader pfr = new PropertyFileReader();
-
+    CheckOutPage checkOutPage = new CheckOutPage(hooks.MyHooks.driver);
     @Given("I login to the app")
     public void iLoginToTheApp()  {
 
-        BasePage.setUpDriver();
-        driver.get(pfr.getUrl());
+
+        hooks.MyHooks.driver.get(pfr.getUrl());
         TutHeadersSectionPage.navigateToLoginPage();
         loginToTheApp();
 
@@ -43,14 +42,14 @@ public class Orders {
         TutHeadersSectionPage.searchProduct();
         SearchResultsPage.addFirstProduct();
         TutHeadersSectionPage.navigateToThShoppingCartPage();
-        CheckOutPage.navigateToCheckOutPage();
+        checkOutPage.navigateToCheckOutPage();
 
 
     }
 
     @And("I place the order")
     public void iPlaceTheOrder() {
-        CheckOutPage.placeTheOrder();
+        checkOutPage.placeTheOrder();
     }
 
     @Then("I should see that the order is placed successfully")
@@ -59,11 +58,11 @@ public class Orders {
     }
     public static void loginToTheApp() {
 
-        WebElement emailField = driver.findElement(email);
+        WebElement emailField = hooks.MyHooks.driver.findElement(email);
         Elements.TypeText(emailField, pfr.getEmail());
-        WebElement passwordField = driver.findElement(password);
+        WebElement passwordField = hooks.MyHooks.driver.findElement(password);
         Elements.TypeText(passwordField, pfr.getPassword());
-        WebElement loginSubmitBtn = BasePage.wait.until(ExpectedConditions.elementToBeClickable(submit));
+        WebElement loginSubmitBtn = hooks.MyHooks.wait.until(ExpectedConditions.elementToBeClickable(submit));
         Elements.clickOnlyIfElementPresent(loginSubmitBtn);
 
     }
@@ -79,7 +78,7 @@ public class Orders {
 
     @Then("I should see the message that this product is out-of-stock")
     public void iShouldSeeTheMessageThatThisProductIsOutOfStock() {
-        String outOfStock = CheckOutPage.outOfStockWarningMessage();
+        String outOfStock = checkOutPage.outOfStockWarningMessage();
         Assert.assertTrue(outOfStock.contains(
                 "Products marked with *** are not available in the desired quantity or not in stock!"));
     }

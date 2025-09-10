@@ -1,29 +1,19 @@
 package StepDefinitions;
-
-import Base.BasePage;
 import POM.TutorialForgotPasswordPage;
 import POM.TuturialMyAccountPage;
-import POM.TutHeadersSectionPage;
-import POM.TutorialLoginPage;
+import hooks.MyHooks;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
-
 import static POM.TutorialForgotPasswordPage.continued;
-import static POM.TutorialLoginPage.forgot;
 import static POM.TutorialLoginPage.info;
 
 
@@ -31,8 +21,8 @@ public class StepsTutorialLogin {
     public static WebDriver driver;
     public static WebDriverWait wait;
     public StepsTutorialLogin(){
-        this.driver = BasePage.driver;
-        this.wait =BasePage.wait;
+        this.driver = MyHooks.driver;
+        this.wait = MyHooks.wait;
 
     }
 
@@ -72,10 +62,10 @@ public class StepsTutorialLogin {
     }
     @When("User reset forgotten password for email {string}")
     public void userResetForgottenPasswordForEmail(String email) {
-        WebElement forgotPassword =BasePage.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".form-group>a")));
+        WebElement forgotPassword = MyHooks.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".form-group>a")));
         forgotPassword.click();
         TutorialForgotPasswordPage.emailField.sendKeys(email);
-        WebElement continueBtn = BasePage.wait
+        WebElement continueBtn = MyHooks.wait
                         .until(ExpectedConditions.elementToBeClickable(continued));
         continueBtn.click();
     }
@@ -83,7 +73,7 @@ public class StepsTutorialLogin {
 
     @Then("Use see a message that resetting info was sending to his email")
     public void useSeeAMessageThatResettingInfoWasSendingToHisEmail() {
-        WebElement infoMessage = BasePage.wait.until(ExpectedConditions.visibilityOfElementLocated(info));
+        WebElement infoMessage = MyHooks.wait.until(ExpectedConditions.visibilityOfElementLocated(info));
         String message = infoMessage.getText();
         Assert.assertEquals(message,"An email with a confirmation link has been sent your email address.");
 

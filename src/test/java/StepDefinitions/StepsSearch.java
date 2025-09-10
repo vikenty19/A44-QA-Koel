@@ -1,8 +1,8 @@
 package StepDefinitions;
 
-import Base.BasePage;
 import Base.Elements;
 import POM.SearchResultsPage;
+import hooks.MyHooks;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
@@ -16,15 +16,15 @@ public class StepsSearch {
     @When("User search for a product {string}")
     public void userSearchForAProduct(String arg0)  {
 
-        WebElement searchField = BasePage.wait.until(ExpectedConditions.visibilityOfElementLocated(search));
+        WebElement searchField = hooks.MyHooks.wait.until(ExpectedConditions.visibilityOfElementLocated(search));
         Elements.TypeText(searchField,arg0);
-        WebElement searchBtn = BasePage.wait.until(ExpectedConditions.visibilityOfElementLocated(name));
+        WebElement searchBtn = MyHooks.wait.until(ExpectedConditions.visibilityOfElementLocated(name));
         searchBtn.click();
     }
 
     @Then("User should see this product {string} in the search results")
     public void userShouldSeeThisProductInTheSearchResults(String message) {
-        WebElement result = BasePage.wait.until(ExpectedConditions.presenceOfElementLocated(SearchResultsPage.resultSearch));
+        WebElement result = MyHooks.wait.until(ExpectedConditions.presenceOfElementLocated(SearchResultsPage.resultSearch));
         String SearchResult = result.getText();
         Assert.assertEquals(SearchResult, message);
     }

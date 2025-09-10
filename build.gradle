@@ -54,7 +54,7 @@ task playSong(type: Test) {
 
     }
 }
-test {
+task cucumber(type: Test) {
     useTestNG() {
         suites "src/test/resources/Cucumber.xml"
     }

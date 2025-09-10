@@ -1,26 +1,14 @@
 package StepDefinitions;
 
-import Base.BasePage;
 import Config.ConfigurationReader;
 import POM.TutHeadersSectionPage;
-import io.cucumber.java.After;
+import hooks.MyHooks;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.time.Duration;
-
-import static Base.BasePage.driver;
-
 
 public class TutorialsLoginOnly {
 
@@ -31,7 +19,7 @@ public class TutorialsLoginOnly {
 
     @Given("User opens application URL")
     public void userOpensApplicationURL() {
-       BasePage.setUpDriver();
+
       /*  WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
          driver.manage().window().maximize();*/
@@ -46,40 +34,40 @@ public class TutorialsLoginOnly {
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));*/
 
-        driver.get(tutorialURL);
+        MyHooks.driver.get(tutorialURL);
 
         System.out.println("User open the URL");
     }
 
     @And("navigates om Login page")
     public void navigatesOmLoginPage() {
-        driver.findElement(TutHeadersSectionPage.accountEnterBtn).click();
-        driver.findElement(TutHeadersSectionPage.loginBtn).click();
+        MyHooks.driver.findElement(TutHeadersSectionPage.accountEnterBtn).click();
+        MyHooks.driver.findElement(TutHeadersSectionPage.loginBtn).click();
     }
 
     @When("User enters valid email {string}")
     public void userEntersValidEmail(String email) {
-        driver.findElement(TutHeadersSectionPage.email).sendKeys(email);
+        MyHooks.driver.findElement(TutHeadersSectionPage.email).sendKeys(email);
 
         System.out.println("User enters  " + email);
     }
 
     @And("Enters valid password {string}")
     public void entersValidPassword(String password) {
-        driver.findElement(TutHeadersSectionPage.password).sendKeys(password);
+        MyHooks.driver.findElement(TutHeadersSectionPage.password).sendKeys(password);
 
         System.out.println("User enters   " + password);
     }
 
     @And("Click on login button")
     public void clickOnLoginButton() {
-        driver.findElement(TutHeadersSectionPage.submit).click();
+        MyHooks.driver.findElement(TutHeadersSectionPage.submit).click();
         System.out.println("Click on login button");
     }
 
     @Then("User login successfully")
     public void userLoginSuccessfully() {
-        WebElement confirm = driver.findElement(TutHeadersSectionPage.confirm);
+        WebElement confirm = MyHooks.driver.findElement(TutHeadersSectionPage.confirm);
         Assert.assertTrue(confirm.isDisplayed());
         System.out.println("User is logged in!!");
     }

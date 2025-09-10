@@ -1,23 +1,22 @@
 package POM;
 
-import Base.BasePage;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.awt.event.WindowFocusListener;
-
-import static Base.BasePage.driver;
-
 
 public class TutorialForgotPasswordPage {
-    public TutorialForgotPasswordPage(){
+    private WebDriver driver;
+    public TutorialForgotPasswordPage(WebDriver driver) {
+        this.driver= driver;
         PageFactory.initElements(driver,this);
     }
     @FindBy(id = "input-email")
-    public static WebElement emailField = BasePage.wait.until
+    public static WebElement emailField = hooks.MyHooks.wait.until
             (ExpectedConditions.visibilityOfElementLocated(By.id("input-email")));
 
 

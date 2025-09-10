@@ -8,8 +8,8 @@ import org.testng.annotations.DataProvider;
 
 @CucumberOptions(
         features = {"src/test/resources/features"},
-        glue = {"StepDefinitions"},
-       tags = "@Orders",
+        glue = {"StepDefinitions","hooks"},
+       tags = "@Register and @One",
         publish = true,
         plugin = {"pretty",
                "html:target/CucumberReports/CucumberReport.html" ,

@@ -1,12 +1,13 @@
 package Base;
 
+import hooks.MyHooks;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 import java.util.Random;
 
-import static Base.BasePage.driver;
+
 
 
 public class Elements {
@@ -49,11 +50,11 @@ public class Elements {
     }
 
     public static String getTitle(){
-        return driver.getTitle();
+        return MyHooks.driver.getTitle();
     }
 
     public String getCurrentUrl(){
-        return driver.getCurrentUrl();
+        return MyHooks.driver.getCurrentUrl();
     }
 
     public boolean isSelected(WebElement element) {
