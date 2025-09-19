@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Map;
+
 import static Base.BasePage.driver;
 
 
@@ -102,5 +104,13 @@ public class StepsTutorialRegister  {
 
       Assert.assertEquals(TutorialRegisterPage
               .mainWarning.getText(),"Warning: E-Mail Address is already registered!");
+  }
+
+  @When("I provide all the below valid details into fields:")
+  public void iProvideAllTheBelowValidDetailsIntoFields(DataTable table) {
+    Map<String, String> map = table.asMap(String.class, String.class);
+    System.out.println("User enter first name  "+ map.get("FirstName"));
+    System.out.println("User enter lAST name  "+ map.get("LastName"));
+    System.out.println("User enter lAST name  "+ map.get("Email"));
   }
 }

@@ -1,10 +1,10 @@
 Feature: Registration functionality scenarios
+  Background:
+Given User opens application URL
+And I navigate to Account Registration page
 @Register @One
   Scenario: Verify whether user is able to register into the application by providing all the details
-
-    Given User opens application URL
-    And I navigate to Account Registration page
-    When I provide all the below valid details :
+    When I provide all the below valid details into fields:
 
       |FirstName| Ravi                    |
       |LastName | Kiran                   |

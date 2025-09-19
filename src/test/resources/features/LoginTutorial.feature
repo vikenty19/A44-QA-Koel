@@ -8,8 +8,8 @@ Feature: Login scenarios
     When User login to the app using email "<email>" and password "<password>"
     Then User should be able to login successfully
     Examples:
-      |email             | password      |
-      | ravi.kiran1@gmail.com    |rkiran         |
+      | email                 | password |
+      | ravi.kiran1@gmail.com | rkiran   |
 
   @Login @One
   Scenario Outline: User shouldn't login with invalid credentials
