@@ -53,7 +53,8 @@ public class PlayListTests extends BaseTest {
         playListPage.enterNewNameIntoNameField(newPlayLIstName);
         System.out.println(newPlayLIstName);
         System.out.println(playListPage.getPlaylistName());
-        basePage.isSuccessBannerDisplayed();
+          basePage.isSuccessBannerDisplayed();
+
         //DataBase checking pListName
         //Assertion
        Assert.assertEquals(newPlayLIstName,GetSQLInfo.checkSQLPlayListName(newPlayLIstName));

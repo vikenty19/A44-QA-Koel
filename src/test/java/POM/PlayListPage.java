@@ -66,7 +66,8 @@ public class PlayListPage extends BasePage {
     }
     public void enterNewNameIntoNameField(String newName) {
         BasePage basePage = new BasePage(driver);
-        WebElement  enterNewPlistName = basePage.waitUntilClickable(pListNamelocator);
+      //  WebElement  enterNewPlistName = basePage.waitUntilClickable(pListNamelocator);
+        WebElement  enterNewPlistName = super.waitUntilClickable(pListNamelocator);
         new Actions(driver).doubleClick(enterNewPlistName).perform();
         //Double click on plList name( first in the list)
         WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(nameField));
