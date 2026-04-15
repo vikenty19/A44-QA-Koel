@@ -58,7 +58,7 @@ public class LoginTests extends BaseTest {
         //       Assert.assertFalse(homePage.getAvatar());
     }
 
-    @Test(dataProvider = "IncorrectLoginProviders")
+    @Test(dataProvider = "IncorrectLoginProviders",dataProviderClass = DataProviders.class)
     public void negativeLoginTests(String email, String password) {
         LoginPage loginpage = new LoginPage(driver);
         loginpage.login(email, password);

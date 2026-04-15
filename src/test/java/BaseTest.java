@@ -82,14 +82,7 @@ public class BaseTest {
         driver.get(url);
     }
 
-    @DataProvider(name = "IncorrectLoginProviders")
-    public static Object[][] getDataFromDataProviders() {
-        return new Object[][]{
-                {"notExisting@email.com", "NotExistingPassword"},
-                {"demo@class.com", ""},
-                {"", ""}, {"demo@@class.com", "te$t$tudent"}, {"<include name=test'></include>@class.com", "te$t$tudent"}
-        };
-    }
+
 
     @DataProvider(name = "profileThemeTest")
     public static Object[][] getProfileThemeFromDataProvider() {
