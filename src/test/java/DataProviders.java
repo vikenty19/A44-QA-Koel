@@ -4,6 +4,8 @@ import org.testng.annotations.DataProvider;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -35,7 +37,13 @@ public class DataProviders {
             //       array[i][2] = row[3];
         }
         return array;
-
-
+    }
+    @DataProvider(name = "InvalidDataSet")
+    public Iterator<Object[]> dataSupplier(){
+        List<Object[]> list= new ArrayList<Object[]>();
+        list.add(new Object[]{"notExisting@email.com", "NotExistingPassword"});
+        list.add(new Object[]{"@gmail.com","!@$%^&&"});
+        list.add(new Object[]{"",""});
+        return list.iterator();
     }
 }

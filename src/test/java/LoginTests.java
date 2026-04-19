@@ -10,13 +10,12 @@ import static POM.LoginPage.emailWithoutAt;
 
 public class LoginTests extends BaseTest {
 
-
     @Test//(groups = {"smoke1"})
     public void loginSucceedTest() {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         loginPage.login(myEmail, myLogin);
-
+        System.out.println(super.generateRandomName());//jus to show super class(BaseTest) method
         // find if avatar exists
 
         Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
@@ -61,10 +60,15 @@ public class LoginTests extends BaseTest {
     @Test(dataProvider = "IncorrectLoginProviders",dataProviderClass = DataProviders.class)
     public void negativeLoginTests(String email, String password) {
         LoginPage loginpage = new LoginPage(driver);
-        loginpage.login(email, password);
+        loginpage.login( email, password);
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
-
+    @Test(dataProvider = "InvalidDataSet",  dataProviderClass = DataProviders.class)
+    public void negativeLoginTestsIterator(Object email, Object password) {
+        LoginPage loginpage = new LoginPage(driver);
+        loginpage.login((String) email, (String) password);
+        Assert.assertEquals(driver.getCurrentUrl(), url);
+    }
     //        Email("demo@class.com");
 //        Password("te$t$tudent");
 }
