@@ -15,7 +15,8 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
         loginPage.login(myEmail, myLogin);
-        System.out.println(super.generateRandomName());//jus to show super class(BaseTest) method
+    //    System.out.println(super.generateRandomName());//just to show super class(BaseTest) method
+    //    System.out.println(generateRandomName());
         // find if avatar exists
 
         Assert.assertTrue(homePage.getAvatar(), " User is NOT Logged in");
